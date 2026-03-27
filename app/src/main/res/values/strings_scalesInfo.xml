@@ -1,0 +1,44 @@
+<resources>
+    <!-- Test names -->
+    <string name="berg_name">Escala equilibrio Berg</string>
+    <string name="motricity_index_name">Índice motor</string>
+    <string name="trunk_control_test_name">Test de control de tronco</string>
+
+    <!-- Berg Info -->
+    <string name="berg_description">Es una escala ampliamente usada para valorar el equilibrio estático y dinámico tanto en sedestación como en bipedestación.</string>
+    <string name="berg_scoring">Cada ítem puntúa de 0 a 4. Una puntuación de 0 indica incapacidad para realizar la tarea y una puntuación de 4 indica capacidad para poder hacer la tarea.\nLos ítems puntúan en relación al tiempo, nivel de independencia o supervisión requerida.</string>
+    <string name="berg_interpretation">De 0 a 20: Precisa de silla de ruedas.\nDe 21 a 40: Puede caminar con ayuda.\nDe 41 a 56: Independiente.</string>
+    <string name="berg_recommendations">Para apreciar cambios, es aconsejable realizar la prueba al menos 2 veces y, a ser posible, bajo las mismas condiciones.</string>
+
+    <!-- Berg materials -->
+    <string-array name="berg_materials">
+        <item>Cronómetro</item>
+        <item>Silla de entre 45 y 50 cm con reposabrazos</item>
+        <item>Silla de entre 45 y 50 cm sin reposabrazos</item>
+        <item>Escalón/cajón de entre 20 y 23 cm</item>
+        <item>Regla</item>
+        <item>Una zapatilla</item>
+    </string-array>
+
+    <!-- Motricity Index Info -->
+    <string name="motricity_description">El Motricity Index es un método ordinal para medir la fuerza motora en pacientes con hemiparesia tras un accidente cerebrovascular.</string>
+    <string name="motricity_scoring">Seis ítems (3 para extremidad superior: prensión, flexión de codo, abducción de hombro; y 3 para extremidad inferior: dorsiflexión de tobillo, extensión de rodilla y flexión de cadera).</string>
+    <string name="motricity_interpretation">Una puntuación más alta indica mayor fuerza motora global.</string>
+    <string name="motricity_recommendations">Usar como parte de la evaluación clínica para planificar intervenciones de rehabilitación centradas en fuerza motora.</string>
+
+    <!-- Motricity materials -->
+    <string-array name="motricity_materials">
+        <item>Cubito de 2.5 cm para pruebas de prensión</item>
+    </string-array>
+
+    <!-- Trunk Control Test Info -->
+    <string name="tct_description">El Trunk Control Test evalúa el control y la estabilidad de tronco mediante cuatro movimientos funcionales.</string>
+    <string name="tct_scoring">Cuatro ítems, cada uno puntuado con 0, 12 o 25. La puntuación total varía de 0 a 100.</string>
+    <string name="tct_interpretation">Una puntuación total más alta indica mejor control del tronco.</string>
+    <string name="tct_recommendations">El TCT puede ser utilizado para guiar el plan de rehabilitación dirigido a mejorar el control del tronco.</string>
+
+    <!-- Trunk Control materials -->
+    <string-array name="tct_materials">
+        <item>Camilla</item>
+    </string-array>
+</resources>

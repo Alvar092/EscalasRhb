@@ -1,0 +1,44 @@
+<resources>
+    <!-- Test names -->
+    <string name="berg_name">Berg Balance Scale</string>
+    <string name="motricity_index_name">Motricity Index</string>
+    <string name="trunk_control_test_name">Trunk Control Test</string>
+
+    <!-- Berg Info -->
+    <string name="berg_description">It is a widely used scale to assess static and dynamic balance in both sitting and standing positions.</string>
+    <string name="berg_scoring">Each item is scored from 0 to 4. A score of 0 indicates inability to perform the task, and a score of 4 indicates the ability to complete the task independently.\nItems are scored based on time, level of independence, or supervision required.</string>
+    <string name="berg_interpretation">0 to 20: Wheelchair dependent.\n21 to 40: Able to walk with assistance.\n41 to 56: Independent.</string>
+    <string name="berg_recommendations">To detect changes, it is advisable to perform the test at least twice and, if possible, under the same conditions.</string>
+
+    <!-- Berg materials -->
+    <string-array name="berg_materials">
+        <item>Stopwatch</item>
+        <item>Chair between 45 and 50 cm with armrests</item>
+        <item>Chair between 45 and 50 cm without armrests</item>
+        <item>Step/stool between 20 and 23 cm</item>
+        <item>Ruler</item>
+        <item>A shoe</item>
+    </string-array>
+
+    <!-- Motricity Index Info -->
+    <string name="motricity_description">The Motricity Index is an ordinal method used to measure motor strength in patients with hemiparesis after a stroke.</string>
+    <string name="motricity_scoring">Six items (3 for the upper limb: grip, elbow flexion, shoulder abduction; and 3 for the lower limb: ankle dorsiflexion, knee extension, and hip flexion).</string>
+    <string name="motricity_interpretation">A higher score indicates greater overall motor strength.</string>
+    <string name="motricity_recommendations">Use as part of the clinical assessment to plan rehabilitation interventions focused on motor strength.</string>
+
+    <!-- Motricity materials -->
+    <string-array name="motricity_materials">
+        <item>2.5 cm cube for grip testing</item>
+    </string-array>
+
+    <!-- Trunk Control Test Info -->
+    <string name="tct_description">The Trunk Control Test assesses trunk control and stability through four functional movements.</string>
+    <string name="tct_scoring">Four items, each scored 0, 12, or 25. The total score ranges from 0 to 100.</string>
+    <string name="tct_interpretation">A higher total score indicates better trunk control.</string>
+    <string name="tct_recommendations">The TCT can be used to guide the rehabilitation plan aimed at improving trunk control.</string>
+
+    <!-- Trunk Control materials -->
+    <string-array name="tct_materials">
+        <item>Examination table</item>
+    </string-array>
+</resources>
