@@ -1,6 +1,5 @@
 package com.aentrena.escalasrhb.domain.interfaces
 
-import com.aentrena.escalasrhb.domain.model.scales.BodySide
 import java.util.UUID
 
 interface ClinicalTest {
