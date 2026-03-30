@@ -1,10 +1,20 @@
 package com.aentrena.escalasrhb.data.local.entities
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.aentrena.escalasrhb.domain.model.scales.BodySide
 
-@Entity(tableName = "motricity_index")
+@Entity(
+    tableName = "motricity_index",
+    foreignKeys = [ForeignKey(
+        entity = PatientEntity::class,
+        parentColumns = ["id"],
+        childColumns = ["patientId"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
+
 data class MotricityIndexEntity(
     @PrimaryKey
     val id: String,

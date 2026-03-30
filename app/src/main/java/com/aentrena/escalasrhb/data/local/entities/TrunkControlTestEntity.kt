@@ -1,10 +1,20 @@
 package com.aentrena.escalasrhb.data.local.entities
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.aentrena.escalasrhb.domain.model.scales.BodySide
 
-@Entity(tableName = "trunk_control")
+@Entity(
+    tableName = "trunk_control",
+    foreignKeys = [ForeignKey(
+        entity = PatientEntity::class,
+        parentColumns = ["id"],
+        childColumns = ["patientId"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
+
 data class TrunkControlTestEntity(
     @PrimaryKey
     val id: String,

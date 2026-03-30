@@ -1,9 +1,19 @@
 package com.aentrena.escalasrhb.data.local.entities
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "berg_tests")
+@Entity(
+    tableName = "berg_tests",
+    foreignKeys = [ForeignKey(
+        entity = PatientEntity::class,
+        parentColumns = ["id"],
+        childColumns = ["patientId"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
+
 data class BergTestEntity(
     @PrimaryKey
     val id: String,
