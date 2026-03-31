@@ -63,7 +63,7 @@ data class BergItem(
             }
             else -> return this // items sin tiempo no aplica
         }
-        return BergItem(score = newScore.coerceIn(0, 4))
+        return BergItem(score = newScore.coerceIn(0, 4), itemType = itemType)
     }
 }
 

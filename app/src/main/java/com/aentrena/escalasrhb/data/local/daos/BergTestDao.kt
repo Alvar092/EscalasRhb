@@ -17,7 +17,7 @@ interface BergTestDao {
     @Query("SELECT * FROM berg_tests WHERE patientId = :patientId ORDER BY date DESC")
     fun getBergTestsByPatient(patientId: String): Flow<List<BergTestEntity>>
 
-    @Query("SELECT * FROM berg_tests WHERE id = id ORDER BY date DESC")
+    @Query("SELECT * FROM berg_tests WHERE id = :id ORDER BY date DESC")
     fun getBergTestById(id: String): Flow<BergTestEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

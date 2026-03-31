@@ -2,6 +2,7 @@ package com.aentrena.escalasrhb.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.aentrena.escalasrhb.domain.model.scales.BodySide
 
@@ -12,7 +13,8 @@ import com.aentrena.escalasrhb.domain.model.scales.BodySide
         parentColumns = ["id"],
         childColumns = ["patientId"],
         onDelete = ForeignKey.CASCADE
-    )]
+    )],
+    indices = [Index(value = ["patientId"])]
 )
 
 data class TrunkControlTestEntity(

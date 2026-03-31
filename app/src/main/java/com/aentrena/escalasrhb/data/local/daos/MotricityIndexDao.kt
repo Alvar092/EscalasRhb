@@ -17,7 +17,7 @@ interface MotricityIndexDao {
     @Query("SELECT * FROM motricity_index WHERE patientId = :patientId ORDER BY date DESC")
     fun getMotricityIndexByPatient(patientId: String): Flow<List<MotricityIndexEntity>>
 
-    @Query("SELECT * FROM motricity_index WHERE id = id ORDER BY date DESC")
+    @Query("SELECT * FROM motricity_index WHERE id = :id ORDER BY date DESC")
     fun getMotricityIndexById(id: String): Flow<MotricityIndexEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

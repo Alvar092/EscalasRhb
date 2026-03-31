@@ -17,7 +17,7 @@ interface TrunkControlTestDao {
     @Query("SELECT * FROM trunk_control WHERE patientId = :patientId ORDER BY date DESC")
     fun getTrunkControlTestByPatient(patientId: String): Flow<List<TrunkControlTestEntity>>
 
-    @Query("SELECT * FROM trunk_control WHERE id = id ORDER BY date DESC")
+    @Query("SELECT * FROM trunk_control WHERE id = :id ORDER BY date DESC")
     fun getTrunkControlTestById(id: String): Flow<TrunkControlTestEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

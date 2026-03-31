@@ -3,7 +3,6 @@ package com.aentrena.escalasrhb.domain.model.patients
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
 import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexTest
-import com.aentrena.escalasrhb.domain.model.scales.TrunckControlTest
 import com.aentrena.escalasrhb.domain.model.scales.TrunkControlTest
 
 data class PatientHistory(
