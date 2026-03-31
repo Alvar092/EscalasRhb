@@ -9,6 +9,6 @@ import javax.inject.Inject
 class GetPatientByIdUseCase @Inject constructor(
     private val repository: PatientRepository
 ) {
-    operator fun invoke(id: UUID): Flow<List<Patient>> =
+    operator fun invoke(id: UUID): Flow<Patient?> =
         repository.getById(id)
 }
