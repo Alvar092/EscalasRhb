@@ -12,15 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = P1D,
+    secondary = Sec,
+    tertiary = TextOnPrimD
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = P1L,
+    secondary = Sec,
+    tertiary = TextOnPrim
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -52,7 +52,7 @@ fun EscalasRhbTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AppTypography,
         content = content
     )
 }
