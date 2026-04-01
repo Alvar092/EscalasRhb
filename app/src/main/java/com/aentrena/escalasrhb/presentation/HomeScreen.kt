@@ -1,6 +1,7 @@
-package com.aentrena.escalasrhb.presentation.screens
+package com.aentrena.escalasrhb.presentation
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -10,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.presentation.theme.P1L
 import com.aentrena.escalasrhb.presentation.theme.TextPrim
 
@@ -67,7 +70,7 @@ fun HomeScreen(
                                 },
                                 onClick = {
                                     menuExpanded = false
-                                    // TODO onNavigateToPatients()
+                                    onNavigateToPatients()
                                 }
                             )
                             DropdownMenuItem(
@@ -95,16 +98,24 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Mensaje de bienvenida (2 líneas)
             Text(
                 text = "Bienvenido",
                 style = MaterialTheme.typography.headlineMedium
             )
+
+            Image(
+                painter = painterResource(id = R.mipmap.icono),
+                contentDescription = "icono app"
+            )
+
+            Spacer(modifier = Modifier.height(48.dp))
+
             Text(
                 text = "Nos alegra verte de nuevo.",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
+
             Text(
                 text = "Elige una escala para comenzar.",
                 style = MaterialTheme.typography.bodyLarge,
@@ -117,7 +128,7 @@ fun HomeScreen(
             Button(
                 onClick = onAction1,
                 colors = ButtonDefaults.buttonColors(containerColor = P1L),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text("Berg Balance Scale")
@@ -128,7 +139,7 @@ fun HomeScreen(
             Button(
                 onClick = onAction2,
                 colors = ButtonDefaults.buttonColors(containerColor = P1L),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text("Índice motor")
@@ -139,7 +150,7 @@ fun HomeScreen(
             Button(
                 onClick = onAction3,
                 colors = ButtonDefaults.buttonColors(containerColor = P1L),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text("Test de control de tronco")

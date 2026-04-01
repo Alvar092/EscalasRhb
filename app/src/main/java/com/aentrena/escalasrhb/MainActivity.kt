@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.aentrena.escalasrhb.presentation.HomeScreen
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +19,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            _root_ide_package_.com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            EscalasRhbTheme(dynamicColor = false) {
+               HomeScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun HomeScreen() {
+    
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun GreetingPreview() {
-    _root_ide_package_.com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme {
-        Greeting("Android")
-    }
+private fun HomeScreen_Preview() {
+    HomeScreen()
 }
+
