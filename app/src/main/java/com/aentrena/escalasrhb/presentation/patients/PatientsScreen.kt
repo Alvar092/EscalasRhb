@@ -4,7 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,48 +16,69 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.presentation.theme.P1L
-import java.time.LocalDate
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatientsScreen(
-    patients: List<Patient> = emptyList(),
-    onLookDetail: (Patient) -> Unit = {},
-    onEditPatient: (Patient) -> Unit = {},
-    onAddPatient: () -> Unit = {}
+    patients: List<Patient>,
+    onLookDetail: (Patient) -> Unit,
+    onEditPatient: (Patient) -> Unit,
+    onAddPatient: (String, Long) -> Unit,
+    onNavigateBack: () -> Unit = {}
 ) {
+    val sheetState = rememberModalBottomSheetState()
+    var showSheet by remember { mutableStateOf(false) }
+
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            CenterAlignedTopAppBar(title = { Text("Pacientes")} )
+            CenterAlignedTopAppBar(
+                title = {
+                    Text("Pacientes")
+                }
+            )
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                onClick = onAddPatient,
+                onClick = { showSheet = true },
                 icon = { Icon(Icons.Default.Add, contentDescription = null)},
                 text = {Text("Añadir paciente")}
             )
@@ -90,10 +110,23 @@ fun PatientsScreen(
                         PatientCard(
                             patient = patient,
                             onClick = { onLookDetail(patient)},
-                            onEdit = { onEditPatient(patient)},
+                            onEdit = { onEditPatient(patient)}
                         )
                     }
                 }
+            }
+        }
+        if (showSheet) {
+            ModalBottomSheet(
+                onDismissRequest = {showSheet = false},
+                sheetState = sheetState
+            ){
+                AddPatientForm(
+                    onSave = { name, birthDate ->
+                        onAddPatient(name, birthDate)
+                        showSheet = false
+                    }
+                )
             }
         }
     }
@@ -108,7 +141,8 @@ fun PatientCard(
    Card(
        modifier = Modifier
            .fillMaxWidth()
-           .clickable { onClick() },
+           .clickable { onClick() }
+           .padding(horizontal = 12.dp),
        shape = RoundedCornerShape(14.dp),
        colors = CardDefaults.cardColors(
            containerColor = P1L,
@@ -156,6 +190,72 @@ fun PatientCard(
    }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AddPatientForm(
+    onSave: (name: String, birthDate: Long) -> Unit
+) {
+    var name by remember { mutableStateOf("") }
+    var showDatePicker by remember { mutableStateOf(false) }
+    val datePickerState = rememberDatePickerState()
+
+    val selectedDateText = datePickerState.selectedDateMillis?.let {
+        SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault()).format(Date(it))
+    } ?: "Seleccionar fecha"
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Nombre") },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        OutlinedTextField(
+            value = selectedDateText,
+            onValueChange = {},
+            label = { Text("Fecha de nacimiento") },
+            readOnly = false,
+            trailingIcon = {
+                IconButton(onClick = { showDatePicker = true }) {
+                    Icon(Icons.Default.DateRange, contentDescription = "Seleccionar fecha")
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { showDatePicker = true }
+        )
+
+        Button(
+            onClick = {
+                val date = datePickerState.selectedDateMillis
+                if (name.isNotBlank() && date != null) {
+                    onSave(name, date)
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Guardar")
+        }
+    }
+    if (showDatePicker) {
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(onClick = { showDatePicker = false }) { Text("Aceptar") }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+}
+
 @Preview
 @Composable
 private fun PatientsScreen_Preview() {
@@ -166,13 +266,26 @@ private fun PatientsScreen_Preview() {
         )
 
     MaterialTheme {
-        PatientsScreen(patients = muestra)
+        PatientsScreen(patients = muestra,
+            onLookDetail = {},
+            onEditPatient = {},
+            onAddPatient = {_, _ -> },
+            onNavigateBack = {}
+        )
     }
 }
 
 @Preview
 @Composable
 private fun PatientsScreenEmpty_Preview() {
-    PatientsScreen()
+    PatientsScreen(
+        patients = emptyList(),
+        onLookDetail = {},
+        onEditPatient = {},
+        onAddPatient = {_, _ -> },
+        onNavigateBack = {}
+    )
 }
+
+
 

@@ -24,7 +24,6 @@ import com.aentrena.escalasrhb.presentation.theme.TextPrim
 @Composable
 fun HomeScreen(
     // Lambdas que descoplan la navegación de la UI
-
     onNavigateToPatients: () -> Unit = {},
     onNavigateToContact: () -> Unit = {},
     onAction1: () -> Unit = {},
