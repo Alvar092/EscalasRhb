@@ -2,6 +2,7 @@ package com.aentrena.escalasrhb.domain.model.scales
 
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTestItem
+import com.aentrena.escalasrhb.domain.model.TestType
 import java.util.UUID
 
 data class BergTest(
@@ -10,7 +11,8 @@ data class BergTest(
     override val evaluator: String? = null,
     override val patientId: UUID,
     override val items: List<BergItem>,
-    override val maxScore: Int = 56
+    override val maxScore: Int = 56,
+    override val testType: TestType = TestType.BERG
 ): ClinicalTest {
     override val totalScore: Int
             get() = items.mapNotNull {it.score}.sum()

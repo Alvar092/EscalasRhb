@@ -26,9 +26,9 @@ fun HomeScreen(
     // Lambdas que descoplan la navegación de la UI
     onNavigateToPatients: () -> Unit = {},
     onNavigateToContact: () -> Unit = {},
-    onAction1: () -> Unit = {},
-    onAction2: () -> Unit = {},
-    onAction3: () -> Unit = {},
+    onNavigateToBerg: () -> Unit = {},
+    onNavigateToMotricity: () -> Unit = {},
+    onNavigateToTrunk: () -> Unit = {},
 ) {
     /*
     Estado local de la UI.
@@ -125,7 +125,7 @@ fun HomeScreen(
 
             // Tres botones
             Button(
-                onClick = onAction1,
+                onClick = onNavigateToBerg,
                 colors = ButtonDefaults.buttonColors(containerColor = P1L),
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
@@ -136,7 +136,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             Button(
-                onClick = onAction2,
+                onClick = onNavigateToMotricity,
                 colors = ButtonDefaults.buttonColors(containerColor = P1L),
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
@@ -147,7 +147,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(12.dp))
 
             Button(
-                onClick = onAction3,
+                onClick = onNavigateToTrunk,
                 colors = ButtonDefaults.buttonColors(containerColor = P1L),
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)

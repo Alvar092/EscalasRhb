@@ -55,11 +55,15 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
+enum class PatientsScreenMode { Browse, Select}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatientsScreen(
     patients: List<Patient>,
+    mode: PatientsScreenMode,
     onLookDetail: (Patient) -> Unit,
+    onSelectPatient: (Patient) -> Unit,
     onEditPatient: (Patient) -> Unit,
     onAddPatient: (String, Long) -> Unit,
     onNavigateBack: () -> Unit = {}
@@ -77,11 +81,13 @@ fun PatientsScreen(
             )
         },
         floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = { showSheet = true },
-                icon = { Icon(Icons.Default.Add, contentDescription = null)},
-                text = {Text("Añadir paciente")}
-            )
+            if (mode == PatientsScreenMode.Browse) {
+                ExtendedFloatingActionButton(
+                    onClick = { showSheet = true },
+                    icon = { Icon(Icons.Default.Add, contentDescription = null) },
+                    text = { Text("Añadir paciente") }
+                )
+            }
         }
     ) { padding ->
         if(patients.isEmpty()) {
@@ -106,10 +112,17 @@ fun PatientsScreen(
                 // Iterate, similar to for
                 items(patients, key = {it.id}) { patient ->
                     val dismissState = rememberSwipeToDismissBoxState()
-                    SwipeToDismissBox(state = dismissState, backgroundContent = {}) {
+                    SwipeToDismissBox(state = dismissState, backgroundContent = {/*TODO: deletePatient()*/}) {
                         PatientCard(
                             patient = patient,
-                            onClick = { onLookDetail(patient)},
+                            onClick = {
+                                when (mode) {
+                                    PatientsScreenMode.Browse -> onLookDetail(patient)
+                                    PatientsScreenMode.Select -> {
+                                        onSelectPatient(patient)
+                                    }
+                                }
+                            },
                             onEdit = { onEditPatient(patient)}
                         )
                     }
@@ -164,7 +177,7 @@ fun PatientCard(
            ){
              Box(contentAlignment = Alignment.Center) {
                  Text(
-                     text = patient.name,
+                     text = patient.name.first().uppercase(),
                      style = MaterialTheme.typography.headlineMedium,
                  )
              }
@@ -260,14 +273,16 @@ fun AddPatientForm(
 @Composable
 private fun PatientsScreen_Preview() {
     val muestra = listOf(
-        Patient(UUID.randomUUID(), "Ana", System.currentTimeMillis()),
+        Patient(UUID.randomUUID(), "Ana Maria Martinez", System.currentTimeMillis()),
         Patient(UUID.randomUUID(), "Carlos",System.currentTimeMillis()),
         Patient(UUID.randomUUID(), "Laura", System.currentTimeMillis())
         )
 
     MaterialTheme {
         PatientsScreen(patients = muestra,
+            mode = PatientsScreenMode.Browse,
             onLookDetail = {},
+            onSelectPatient = {},
             onEditPatient = {},
             onAddPatient = {_, _ -> },
             onNavigateBack = {}
@@ -280,7 +295,9 @@ private fun PatientsScreen_Preview() {
 private fun PatientsScreenEmpty_Preview() {
     PatientsScreen(
         patients = emptyList(),
+        mode = PatientsScreenMode.Browse,
         onLookDetail = {},
+        onSelectPatient = {},
         onEditPatient = {},
         onAddPatient = {_, _ -> },
         onNavigateBack = {}

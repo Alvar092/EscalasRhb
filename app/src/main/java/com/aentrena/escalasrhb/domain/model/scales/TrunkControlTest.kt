@@ -3,6 +3,7 @@ package com.aentrena.escalasrhb.domain.model.scales
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTestItem
 import com.aentrena.escalasrhb.domain.interfaces.SideTest
+import com.aentrena.escalasrhb.domain.model.TestType
 import java.util.UUID
 
 class TrunkControlTest(
@@ -12,6 +13,7 @@ class TrunkControlTest(
     override val patientId: UUID,
     override val side: BodySide? = null,
     override val maxScore: Int? = 100,
+    override val testType: TestType = TestType.TRUNK_CONTROL_TEST,
     override val items: List<TrunkControlTestItem>
 ): ClinicalTest, SideTest {
     override val totalScore: Int

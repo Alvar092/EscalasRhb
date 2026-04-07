@@ -4,6 +4,7 @@ import com.aentrena.escalasrhb.domain.model.scales.BodySide
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTestItem
 import com.aentrena.escalasrhb.domain.interfaces.SideTest
+import com.aentrena.escalasrhb.domain.model.TestType
 import java.util.UUID
 
 class MotricityIndexTest(
@@ -13,6 +14,7 @@ class MotricityIndexTest(
     override val patientId: UUID,
     override val side: BodySide? = null,
     override val maxScore: Int? = null,
+    override val testType: TestType = TestType.MOTRICITY_INDEX,
     override val items: List<MotricityIndexItem>
 ): ClinicalTest, SideTest {
     override val totalScore: Int

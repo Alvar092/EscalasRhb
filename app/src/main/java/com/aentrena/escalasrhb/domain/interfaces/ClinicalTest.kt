@@ -1,5 +1,6 @@
 package com.aentrena.escalasrhb.domain.interfaces
 
+import com.aentrena.escalasrhb.domain.model.TestType
 import java.util.UUID
 
 interface ClinicalTest {
@@ -10,6 +11,8 @@ interface ClinicalTest {
     val maxScore: Int?
     val totalScore: Int
     val items: List<ClinicalTestItem>
+
+    val testType: TestType
 }
 
 interface ClinicalTestItem {
