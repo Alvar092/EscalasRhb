@@ -103,30 +103,14 @@ fun PatientsScreen(
                 )
             }
         } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                // Iterate, similar to for
-                items(patients, key = {it.id}) { patient ->
-                    val dismissState = rememberSwipeToDismissBoxState()
-                    SwipeToDismissBox(state = dismissState, backgroundContent = {/*TODO: deletePatient()*/}) {
-                        PatientCard(
-                            patient = patient,
-                            onClick = {
-                                when (mode) {
-                                    PatientsScreenMode.Browse -> onLookDetail(patient)
-                                    PatientsScreenMode.Select -> {
-                                        onSelectPatient(patient)
-                                    }
-                                }
-                            },
-                            onEdit = { onEditPatient(patient)}
-                        )
-                    }
-                }
+                PatientList(
+                    patients = patients,
+                    mode = PatientsScreenMode.Browse,
+                    onLookDetail = onLookDetail,
+                    onSelectPatient = onSelectPatient,
+                    onEditPatient = onEditPatient,
+                    modifier = Modifier.fillMaxSize().padding(padding)
+                )
             }
         }
         if (showSheet) {
@@ -143,6 +127,40 @@ fun PatientsScreen(
             }
         }
     }
+
+@Composable
+fun PatientList(
+    patients: List<Patient>,
+    mode: PatientsScreenMode,
+    onLookDetail: (Patient) -> Unit,
+    onSelectPatient: (Patient) -> Unit,
+    onEditPatient: (Patient) -> Unit,
+    modifier: Modifier = Modifier
+){
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // Iterate, similar to for
+        items(patients, key = {it.id}) { patient ->
+            val dismissState = rememberSwipeToDismissBoxState()
+            SwipeToDismissBox(state = dismissState, backgroundContent = {/*TODO: deletePatient()*/}) {
+                PatientCard(
+                    patient = patient,
+                    onClick = {
+                        when (mode) {
+                            PatientsScreenMode.Browse -> onLookDetail(patient)
+                            PatientsScreenMode.Select -> {
+                                onSelectPatient(patient)
+                            }
+                        }
+                    },
+                    onEdit = { onEditPatient(patient)}
+                )
+            }
+        }
+    }
+    
 }
 
 @Composable

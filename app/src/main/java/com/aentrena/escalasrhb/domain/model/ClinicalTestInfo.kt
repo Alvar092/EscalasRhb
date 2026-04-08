@@ -12,6 +12,13 @@ val TestType.displayName: String
         TestType.TRUNK_CONTROL_TEST -> "Trunk Control Test"
     }
 
+val TestType.info: ClinicalTestInfo
+    get() = when (this) {
+        TestType.BERG -> ClinicalTestInfo.berg
+        TestType.MOTRICITY_INDEX -> ClinicalTestInfo.motricityIndex
+        TestType.TRUNK_CONTROL_TEST -> ClinicalTestInfo.trunkControlTest
+    }
+
 class ClinicalTestInfo(
     val testType: TestType,
     val descriptionResId: Int,

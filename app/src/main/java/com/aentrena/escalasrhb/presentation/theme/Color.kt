@@ -3,8 +3,8 @@ package com.aentrena.escalasrhb.presentation.theme
 import androidx.compose.ui.graphics.Color
 
 // Background
-val backg = Color(0xE9EDF0)
-val backgD = Color(0x121821)
+val backg = Color(0xFFE9EDF0)
+val backgD = Color(0xFF121821)
 
 // Primary
 val P1L = Color(0xFF3A6EA5)

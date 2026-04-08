@@ -7,20 +7,24 @@ import androidx.lifecycle.viewModelScope
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.TestType
 import com.aentrena.escalasrhb.domain.model.patients.Patient
+import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientsUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.CreateTestUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class ScalesMenuViewModel @Inject constructor(
+class ScaleMenuViewModel @Inject constructor(
+    private var getPatients: GetPatientsUseCase,
     private var createTestUseCase: CreateTestUseCase,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
+
+    val patients: StateFlow<List<Patient>> = getPatients()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
    private val _selectedPatient = MutableStateFlow<Patient?>(null)
     val selectedPatient: StateFlow<Patient?> = _selectedPatient

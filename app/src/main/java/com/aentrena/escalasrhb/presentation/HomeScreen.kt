@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.R
+import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
 import com.aentrena.escalasrhb.presentation.theme.P1L
 import com.aentrena.escalasrhb.presentation.theme.TextPrim
 
@@ -45,6 +46,9 @@ fun HomeScreen(
         topBar = {
             TopAppBar(
                 title = {},
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                ),
                 navigationIcon = {
                     // Context menu
                     Box {
@@ -126,7 +130,7 @@ fun HomeScreen(
             // Tres botones
             Button(
                 onClick = onNavigateToBerg,
-                colors = ButtonDefaults.buttonColors(containerColor = P1L),
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
@@ -137,7 +141,7 @@ fun HomeScreen(
 
             Button(
                 onClick = onNavigateToMotricity,
-                colors = ButtonDefaults.buttonColors(containerColor = P1L),
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
@@ -148,7 +152,7 @@ fun HomeScreen(
 
             Button(
                 onClick = onNavigateToTrunk,
-                colors = ButtonDefaults.buttonColors(containerColor = P1L),
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
@@ -161,6 +165,9 @@ fun HomeScreen(
 @Preview
 @Composable
 private fun HomeScreen_Preview() {
-    HomeScreen()
+    EscalasRhbTheme {
+        HomeScreen()
+    }
+
 }
 
