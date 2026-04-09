@@ -1,0 +1,1001 @@
+{
+  "sourceLanguage" : "es",
+  "strings" : {
+
+    "berg.sittingToStanding.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "De sentado a de pie" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Sitting to Standing" }
+        }
+      }
+    },
+    "berg.sittingToStanding.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente se levanta desde una silla de altura estándar con reposabrazos, intentando no usar las manos para apoyarse." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient rises from a standard-height chair with armrests, attempting not to use their hands for support." }
+        }
+      }
+    },
+    "berg.sittingToStanding.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Se levanta sin usar las manos y se estabiliza de forma independiente." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to stand without using hands and stabilizes independently." }
+        }
+      }
+    },
+    "berg.sittingToStanding.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Se levanta de forma independiente usando las manos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to stand independently using hands." }
+        }
+      }
+    },
+    "berg.sittingToStanding.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Se levanta usando las manos tras varios intentos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to stand using hands after several tries." }
+        }
+      }
+    },
+    "berg.sittingToStanding.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita ayuda mínima para levantarse o estabilizarse." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Needs minimal assistance to stand or stabilize." }
+        }
+      }
+    },
+    "berg.sittingToStanding.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Necesita ayuda moderada o máxima para levantarse." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Needs moderate or maximal assistance to stand." }
+        }
+      }
+    },
+
+    "berg.standingUnsupported.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Bipedestación sin apoyo" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Standing Unsupported" }
+        }
+      }
+    },
+    "berg.standingUnsupported.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente permanece de pie sin apoyo, con los pies separados al ancho de los hombros, durante dos minutos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient stands without support, feet shoulder-width apart, for two minutes." }
+        }
+      }
+    },
+    "berg.standingUnsupported.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Permanece de pie de forma segura durante 2 minutos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to stand safely for 2 minutes." }
+        }
+      }
+    },
+    "berg.standingUnsupported.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Permanece de pie 2 minutos bajo supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to stand for 2 minutes with supervision." }
+        }
+      }
+    },
+    "berg.standingUnsupported.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Permanece de pie 30 segundos sin apoyo." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to stand for 30 seconds without support." }
+        }
+      }
+    },
+    "berg.standingUnsupported.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita varios intentos para mantenerse 30 segundos sin apoyo." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Needs several tries to stand for 30 seconds without support." }
+        }
+      }
+    },
+    "berg.standingUnsupported.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. No puede mantenerse de pie 30 segundos sin apoyo." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Unable to stand for 30 seconds without support." }
+        }
+      }
+    },
+
+    "berg.sittingWithBackUnsupported.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Sedestación sin apoyo de espalda" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Sitting Unsupported" }
+        }
+      }
+    },
+    "berg.sittingWithBackUnsupported.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente permanece sentado sin apoyo de espalda, con los brazos cruzados y los pies apoyados, durante dos minutos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient sits without back support, arms folded and feet flat on the floor, for two minutes." }
+        }
+      }
+    },
+    "berg.sittingWithBackUnsupported.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Permanece sentado de forma segura durante 2 minutos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to sit safely for 2 minutes." }
+        }
+      }
+    },
+    "berg.sittingWithBackUnsupported.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Permanece sentado 2 minutos bajo supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to sit for 2 minutes under supervision." }
+        }
+      }
+    },
+    "berg.sittingWithBackUnsupported.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Permanece sentado 30 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to sit for 30 seconds." }
+        }
+      }
+    },
+    "berg.sittingWithBackUnsupported.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Permanece sentado 10 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Able to sit for 10 seconds." }
+        }
+      }
+    },
+    "berg.sittingWithBackUnsupported.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. No puede permanecer sentado sin apoyo durante 10 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Unable to sit without support for 10 seconds." }
+        }
+      }
+    },
+
+    "berg.standingToSitting.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "De pie a sentado" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Standing to Sitting" }
+        }
+      }
+    },
+    "berg.standingToSitting.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente pasa de la posición de pie a sentado en una silla con reposabrazos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient moves from standing to sitting in a chair with armrests." }
+        }
+      }
+    },
+    "berg.standingToSitting.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Se sienta de forma segura con mínimo uso de las manos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Sits safely with minimal use of hands." }
+        }
+      }
+    },
+    "berg.standingToSitting.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Controla el descenso utilizando las manos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Controls descent by using hands." }
+        }
+      }
+    },
+    "berg.standingToSitting.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Utiliza la parte posterior de las piernas contra la silla para controlar el descenso." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Uses back of legs against chair to control descent." }
+        }
+      }
+    },
+    "berg.standingToSitting.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Se sienta de forma independiente pero con descenso no controlado." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Sits independently but has uncontrolled descent." }
+        }
+      }
+    },
+    "berg.standingToSitting.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Necesita ayuda para sentarse." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Needs assistance to sit down." }
+        }
+      }
+    },
+
+    "berg.transfers.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Transferencias" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Transfers" }
+        }
+      }
+    },
+    "berg.transfers.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Se colocan dos sillas formando aproximadamente 90 grados para realizar una transferencia en pivote (una con reposabrazos y otra sin ellos, o una cama y una silla con reposabrazos). El paciente debe realizar la transferencia en ambas direcciones, desde una superficie sin reposabrazos a otra con reposabrazos y viceversa." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Two chairs are arranged at approximately 90 degrees for a pivot transfer (one with armrests and one without, or a bed and a chair with armrests). The patient must transfer in both directions, from a surface without armrests to one with armrests and vice versa." }
+        }
+      }
+    },
+    "berg.transfers.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Realiza la transferencia de forma segura con uso mínimo de las manos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to transfer safely with minor use of hands." }
+        }
+      }
+    },
+    "berg.transfers.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Realiza la transferencia de forma segura con necesidad clara de usar las manos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to transfer safely with definite need of hands." }
+        }
+      }
+    },
+    "berg.transfers.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Realiza la transferencia con indicaciones verbales y/o supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to transfer with verbal cueing and/or supervision." }
+        }
+      }
+    },
+    "berg.transfers.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita la ayuda de una persona." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Needs one person to assist." }
+        }
+      }
+    },
+    "berg.transfers.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Necesita la ayuda de dos personas o supervisión constante por seguridad." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Needs two people to assist or supervise to be safe." }
+        }
+      }
+    },
+
+    "berg.standingUnsupportedWithEyesClosed.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Bipedestación sin apoyo con ojos cerrados" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Standing Unsupported with Eyes Closed" }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithEyesClosed.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente permanece de pie sin apoyo con los ojos cerrados durante 10 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient stands without support with eyes closed for 10 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithEyesClosed.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Permanece de pie de forma segura durante 10 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to stand safely for 10 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithEyesClosed.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Permanece de pie 10 segundos bajo supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to stand for 10 seconds with supervision." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithEyesClosed.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Permanece de pie 3 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to stand for 3 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithEyesClosed.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. No puede mantener la posición 3 segundos pero permanece estable." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Unable to keep eyes closed for 3 seconds but stays steady." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithEyesClosed.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Necesita ayuda para evitar la caída." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Needs help to avoid falling." }
+        }
+      }
+    },
+
+    "berg.standingUnsupportedWithFeetTogether.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Bipedestación sin apoyo con pies juntos" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Standing Unsupported with Feet Together" }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithFeetTogether.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente permanece de pie sin apoyo con los pies juntos durante 1 minuto." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient stands without support with feet together for 1 minute." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithFeetTogether.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Permanece de pie de forma segura durante 1 minuto." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to stand safely for 1 minute." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithFeetTogether.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Permanece de pie 1 minuto bajo supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to stand for 1 minute with supervision." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithFeetTogether.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Permanece de pie 30 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to stand for 30 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithFeetTogether.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita ayuda para adoptar la posición pero puede mantenerla 15 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Needs help to attain position but able to stand for 15 seconds with feet together." }
+        }
+      }
+    },
+    "berg.standingUnsupportedWithFeetTogether.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. No puede mantener la posición sin ayuda." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Unable to maintain the position without assistance." }
+        }
+      }
+    },
+
+    "berg.reachingForwardWithOutstretchedArmWhileStanding.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Alcance anterior en bipedestación" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Reaching Forward with Outstretched Arm While Standing" }
+        }
+      }
+    },
+    "berg.reachingForwardWithOutstretchedArmWhileStanding.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Desde bipedestación, el paciente alcanza hacia delante con el brazo extendido sin perder el equilibrio." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "From standing, the patient reaches forward with an outstretched arm without losing balance." }
+        }
+      }
+    },
+    "berg.reachingForwardWithOutstretchedArmWhileStanding.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Alcanza hacia delante más de 25 cm de forma segura." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Can reach forward confidently more than 25 cm." }
+        }
+      }
+    },
+    "berg.reachingForwardWithOutstretchedArmWhileStanding.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Alcanza entre 12 y 25 cm." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Can reach forward more than 12 cm safely." }
+        }
+      }
+    },
+    "berg.reachingForwardWithOutstretchedArmWhileStanding.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Alcanza menos de 12 cm." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Can reach forward less than 12 cm safely." }
+        }
+      }
+    },
+    "berg.reachingForwardWithOutstretchedArmWhileStanding.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Alcanza hacia delante pero necesita supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Reaches forward but needs supervision." }
+        }
+      }
+    },
+    "berg.reachingForwardWithOutstretchedArmWhileStanding.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Pierde el equilibrio o necesita ayuda." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Loses balance while trying or requires external support." }
+        }
+      }
+    },
+
+    "berg.pickUpObjectFromTheFloorFromAStandingPosition.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Recoger un objeto del suelo" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Pick Up Object from the Floor" }
+        }
+      }
+    },
+    "berg.pickUpObjectFromTheFloorFromAStandingPosition.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Desde bipedestación, el paciente recoge un objeto del suelo situado delante de sus pies." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "From standing, the patient picks up an object placed in front of their feet." }
+        }
+      }
+    },
+    "berg.pickUpObjectFromTheFloorFromAStandingPosition.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Recoge el objeto de forma segura y fácil." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to pick up object safely and easily." }
+        }
+      }
+    },
+    "berg.pickUpObjectFromTheFloorFromAStandingPosition.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Recoge el objeto bajo supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to pick up object but needs supervision." }
+        }
+      }
+    },
+    "berg.pickUpObjectFromTheFloorFromAStandingPosition.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. No puede recoger el objeto pero alcanza a tocarlo." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Unable to pick up object but reaches 2-5 cm from object and keeps balance independently." }
+        }
+      }
+    },
+    "berg.pickUpObjectFromTheFloorFromAStandingPosition.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita ayuda para mantener el equilibrio." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Unable to pick up and needs supervision while trying." }
+        }
+      }
+    },
+    "berg.pickUpObjectFromTheFloorFromAStandingPosition.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. No puede intentar la tarea o necesita ayuda." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Unable to try or needs assistance to keep from losing balance." }
+        }
+      }
+    },
+
+    "berg.turningToLookBehindOverLeftAndRightShoulders.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Giro para mirar detrás sobre ambos hombros" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Turning to Look Behind over Shoulders" }
+        }
+      }
+    },
+    "berg.turningToLookBehindOverLeftAndRightShoulders.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Desde bipedestación, el paciente gira el tronco para mirar detrás por ambos hombros." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "From standing, the patient turns to look behind over both shoulders." }
+        }
+      }
+    },
+    "berg.turningToLookBehindOverLeftAndRightShoulders.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Mira detrás por ambos lados con buen equilibrio." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Looks behind from both sides with good weight shift." }
+        }
+      }
+    },
+    "berg.turningToLookBehindOverLeftAndRightShoulders.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Mira detrás por un lado con mayor seguridad que por el otro." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Looks behind one side only; other side shows less weight shift." }
+        }
+      }
+    },
+    "berg.turningToLookBehindOverLeftAndRightShoulders.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Gira parcialmente pero mantiene el equilibrio." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Turns sideways only but maintains balance." }
+        }
+      }
+    },
+    "berg.turningToLookBehindOverLeftAndRightShoulders.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita supervisión al girar." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Needs supervision when turning." }
+        }
+      }
+    },
+    "berg.turningToLookBehindOverLeftAndRightShoulders.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Necesita ayuda para evitar la caída." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Needs assistance to keep from losing balance." }
+        }
+      }
+    },
+
+    "berg.turn360Degrees.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Giro de 360 grados" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Turning 360 Degrees" }
+        }
+      }
+    },
+    "berg.turn360Degrees.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente gira completamente sobre sí mismo en ambos sentidos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient turns a complete circle in both directions." }
+        }
+      }
+    },
+    "berg.turn360Degrees.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Realiza ambos giros en menos de 4 segundos de forma segura." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to turn 360 degrees safely in 4 seconds or less." }
+        }
+      }
+    },
+    "berg.turn360Degrees.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Realiza ambos giros de forma segura pero lentamente." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to turn 360 degrees safely, but slowly." }
+        }
+      }
+    },
+    "berg.turn360Degrees.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Realiza un giro completo de forma segura." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to turn 360 degrees safely one side only." }
+        }
+      }
+    },
+    "berg.turn360Degrees.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita supervisión al girar." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Needs close supervision or verbal cueing." }
+        }
+      }
+    },
+    "berg.turn360Degrees.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Necesita ayuda para girar." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Needs assistance while turning." }
+        }
+      }
+    },
+
+    "berg.placingAlternatesFootOnStepOrStoolWhileStandingUnsupported.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Colocar pies alternos sobre un escalón" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Placing Alternate Foot on Step or Stool While Standing" }
+        }
+      }
+    },
+    "berg.placingAlternatesFootOnStepOrStoolWhileStandingUnsupported.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente coloca alternativamente cada pie sobre un escalón o taburete durante ocho repeticiones." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient alternately places each foot on a step or stool for eight repetitions." }
+        }
+      }
+    },
+    "berg.placingAlternatesFootOnStepOrStoolWhileStandingUnsupported.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Completa 8 repeticiones de forma segura en menos de 20 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to stand independently and safely and complete 8 steps in 20 seconds." }
+        }
+      }
+    },
+    "berg.placingAlternatesFootOnStepOrStoolWhileStandingUnsupported.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Completa 8 repeticiones de forma independiente." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to stand independently and complete 8 steps in more than 20 seconds." }
+        }
+      }
+    },
+    "berg.placingAlternatesFootOnStepOrStoolWhileStandingUnsupported.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Completa 4 repeticiones sin ayuda." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to complete 4 steps without aid with supervision." }
+        }
+      }
+    },
+    "berg.placingAlternatesFootOnStepOrStoolWhileStandingUnsupported.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita ayuda para completar más de 2 repeticiones." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Able to complete more than 2 steps, needs minimal assist." }
+        }
+      }
+    },
+    "berg.placingAlternatesFootOnStepOrStoolWhileStandingUnsupported.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. No puede realizar la tarea." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Needs assistance to keep from falling or unable to try." }
+        }
+      }
+    },
+
+    "berg.standingUnsupportedOneFootInFront.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Bipedestación con un pie delante del otro" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Standing with One Foot in Front" }
+        }
+      }
+    },
+    "berg.standingUnsupportedOneFootInFront.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente permanece de pie con un pie directamente delante del otro durante 30 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient stands with one foot directly in front of the other for 30 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedOneFootInFront.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Mantiene la posición 30 segundos de forma segura." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to place foot tandem independently and hold for 30 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedOneFootInFront.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Mantiene la posición 30 segundos bajo supervisión." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to place foot ahead of other independently and hold for 30 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedOneFootInFront.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Mantiene la posición 10 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to take small step independently and hold for 30 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedOneFootInFront.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Necesita ayuda para adoptar la posición." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Needs help to step but can hold for 15 seconds." }
+        }
+      }
+    },
+    "berg.standingUnsupportedOneFootInFront.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. No puede mantener la posición." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Loses balance while stepping or standing." }
+        }
+      }
+    },
+
+    "berg.standingOnOneLeg.title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "Bipedestación sobre un solo pie" }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "Standing on One Leg" }
+        }
+      }
+    },
+    "berg.standingOnOneLeg.description" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "El paciente permanece de pie apoyado sobre una sola pierna el mayor tiempo posible." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "The patient stands on one leg for as long as possible." }
+        }
+      }
+    },
+    "berg.standingOnOneLeg.score.4" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Mantiene la posición más de 10 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "4. Able to lift leg independently and hold for more than 10 seconds." }
+        }
+      }
+    },
+    "berg.standingOnOneLeg.score.3" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Mantiene la posición entre 5 y 10 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "3. Able to lift leg independently and hold for 5–10 seconds." }
+        }
+      }
+    },
+    "berg.standingOnOneLeg.score.2" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Mantiene la posición al menos 3 segundos." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "2. Able to lift leg independently and hold for 3 or more seconds." }
+        }
+      }
+    },
+    "berg.standingOnOneLeg.score.1" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Intenta levantar el pie pero no mantiene la posición." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "1. Tries to lift leg, unable to hold 3 seconds but remains standing independently." }
+        }
+      }
+    },
+    "berg.standingOnOneLeg.score.0" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. No puede intentar o necesita ayuda." }
+        },
+        "en" : {
+          "stringUnit" : { "state" : "translated", "value" : "0. Unable to try or needs assistance to prevent fall." }
+        }
+      }
+    }
+
+  },
+  "version" : "1.0"
+}
