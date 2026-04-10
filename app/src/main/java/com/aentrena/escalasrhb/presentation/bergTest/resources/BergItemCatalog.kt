@@ -6,6 +6,7 @@ import com.aentrena.escalasrhb.domain.model.scales.BergItemType
 object BergItemCatalog {
 
     val definitions: Map<BergItemType, BergItemDefinition> = mapOf(
+        // Item 1
         BergItemType.SITTING_TO_STANDING to BergItemDefinition(
             type = BergItemType.SITTING_TO_STANDING,
             titleRes = R.string.berg_sittingtostanding_title,
@@ -19,6 +20,7 @@ object BergItemCatalog {
             ),
             needsTimer = false
         ),
+        // Item 2
         BergItemType.STANDING_UNSUPPORTED to BergItemDefinition(
             type = BergItemType.STANDING_UNSUPPORTED,
             titleRes = R.string.berg_standingunsupported_title,
@@ -30,8 +32,9 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_standingunsupported_score_3),
                 BergScoreOption(0, R.string.berg_standingunsupported_score_4),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
+        // Item 3
         BergItemType.SITTING_WITH_BACK_UNSUPPORTED to BergItemDefinition(
             type = BergItemType.SITTING_WITH_BACK_UNSUPPORTED,
             titleRes = R.string.berg_sittingwithbackunsupported_title,
@@ -43,8 +46,9 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_sittingwithbackunsupported_score_3),
                 BergScoreOption(0, R.string.berg_sittingwithbackunsupported_score_4),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
+        // Item 4
         BergItemType.STANDING_TO_SITTING to BergItemDefinition(
             type = BergItemType.STANDING_TO_SITTING,
             titleRes = R.string.berg_standingtositting_title,
@@ -58,6 +62,7 @@ object BergItemCatalog {
             ),
             needsTimer = false
         ),
+        // Item 5
         BergItemType.TRANSFERS to BergItemDefinition(
             type = BergItemType.TRANSFERS,
             titleRes = R.string.berg_transfers_title,
@@ -71,6 +76,7 @@ object BergItemCatalog {
             ),
             needsTimer = false
         ),
+        // Item 6
         BergItemType.STANDING_UNSUPPORTED_EYES_CLOSED to BergItemDefinition(
             type = BergItemType.STANDING_UNSUPPORTED_EYES_CLOSED,
             titleRes = R.string.berg_standingunsupportedwitheyesclosed_title,
@@ -82,8 +88,9 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_standingunsupportedwitheyesclosed_score_3),
                 BergScoreOption(0, R.string.berg_standingunsupportedwitheyesclosed_score_4),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
+        // Item 7
         BergItemType.STANDING_UNSUPPORTED_FEET_TOGETHER to BergItemDefinition(
             type = BergItemType.STANDING_UNSUPPORTED_FEET_TOGETHER,
             titleRes = R.string.berg_standingunsupportedwithfeettogether_title,
@@ -95,8 +102,9 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_standingunsupportedwithfeettogether_score_3),
                 BergScoreOption(0, R.string.berg_standingunsupportedwithfeettogether_score_4),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
+        // Item 8
         BergItemType.REACHING_FORWARD_OUTSTRETCHED_ARM to BergItemDefinition(
             type = BergItemType.REACHING_FORWARD_OUTSTRETCHED_ARM,
             titleRes = R.string.berg_reachingforwardwithoutstretchedarmwhilestanding_title,
@@ -110,6 +118,7 @@ object BergItemCatalog {
             ),
             needsTimer = false
         ),
+        // Item 9
         BergItemType.PICK_UP_OBJECT_FROM_FLOOR to BergItemDefinition(
             type = BergItemType.PICK_UP_OBJECT_FROM_FLOOR,
             titleRes = R.string.berg_pickupobjectfromthefloorfromastandingposition_title,
@@ -123,6 +132,7 @@ object BergItemCatalog {
             ),
             needsTimer = false
         ),
+        // Item 10
         BergItemType.TURNING_TO_LOOK_BEHIND to BergItemDefinition(
             type = BergItemType.TURNING_TO_LOOK_BEHIND,
             titleRes = R.string.berg_turningtolookbehindoverleftandrightshoulders_title,
@@ -136,6 +146,7 @@ object BergItemCatalog {
             ),
             needsTimer = false
         ),
+        // Item 11
         BergItemType.TURN_360_DEGREES to BergItemDefinition(
             type = BergItemType.TURN_360_DEGREES,
             titleRes = R.string.berg_turn360degrees_title,
@@ -147,8 +158,9 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_turn360degrees_score_1),
                 BergScoreOption(0, R.string.berg_turn360degrees_score_0),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
+        // Item 12
         BergItemType.PLACING_ALTERNATE_FOOT_ON_STEP to BergItemDefinition(
             type = BergItemType.PLACING_ALTERNATE_FOOT_ON_STEP,
             titleRes = R.string.berg_placingalternatesfootonsteporstoolwhilestandingunsupported_title,
@@ -160,8 +172,9 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_placingalternatesfootonsteporstoolwhilestandingunsupported_score_1),
                 BergScoreOption(0, R.string.berg_placingalternatesfootonsteporstoolwhilestandingunsupported_score_0),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
+        // Item 13
         BergItemType.STANDING_ONE_FOOT_IN_FRONT to BergItemDefinition(
             type = BergItemType.STANDING_ONE_FOOT_IN_FRONT,
             titleRes = R.string.berg_standingunsupportedonefootinfront_title,
@@ -173,8 +186,9 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_standingunsupportedonefootinfront_score_1),
                 BergScoreOption(0, R.string.berg_standingunsupportedonefootinfront_score_0),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
+        // Item 14
         BergItemType.STANDING_ON_ONE_LEG to BergItemDefinition(
             type = BergItemType.STANDING_ON_ONE_LEG,
             titleRes = R.string.berg_standingononeleg_title,
@@ -186,7 +200,7 @@ object BergItemCatalog {
                 BergScoreOption(1, R.string.berg_standingononeleg_score_3),
                 BergScoreOption(0, R.string.berg_standingononeleg_score_4),
             ),
-            needsTimer = false
+            needsTimer = true
         ),
     )
 }

@@ -65,13 +65,11 @@ class ScaleMenuViewModel @Inject constructor(
         val patient = selectedPatient.value ?: return
 
         viewModelScope.launch {
-            val test = withContext(Dispatchers.Default) {
-                createTest(
+                val test  = createTest(
                     type = testType,
                     patientId = patient.id,
                     side = null
                 )
-            }
             _createdTest.value = test
             Log.d("VM", "Test creado: ${_createdTest.value}")
         }

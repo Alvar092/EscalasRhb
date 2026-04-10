@@ -1,10 +1,13 @@
 package com.aentrena.escalasrhb.presentation.navigation
 
 import android.util.Log
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
@@ -13,6 +16,9 @@ import androidx.navigation.navArgument
 import com.aentrena.escalasrhb.domain.model.ClinicalTestInfo
 import com.aentrena.escalasrhb.domain.model.TestType
 import com.aentrena.escalasrhb.presentation.HomeScreen
+import com.aentrena.escalasrhb.presentation.bergTest.BergTestScreen
+import com.aentrena.escalasrhb.presentation.bergTest.BergTestUiState
+import com.aentrena.escalasrhb.presentation.bergTest.BergTestViewModel
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreen
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreenMode
 import com.aentrena.escalasrhb.presentation.patients.PatientsViewModel
@@ -81,11 +87,18 @@ fun AppNavGraph() {
                     viewModel.setSelectedPatient(patient)
                 },
                 onNavigateToInfo = {
-                    val ruta = Routes.scaleInfo(TestType.BERG)
-                    Log.d("NAV", "Navegando a: $ruta")
                     navController.navigate(Routes.scaleInfo(testType))
                                    },
-                onStartTest = { /* TODO: handle start test navigation */ }
+                onStartTest = {
+                    Log.d("NAV", "testType: $testType")
+                    Log.d("NAV", "createdTest: $createdTest")
+                    Log.d("NAV", "createdTest?.id: ${createdTest?.id}")
+                    createdTest?.id?.let { testId ->
+                        val ruta = Routes.test(testType, testId)
+                        Log.d("NAV", "Navegando a: $ruta")
+                        navController.navigate(Routes.test(testType, testId))
+                    }
+                }
             )
         }
 
@@ -99,6 +112,65 @@ fun AppNavGraph() {
                testType = testType,
                 onBack = { navController.popBackStack() }
             )
+        }
+
+        composable(route = Routes.TEST, arguments = listOf(
+            navArgument("testId") { type = NavType.StringType},
+            navArgument("testType") {type = NavType.StringType}
+        )
+        ) { backStackEntry ->
+            val testType = backStackEntry.arguments?.getString("testType")
+                ?.let { TestType.valueOf(it) } ?: TestType.BERG
+
+            when(testType) {
+                TestType.BERG -> {
+                    val viewModel: BergTestViewModel = hiltViewModel()
+                    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+                    val currentItemIndex by viewModel.currentItemIndex.collectAsStateWithLifecycle()
+                    val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
+                    val isTimerRunning by viewModel.isTimerRunning.collectAsStateWithLifecycle()
+                    val formattedTime by viewModel.formattedTime.collectAsStateWithLifecycle()
+
+                    when (uiState) {
+                        is BergTestUiState.Loading -> CircularProgressIndicator()
+                        is BergTestUiState.Error -> Text("Error cargando el test")
+                        is BergTestUiState.Ready -> {
+
+                            val state = uiState as BergTestUiState.Ready
+
+                            BergTestScreen(
+                                currentItemIndex = currentItemIndex,
+                                definition = viewModel.currentItemDefinition,
+                                selectedScore = selectedScore,
+                                totalScore = viewModel.totalScore,
+                                isTimerRunning = isTimerRunning,
+                                formattedTime = formattedTime,
+                                itemCount = viewModel.items.size,
+                                onNextItem = { viewModel.nextItem() },
+                                onBackItem = { viewModel.backItem() },
+                                onSelectScore = { viewModel.selectScore(it) },
+                                onStartTimer = { viewModel.startTimer() },
+                                onStopTimer = { viewModel.saveAndStop() },
+                                onResetTimer = { viewModel.resetTimer() },
+                                onFinish = { /* navController.navigate(...) */ }
+                            )
+                        }
+                    }
+                }
+
+                TestType.MOTRICITY_INDEX -> {
+
+                }
+
+                TestType.TRUNK_CONTROL_TEST -> {
+
+                }
+            }
+
+
+
+
+
         }
     }
 }

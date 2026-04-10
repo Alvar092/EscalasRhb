@@ -21,8 +21,8 @@ data class BergTest(
 data class BergItem(
     override val id: UUID = UUID.randomUUID(),
     val itemType: BergItemType,
-    override val score: Int? = null,
-    val timeRecorded: Double? = null
+    override var score: Int? = null,
+    var timeRecorded: Double? = null
 ) : ClinicalTestItem {
 
     fun withTimeScoring(): BergItem {
