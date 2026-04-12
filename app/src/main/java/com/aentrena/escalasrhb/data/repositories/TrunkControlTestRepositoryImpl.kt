@@ -1,6 +1,8 @@
 package com.aentrena.escalasrhb.data.repositories
 
+import com.aentrena.escalasrhb.data.local.daos.ClinicalHistoryDao
 import com.aentrena.escalasrhb.data.local.daos.TrunkControlTestDao
+import com.aentrena.escalasrhb.data.local.mappers.ClinicalTestMapper.toClinicalHistoryEntity
 import com.aentrena.escalasrhb.data.local.mappers.TrunkControlMapper.toDomain
 import com.aentrena.escalasrhb.data.local.mappers.TrunkControlMapper.toEntity
 import com.aentrena.escalasrhb.domain.interfaces.repositories.TrunkControlRepository
@@ -11,7 +13,8 @@ import java.util.UUID
 import javax.inject.Inject
 
 class TrunkControlTestRepositoryImpl @Inject constructor(
-    private val dao: TrunkControlTestDao
+    private val dao: TrunkControlTestDao,
+    private val indexDao: ClinicalHistoryDao
 ): TrunkControlRepository {
     override fun getAll(): Flow<List<TrunkControlTest>> =
         dao.getAllTrunkControlTests().map { entities ->
@@ -27,6 +30,9 @@ class TrunkControlTestRepositoryImpl @Inject constructor(
         dao.getTrunkControlTestById(id.toString()).map{it?.toDomain()}
 
 
-    override suspend fun save(test: TrunkControlTest) =
+    override suspend fun save(test: TrunkControlTest) {
         dao.insertTrunkControlTest(test.toEntity())
+        indexDao.insert(test.toClinicalHistoryEntity())
+    }
+
 }

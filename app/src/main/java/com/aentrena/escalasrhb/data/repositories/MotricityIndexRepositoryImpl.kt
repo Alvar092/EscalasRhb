@@ -1,6 +1,8 @@
 package com.aentrena.escalasrhb.data.repositories
 
+import com.aentrena.escalasrhb.data.local.daos.ClinicalHistoryDao
 import com.aentrena.escalasrhb.data.local.daos.MotricityIndexDao
+import com.aentrena.escalasrhb.data.local.mappers.ClinicalTestMapper.toClinicalHistoryEntity
 import com.aentrena.escalasrhb.data.local.mappers.MotricityIndexMapper.toDomain
 import com.aentrena.escalasrhb.data.local.mappers.MotricityIndexMapper.toEntity
 import com.aentrena.escalasrhb.domain.interfaces.repositories.MotricityIndexRepository
@@ -13,7 +15,8 @@ import java.util.UUID
 
 
 class MotricityIndexRepositoryImpl @Inject constructor(
-    private val dao: MotricityIndexDao
+    private val dao: MotricityIndexDao,
+    private val indexDao: ClinicalHistoryDao
 ) : MotricityIndexRepository {
 
     override fun getAll(): Flow<List<MotricityIndexTest>> =
@@ -30,7 +33,8 @@ class MotricityIndexRepositoryImpl @Inject constructor(
         dao.getMotricityIndexById(id.toString()).map{it?.toDomain()}
 
 
-    override suspend fun save(test: MotricityIndexTest) =
+    override suspend fun save(test: MotricityIndexTest) {
         dao.insertMotricityIndex(test.toEntity())
-
+        indexDao.insert(test.toClinicalHistoryEntity())
+    }
 }
