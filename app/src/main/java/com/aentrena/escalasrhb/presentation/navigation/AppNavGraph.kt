@@ -7,13 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.aentrena.escalasrhb.domain.model.ClinicalTestInfo
 import com.aentrena.escalasrhb.domain.model.TestType
 import com.aentrena.escalasrhb.presentation.HomeScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestScreen
@@ -130,6 +128,7 @@ fun AppNavGraph() {
                     val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
                     val isTimerRunning by viewModel.isTimerRunning.collectAsStateWithLifecycle()
                     val formattedTime by viewModel.formattedTime.collectAsStateWithLifecycle()
+                    val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
 
                     when (uiState) {
                         is BergTestUiState.Loading -> CircularProgressIndicator()
@@ -146,13 +145,14 @@ fun AppNavGraph() {
                                 isTimerRunning = isTimerRunning,
                                 formattedTime = formattedTime,
                                 itemCount = viewModel.items.size,
+                                isLastItem = isLastItem,
                                 onNextItem = { viewModel.nextItem() },
                                 onBackItem = { viewModel.backItem() },
                                 onSelectScore = { viewModel.selectScore(it) },
                                 onStartTimer = { viewModel.startTimer() },
                                 onStopTimer = { viewModel.saveAndStop() },
                                 onResetTimer = { viewModel.resetTimer() },
-                                onFinish = { /* navController.navigate(...) */ }
+                                onFinish = { viewModel.finishTest() }
                             )
                         }
                     }

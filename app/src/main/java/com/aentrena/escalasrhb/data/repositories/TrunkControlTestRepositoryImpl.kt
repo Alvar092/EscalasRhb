@@ -29,9 +29,4 @@ class TrunkControlTestRepositoryImpl @Inject constructor(
 
     override suspend fun save(test: TrunkControlTest) =
         dao.insertTrunkControlTest(test.toEntity())
-
-
-    override suspend fun update(test: TrunkControlTest) =
-        dao.insertTrunkControlTest(test.toEntity()) // REPLACE hace upsert
-
 }

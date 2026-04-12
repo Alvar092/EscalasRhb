@@ -33,8 +33,4 @@ class MotricityIndexRepositoryImpl @Inject constructor(
     override suspend fun save(test: MotricityIndexTest) =
         dao.insertMotricityIndex(test.toEntity())
 
-
-    override suspend fun update(test: MotricityIndexTest) =
-        dao.insertMotricityIndex(test.toEntity()) // REPLACE hace upsert
-
 }

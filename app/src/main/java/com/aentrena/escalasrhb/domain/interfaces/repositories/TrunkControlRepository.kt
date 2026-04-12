@@ -9,5 +9,4 @@ interface TrunkControlRepository {
     fun getByPatient(patientId: UUID): Flow<List<TrunkControlTest>>
     fun getById(id: UUID): Flow<TrunkControlTest?>
     suspend fun save(test: TrunkControlTest)
-    suspend fun update(test: TrunkControlTest)
 }

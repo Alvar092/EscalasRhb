@@ -1,5 +1,6 @@
 package com.aentrena.escalasrhb.domain.useCases.scales
 
+import android.util.Log
 import com.aentrena.escalasrhb.domain.interfaces.repositories.BergTestRepository
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
 import javax.inject.Inject

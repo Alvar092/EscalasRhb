@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -27,6 +28,7 @@ import com.aentrena.escalasrhb.domain.model.scales.BergItemType
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemDefinition
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
+import kotlinx.coroutines.flow.StateFlow
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +47,8 @@ fun BergTestScreen(
     onStartTimer: () -> Unit,
     onStopTimer: () -> Unit,
     onResetTimer: () -> Unit,
-    onFinish: () -> Unit
+    onFinish: () -> Unit,
+    isLastItem: Boolean
 ) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -53,6 +56,7 @@ fun BergTestScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .navigationBarsPadding()
                     .padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -65,8 +69,17 @@ fun BergTestScreen(
                     text = " Total:\n $totalScore / 56"
                 )
 
-                TextButton(onClick = onNextItem) {
-                    Text("Siguiente")
+                TextButton(onClick = if (isLastItem) {
+                    onFinish
+                } else {
+                    onNextItem
+                }) {
+                    Text(if (isLastItem) {
+                        "Terminar"
+                    } else {
+                        "Siguiente"
+                    }
+                    )
                 }
             }
         }
@@ -174,7 +187,8 @@ private fun BergTestScreen_Preview() {
             onStartTimer = {},
             onStopTimer = {},
             onResetTimer = {},
-            onFinish = {}
+            isLastItem = false,
+            onFinish = {},
         )
     }
 }
@@ -197,7 +211,8 @@ private fun BergTestScreenTimer_Preview() {
             onStartTimer = {},
             onStopTimer = {},
             onResetTimer = {},
-            onFinish = {}
+            isLastItem = false,
+            onFinish = {},
         )
     }
 }

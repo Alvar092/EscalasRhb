@@ -1,5 +1,6 @@
 package com.aentrena.escalasrhb.presentation.bergTest
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.SavedStateHandle
@@ -46,6 +47,9 @@ class BergTestViewModel @Inject constructor(
     val test: StateFlow<BergTest?> = _test.asStateFlow()
 
     val items = mutableStateListOf<BergItem>()
+
+    private val _isLastItem = MutableStateFlow(false)
+    val isLastItem: StateFlow<Boolean> = _isLastItem.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -124,10 +128,10 @@ class BergTestViewModel @Inject constructor(
 
     fun saveAndStop() {
         stopTimer()
-        _elapsedTime.value = 0.0
-        items[currentItemIndex.value].timeRecorded = null
-        items[currentItemIndex.value].score = null
-        _selectedScoreItem.value = items[currentItemIndex.value].score
+        items[currentItemIndex.value].timeRecorded = _elapsedTime.value
+        val updatedItem = items[currentItemIndex.value].withTimeScoring()
+        items[currentItemIndex.value] = updatedItem
+        _selectedScoreItem.value = updatedItem.score
     }
 
     fun resetTimer() {
@@ -142,9 +146,11 @@ class BergTestViewModel @Inject constructor(
         if(isTimerRunning.value == true) {
             stopTimer()
         }
+
         if (currentItemIndex.value >= items.size - 1) return
         _currentItemIndex.value++
         _selectedScoreItem.value = items[currentItemIndex.value].score
+        _isLastItem.value = currentItemIndex.value == items.size -1
 
         //Save time
         _elapsedTime.value = items[currentItemIndex.value].timeRecorded ?: 0.0
@@ -165,8 +171,11 @@ class BergTestViewModel @Inject constructor(
 
     }
 
-    suspend fun finishTest() {
-        // TODO: saveBerg(test = test)
+    fun finishTest() {
+        viewModelScope.launch {
+            test.value?.let { saveBerg(it) }
+            Log.d("REPO", "Test guardado ${test.value}")
+        }
     }
 
 }

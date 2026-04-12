@@ -10,5 +10,4 @@ interface MotricityIndexRepository {
     fun getByPatient(patientId: UUID): Flow<List<MotricityIndexTest>>
     fun getById(id: UUID): Flow<MotricityIndexTest?>
     suspend fun save(test: MotricityIndexTest)
-    suspend fun update(test: MotricityIndexTest)
 }

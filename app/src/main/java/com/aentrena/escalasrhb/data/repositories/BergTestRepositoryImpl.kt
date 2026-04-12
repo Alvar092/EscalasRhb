@@ -26,11 +26,8 @@ class BergTestRepositoryImpl @Inject constructor(
         }
 
     override fun getById(id: UUID): Flow<BergTest?> =
-        dao.getBergTestById(id.toString()).map {it?.toDomain() }
+        dao.getBergTestById(id.toString()).map { it?.toDomain() }
 
     override suspend fun save(test: BergTest) =
-        dao.insertBergTest(test.toEntity())
-
-    override suspend fun update(test: BergTest) =
         dao.insertBergTest(test.toEntity())
 }
