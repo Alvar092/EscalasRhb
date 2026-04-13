@@ -1,13 +1,24 @@
 package com.aentrena.escalasrhb.data.services.pdf
 
+import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.pdf.PdfDocument
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.Period
+import java.time.ZoneId
+import java.util.Date
+import java.util.Locale
 
-class BergPdfStrategy : TestPdfStrategy {
+class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
 
     override fun drawContent(
         test: ClinicalTest,
@@ -21,7 +32,7 @@ class BergPdfStrategy : TestPdfStrategy {
         var currentY = layout.margin
         var currentPage = 1
 
-        currentY = drawHeader(canvas, test.name, currentY, layout)
+        currentY = drawHeader(canvas, test.testType.name, currentY, layout)
         currentY += 15f
 
         currentY = drawSection(canvas, "Datos del Paciente", currentY, layout)
@@ -64,11 +75,13 @@ class BergPdfStrategy : TestPdfStrategy {
     // MARK: - Prepare items
 
     private fun prepareItemsForPdf(bergTest: BergTest): List<BergItemPdf> {
-        val definitions = BergItemCatalog.allDefinitions()
+        val definitions = BergItemCatalog.definitions
         return bergTest.items.mapIndexedNotNull { index, item ->
-            val definition = definitions.firstOrNull { it.type == item.itemType } ?: return@mapIndexedNotNull null
-            val scoreDescription = item.score?.let { score ->
-                definition.scoringOptions.firstOrNull { it.score == score }?.description
+            val definition = definitions[item.itemType] ?: return@mapIndexedNotNull  null
+            val scoreDescription = item.score?.let { score: Int ->
+                definition.scoringOptions.firstOrNull { it.score == score }?.let { option ->
+                    context.getString(option.textRes)
+                }
             } ?: ""
             BergItemPdf(index + 1, definition, item, bergTest, scoreDescription)
         }
@@ -183,7 +196,7 @@ class BergPdfStrategy : TestPdfStrategy {
                 isFakeBoldText = isSelected
                 color = if (isSelected) Color.BLACK else Color.DKGRAY
             }
-            canvas.drawText(option.description, layout.margin + 45f, optionY + 11f, optionPaint)
+            canvas.drawText(option.textRes.toString(), layout.margin + 45f, optionY + 11f, optionPaint)
             optionY += 14f
         }
 
@@ -203,12 +216,14 @@ class BergPdfStrategy : TestPdfStrategy {
 
     // MARK: - Helpers
 
-    private fun formatDate(date: Date): String {
-        return SimpleDateFormat("dd/MM/yyyy", Locale("es", "ES")).format(date)
+    private fun formatDate(timeStamp: Long): String {
+        return SimpleDateFormat("dd/MM/yyyy", Locale("es", "ES")).format(Date(timeStamp))
     }
 
-    private fun calculateAge(birthDate: Date): Int {
-        val birth = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+    private fun calculateAge(birthTimestamp: Long): Int {
+        val birth = Instant.ofEpochMilli(birthTimestamp)
+            .atZone(ZoneId.systemDefault())
+            .toLocalDate()
         return Period.between(birth, LocalDate.now()).years
     }
 }

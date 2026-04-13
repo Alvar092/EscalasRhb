@@ -1,5 +1,6 @@
 package com.aentrena.escalasrhb.data.services.pdf
 
+import android.content.Context
 import android.graphics.pdf.PdfDocument
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.TestType
@@ -7,7 +8,9 @@ import com.aentrena.escalasrhb.domain.model.patients.Patient
 import java.io.ByteArrayOutputStream
 
 
-class PdfGenerator(private val layout: PdfLayout = PdfLayout.A4) {
+class PdfGenerator(
+    private val context: Context,
+    private val layout: PdfLayout = PdfLayout.A4) {
 
     fun generatePdf(test: ClinicalTest, patient: Patient): ByteArray {
         val strategy = getStrategy(test)
@@ -30,8 +33,8 @@ class PdfGenerator(private val layout: PdfLayout = PdfLayout.A4) {
     }
 
     private fun getStrategy(test: ClinicalTest): TestPdfStrategy = when (test.testType) {
-        TestType.BERG -> BergPdfStrategy()
-        TestType.MOTRICITY_INDEX -> MotricityIndexPdfStrategy()
-        TestType.TRUNK_CONTROL -> TrunkControlPdfStrategy()
+        TestType.BERG -> BergPdfStrategy(context = context)
+        TestType.MOTRICITY_INDEX -> BergPdfStrategy(context)
+        TestType.TRUNK_CONTROL_TEST -> BergPdfStrategy(context)
     }
 }
