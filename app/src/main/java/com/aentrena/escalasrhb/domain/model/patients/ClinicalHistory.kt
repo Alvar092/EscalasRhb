@@ -1,7 +1,7 @@
 package com.aentrena.escalasrhb.domain.model.patients
 
 import com.aentrena.escalasrhb.domain.model.TestType
-import java.time.LocalDate
+
 
 class ClinicalHistory (
     val id: String,

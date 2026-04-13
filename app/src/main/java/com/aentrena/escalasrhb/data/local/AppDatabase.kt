@@ -21,13 +21,13 @@ import com.aentrena.escalasrhb.data.local.entities.TrunkControlTestEntity
         MotricityIndexEntity::class,
         TrunkControlTestEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {
     abstract fun patientDao(): PatientDao
 
-    abstract fun ClinicalHistoryDao(): ClinicalHistoryDao
+    abstract fun clinicalHistoryDao(): ClinicalHistoryDao
     abstract fun bergTestDao(): BergTestDao
     abstract fun motricityIndexDao(): MotricityIndexDao
     abstract fun trunkControlTestDao(): TrunkControlTestDao

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.aentrena.escalasrhb.data.local.AppDatabase
 import com.aentrena.escalasrhb.data.local.daos.BergTestDao
+import com.aentrena.escalasrhb.data.local.daos.ClinicalHistoryDao
 import com.aentrena.escalasrhb.data.local.daos.MotricityIndexDao
 import com.aentrena.escalasrhb.data.local.daos.PatientDao
 import com.aentrena.escalasrhb.data.local.daos.TrunkControlTestDao
@@ -25,11 +26,15 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             "escalas_db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton
     fun providePatientDao(db: AppDatabase): PatientDao = db.patientDao()
+
+    @Provides
+    @Singleton
+    fun provideClinicalHistoryDao(db: AppDatabase): ClinicalHistoryDao = db.clinicalHistoryDao()
 
     @Provides
     @Singleton

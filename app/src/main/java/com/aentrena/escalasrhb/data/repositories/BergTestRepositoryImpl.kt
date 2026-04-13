@@ -5,7 +5,6 @@ import com.aentrena.escalasrhb.data.local.daos.ClinicalHistoryDao
 import com.aentrena.escalasrhb.data.local.mappers.BergTestMapper.toDomain
 import com.aentrena.escalasrhb.data.local.mappers.BergTestMapper.toEntity
 import com.aentrena.escalasrhb.data.local.mappers.ClinicalTestMapper.toClinicalHistoryEntity
-import com.aentrena.escalasrhb.data.local.mappers.ClinicalTestMapper.toEntity
 import com.aentrena.escalasrhb.domain.interfaces.repositories.BergTestRepository
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
 import kotlinx.coroutines.flow.Flow

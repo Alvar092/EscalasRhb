@@ -1,6 +1,7 @@
 package com.aentrena.escalasrhb.data.repositories
 
 import com.aentrena.escalasrhb.data.local.daos.ClinicalHistoryDao
+import com.aentrena.escalasrhb.data.local.entities.ClinicalHistoryEntity
 import com.aentrena.escalasrhb.data.local.mappers.ClinicalTestMapper.toClinicalHistoryDomain
 import com.aentrena.escalasrhb.data.local.mappers.ClinicalTestMapper.toClinicalHistoryEntity
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
@@ -23,6 +24,7 @@ class ClinicalHistoryRepositoryImpl @Inject constructor(
     override suspend fun addEntry(test: ClinicalTest) =
         dao.insert(test.toClinicalHistoryEntity())
 
-    override suspend fun getById(testId: UUID): Flow<ClinicalHistory> =
-        dao.getById(testId = testId.toString()).map { it.toClinicalHistoryDomain() }
+    override fun getById(testId: UUID): Flow<ClinicalHistory?> =
+        dao.getById(testId = testId.toString())
+            .map {it?.toClinicalHistoryDomain()}
 }

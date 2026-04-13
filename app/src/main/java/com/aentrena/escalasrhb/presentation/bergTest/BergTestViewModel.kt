@@ -38,7 +38,7 @@ class BergTestViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    private val testId: UUID = UUID.fromString(checkNotNull(savedStateHandle["testId"]))
+    val testId: UUID = UUID.fromString(checkNotNull(savedStateHandle["testId"]))
 
     private val _uiState = MutableStateFlow<BergTestUiState>(BergTestUiState.Loading)
     val uiState: StateFlow<BergTestUiState> = _uiState.asStateFlow()

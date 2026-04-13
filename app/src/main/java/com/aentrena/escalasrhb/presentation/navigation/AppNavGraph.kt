@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -13,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aentrena.escalasrhb.domain.model.TestType
+import com.aentrena.escalasrhb.domain.model.scales.BergTest
 import com.aentrena.escalasrhb.presentation.HomeScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestUiState
@@ -20,9 +22,14 @@ import com.aentrena.escalasrhb.presentation.bergTest.BergTestViewModel
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreen
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreenMode
 import com.aentrena.escalasrhb.presentation.patients.PatientsViewModel
+import com.aentrena.escalasrhb.presentation.results.ResultsScreen
+import com.aentrena.escalasrhb.presentation.results.ResultsViewModel
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleInfoScreen
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleMenuScreen
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleMenuViewModel
+import java.time.LocalDate
+import java.time.LocalTime
+import java.util.UUID
 
 @Composable
 fun AppNavGraph() {
@@ -152,7 +159,11 @@ fun AppNavGraph() {
                                 onStartTimer = { viewModel.startTimer() },
                                 onStopTimer = { viewModel.saveAndStop() },
                                 onResetTimer = { viewModel.resetTimer() },
-                                onFinish = { viewModel.finishTest() }
+                                onFinish = {
+                                    viewModel.finishTest()
+                                    navController.navigate(Routes.testResult(testId = viewModel.testId))
+
+                                }
                             )
                         }
                     }
@@ -166,10 +177,24 @@ fun AppNavGraph() {
 
                 }
             }
+        }
 
+        composable(
+            route = Routes.TEST_RESULT,
+            arguments = listOf(navArgument("testId") { type = NavType.StringType}
+            )
+        ) { backStackEntry ->
 
+            val viewModel: ResultsViewModel = hiltViewModel()
+            val test by viewModel.test.collectAsStateWithLifecycle()
+            val patient by viewModel.patient.collectAsStateWithLifecycle()
+            val formattedDate by viewModel.formattedDate.collectAsState()
 
-
+            ResultsScreen(
+                test = test,
+                patient = patient,
+                formattedDate = formattedDate
+            )
 
         }
     }

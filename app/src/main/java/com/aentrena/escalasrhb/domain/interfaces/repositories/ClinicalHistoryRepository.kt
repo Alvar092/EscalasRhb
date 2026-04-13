@@ -9,5 +9,5 @@ interface ClinicalHistoryRepository {
     fun getPatientHistory(patientId: UUID): Flow<List<ClinicalHistory>>
     suspend fun addEntry(test: ClinicalTest)
 
-    suspend fun getById(testId: UUID): Flow<ClinicalTest>
+    fun getById(testId: UUID): Flow<ClinicalHistory?>
 }
