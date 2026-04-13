@@ -24,13 +24,14 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
         test: ClinicalTest,
         patient: Patient,
         canvas: Canvas,
-        page: PdfDocument.Page,
-        document: PdfDocument,
         layout: PdfLayout
     ): Float {
+
         val bergTest = test as? BergTest ?: return layout.margin
         var currentY = layout.margin
+        var currentCanvas = canvas
         var currentPage = 1
+
 
         currentY = drawHeader(canvas, test.testType.name, currentY, layout)
         currentY += 15f
@@ -50,7 +51,8 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
         currentY = drawSection(canvas, "Detalle de Ítems", currentY, layout)
         currentY += 10f
 
-        for (item in itemsPdf) {
+
+        /* for (item in itemsPdf) {
             // Nueva página si no hay espacio
             if (currentY > layout.pageHeight - 150f) {
                 drawPageNumber(canvas, currentPage, layout)
@@ -66,7 +68,7 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
 
             currentY = drawItem(canvas, item, currentY, layout)
             currentY += 8f
-        }
+        } */
 
         drawPageNumber(canvas, currentPage, layout)
         return currentY

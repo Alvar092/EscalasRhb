@@ -34,7 +34,8 @@ import java.util.UUID
 fun ResultsScreen(
     test: ClinicalTest?,
     patient: Patient?,
-    formattedDate: String
+    formattedDate: String,
+    onExportPdf: () -> Unit
 ) {
     Scaffold(
         bottomBar = {
@@ -92,7 +93,7 @@ fun ResultsScreen(
 
 
             Button(
-                onClick = { /* exportPDF */ },
+                onClick = { onExportPdf() },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(imageVector = Icons.Default.Share, contentDescription = null)
@@ -128,7 +129,8 @@ private fun ResultsScreen_Preview() {
                 "Ana Maria Martinez",
                 System.currentTimeMillis()
             ),
-            formattedDate = "25/12/2025"
+            formattedDate = "25/12/2025",
+            onExportPdf = {}
         )
     }
 }

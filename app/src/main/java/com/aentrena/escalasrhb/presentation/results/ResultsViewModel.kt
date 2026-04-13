@@ -1,9 +1,11 @@
 package com.aentrena.escalasrhb.presentation.results
 
+import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.aentrena.escalasrhb.data.services.pdf.PdfGenerator
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientByIdUseCase
@@ -29,6 +31,7 @@ import javax.inject.Inject
 class ResultsViewModel @Inject constructor(
     private val getTest: GetTestResultUseCase,
     private val getPatient: GetPatientByIdUseCase,
+    private val pdfGenerator: PdfGenerator,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -72,5 +75,9 @@ class ResultsViewModel @Inject constructor(
         viewModelScope.launch {
             getPatient(patientId).collect { _patient.value = it }
         }
+    }
+
+    fun generatePdf(test: ClinicalTest, patient: Patient): Uri {
+        return pdfGenerator.generatePdf(test, patient)
     }
 }

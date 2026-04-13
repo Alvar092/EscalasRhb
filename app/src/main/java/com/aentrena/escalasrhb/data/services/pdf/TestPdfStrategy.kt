@@ -10,8 +10,6 @@ interface TestPdfStrategy {
         test: ClinicalTest,
         patient: Patient,
         canvas: Canvas,
-        page: PdfDocument.Page,
-        document: PdfDocument,
         layout: PdfLayout
     ): Float
 }
