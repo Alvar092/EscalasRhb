@@ -6,6 +6,7 @@ import java.util.UUID
 object Routes {
     const val HOME = "home"
     const val PATIENTS = "patients"
+    const val PATIENT_DETAIL = "patientDetail/{patientId}"
     const val CONTACT = "contact"
     const val SCALE_MENU = "scale_menu/{testType}"
     const val SCALE_INFO = "scale_info/{testType}"
@@ -16,4 +17,5 @@ object Routes {
     fun scaleInfo(type: TestType) = "scale_info/${type.name}"
     fun test(type: TestType, testId: UUID) = "test/${type.name}/$testId"
     fun testResult(testId: UUID) = "test/$testId"
+    fun patientDetail(patientId: UUID) = "patientDetail/$patientId"
 }

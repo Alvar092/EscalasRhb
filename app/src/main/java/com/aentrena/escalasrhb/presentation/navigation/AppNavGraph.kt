@@ -20,6 +20,7 @@ import com.aentrena.escalasrhb.presentation.HomeScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestUiState
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestViewModel
+import com.aentrena.escalasrhb.presentation.patients.PatientsDetailViewModel
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreen
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreenMode
 import com.aentrena.escalasrhb.presentation.patients.PatientsViewModel
@@ -61,6 +62,23 @@ fun AppNavGraph() {
                 onAddPatient = {name, birthdate -> viewModel.addPatient(name,birthdate)},
                 onNavigateBack = { navController.popBackStack() }
             )
+        }
+
+        composable(Routes.PATIENT_DETAIL, arguments = listOf(navArgument("patientId"){
+            type = NavType.StringType
+        })) {
+            val viewModel: PatientsDetailViewModel = hiltViewModel()
+            val patient by viewModel.patient.collectAsStateWithLifecycle()
+            val tests by viewModel.tests.collectAsStateWithLifecycle()
+
+            patient?.let {
+                PatientDetailScreen(
+                    patient = it,
+                    tests = tests,
+                    onTestClick = { test -> navController.navigate(Routes.testDetail(test.id)) }
+                )
+            }
+
         }
 
         /*composable(Routes.CONTACT) {
