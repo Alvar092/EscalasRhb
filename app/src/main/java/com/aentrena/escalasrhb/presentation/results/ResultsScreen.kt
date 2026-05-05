@@ -35,12 +35,13 @@ fun ResultsScreen(
     test: ClinicalTest?,
     patient: Patient?,
     formattedDate: String,
-    onExportPdf: () -> Unit
+    onExportPdf: () -> Unit,
+    onNavigateToHome: () -> Unit
 ) {
     Scaffold(
         bottomBar = {
             Button(
-                onClick = { /* navigateToRoot */ },
+                onClick = { onNavigateToHome()},
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
@@ -130,7 +131,8 @@ private fun ResultsScreen_Preview() {
                 System.currentTimeMillis()
             ),
             formattedDate = "25/12/2025",
-            onExportPdf = {}
+            onExportPdf = {},
+            onNavigateToHome = {}
         )
     }
 }

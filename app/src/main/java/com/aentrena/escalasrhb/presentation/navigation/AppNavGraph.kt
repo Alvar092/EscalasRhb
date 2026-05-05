@@ -209,7 +209,8 @@ fun AppNavGraph() {
                     } catch (e: Exception) {
                         Log.e("PDF", "Error generando PDF: ${e.message}", e)
                     }
-                }
+                },
+                onNavigateToHome = {navController.navigate(Routes.HOME)}
             )
 
         }
