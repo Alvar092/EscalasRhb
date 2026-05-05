@@ -1,7 +1,7 @@
-package com.aentrena.escalasrhb.data.services.pdf
+package com.aentrena.escalasrhb.data.services.pdf.strategies
 
 import android.graphics.Canvas
-import android.graphics.pdf.PdfDocument
+import com.aentrena.escalasrhb.data.services.pdf.PdfLayout
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 
@@ -10,6 +10,7 @@ interface TestPdfStrategy {
         test: ClinicalTest,
         patient: Patient,
         canvas: Canvas,
-        layout: PdfLayout
+        layout: PdfLayout,
+        requestNewPage: () -> Canvas
     ): Float
 }

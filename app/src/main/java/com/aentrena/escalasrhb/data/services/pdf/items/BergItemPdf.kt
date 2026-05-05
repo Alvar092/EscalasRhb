@@ -1,4 +1,4 @@
-package com.aentrena.escalasrhb.data.services.pdf
+package com.aentrena.escalasrhb.data.services.pdf.items
 
 import com.aentrena.escalasrhb.domain.model.scales.BergItem
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
