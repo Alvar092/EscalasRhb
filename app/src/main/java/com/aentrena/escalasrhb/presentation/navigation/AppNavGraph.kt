@@ -20,6 +20,7 @@ import com.aentrena.escalasrhb.presentation.HomeScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestUiState
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestViewModel
+import com.aentrena.escalasrhb.presentation.patients.PatientDetailScreen
 import com.aentrena.escalasrhb.presentation.patients.PatientsDetailViewModel
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreen
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreenMode
@@ -56,7 +57,7 @@ fun AppNavGraph() {
             PatientsScreen(
                 patients = patients,
                 mode = PatientsScreenMode.Browse,
-                onLookDetail = { /*navController.navigate(Routes.PATIENT_DETAIL)*/},
+                onLookDetail = { patient -> navController.navigate(Routes.patientDetail(patient.id))},
                 onSelectPatient = { },
                 onEditPatient = { viewModel.onEditPatient(it)},
                 onAddPatient = {name, birthdate -> viewModel.addPatient(name,birthdate)},
@@ -75,7 +76,7 @@ fun AppNavGraph() {
                 PatientDetailScreen(
                     patient = it,
                     tests = tests,
-                    onTestClick = { test -> navController.navigate(Routes.testDetail(test.id)) }
+                    onTestClick = { /*test -> navController.navigate(Routes.testDetail(test.id)) */ }
                 )
             }
 

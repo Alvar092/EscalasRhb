@@ -297,7 +297,8 @@ private fun PatientsScreen_Preview() {
         )
 
     MaterialTheme {
-        PatientsScreen(patients = muestra,
+        PatientsScreen(
+            patients = muestra,
             mode = PatientsScreenMode.Browse,
             onLookDetail = {},
             onSelectPatient = {},
