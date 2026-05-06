@@ -8,8 +8,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aentrena.escalasrhb.data.services.pdf.PdfGenerator
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.patients.Patient
+import com.aentrena.escalasrhb.domain.model.scales.BergTest
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientByIdUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.GetTestResultUseCase
+import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
+import com.aentrena.escalasrhb.presentation.results.resources.TestResultItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -54,6 +57,11 @@ class ResultsViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "")
 
+    val resultItems: StateFlow<List<TestResultItem>> = _test
+        .filterNotNull()
+        .map { test -> buildResultItems(test)}
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
     init {
         loadTest()
     }
@@ -80,4 +88,18 @@ class ResultsViewModel @Inject constructor(
     fun generatePdf(test: ClinicalTest, patient: Patient): Uri {
         return pdfGenerator.generatePdf(test, patient)
     }
+
+    private fun buildResultItems(test: ClinicalTest): List<TestResultItem> =
+        when (test) {
+            is BergTest -> test.items.mapNotNull { item ->
+                val definition = BergItemCatalog.definitions[item.itemType] ?: return@mapNotNull null
+                TestResultItem(
+                    titleRes = definition.titleRes,
+                    options = definition.scoringOptions.map { it.score to it.textRes },
+                    selectedScore = item.score
+                )
+            }
+            else -> emptyList()
+        }
+
 }

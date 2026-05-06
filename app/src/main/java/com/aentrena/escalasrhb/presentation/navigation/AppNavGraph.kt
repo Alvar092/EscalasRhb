@@ -30,6 +30,7 @@ import com.aentrena.escalasrhb.presentation.results.ResultsViewModel
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleInfoScreen
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleMenuScreen
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleMenuViewModel
+import java.util.UUID
 
 
 @Composable
@@ -76,10 +77,9 @@ fun AppNavGraph() {
                 PatientDetailScreen(
                     patient = it,
                     tests = tests,
-                    onTestClick = { /*test -> navController.navigate(Routes.testDetail(test.id)) */ }
+                    onTestClick = { test -> navController.navigate(Routes.testResult(testId = UUID.fromString(test.id)))  }
                 )
             }
-
         }
 
         /*composable(Routes.CONTACT) {
@@ -208,11 +208,13 @@ fun AppNavGraph() {
             val test by viewModel.test.collectAsStateWithLifecycle()
             val patient by viewModel.patient.collectAsStateWithLifecycle()
             val formattedDate by viewModel.formattedDate.collectAsState()
+            val resultItems by viewModel.resultItems.collectAsStateWithLifecycle()
 
             ResultsScreen(
                 test = test,
                 patient = patient,
                 formattedDate = formattedDate,
+                resultItems = resultItems,
                 onExportPdf = {
                     val currentTest = test ?: return@ResultsScreen
                     val currentPatient = patient ?: return@ResultsScreen
