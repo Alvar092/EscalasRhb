@@ -1,5 +1,6 @@
-package com.aentrena.escalasrhb.presentation.bergTest
+package com.aentrena.escalasrhb.presentation.motricityIndex
 
+import android.app.AlertDialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,8 +13,9 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -24,28 +26,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.aentrena.escalasrhb.domain.model.scales.BergItemType
-import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
-import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemDefinition
+import com.aentrena.escalasrhb.domain.model.scales.BodySide
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItemType
+import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityIndexCatalog
+import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityItemDefinition
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BergTestScreen(
+fun MotricityIndexScreen(
     currentItemIndex: Int,
-    definition: BergItemDefinition,
+    definition: MotricityItemDefinition,
     selectedScore: Int?,
-    totalScore: Int,
-    isTimerRunning: Boolean,
-    formattedTime: String,
+    upperLimbScore: Int,
+    loweLimbScore: Int,
     itemCount: Int,
     onNextItem: () -> Unit,
     onBackItem: () -> Unit,
     onSelectScore: (Int) -> Unit,
-    onStartTimer: () -> Unit,
-    onStopTimer: () -> Unit,
-    onResetTimer: () -> Unit,
     onFinish: () -> Unit,
     isLastItem: Boolean
 ) {
@@ -64,9 +62,16 @@ fun BergTestScreen(
                     Text("Atrás")
                 }
 
-                Text(
-                    text = " Total:\n $totalScore / 56"
-                )
+                Column( modifier = Modifier
+                    .padding()) {
+                    Text(
+                        text = "Puntuación MS: ${upperLimbScore}/ 100"
+                    )
+                    Text(
+                        text = "Puntuación MI: ${loweLimbScore}/ 100"
+                    )
+                }
+
 
                 TextButton(onClick = if (isLastItem) {
                     onFinish
@@ -108,53 +113,19 @@ fun BergTestScreen(
                 style = MaterialTheme.typography.bodyMedium
             )
 
-            // Timer
-            if (definition.needsTimer) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = formattedTime,
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-
-                    TextButton(onClick = {
-                        if(!isTimerRunning) {
-                            onStartTimer()
-                        } else {
-                            onStopTimer()
-                        }
-                    })
-                    {
-                        if (isTimerRunning) {
-                            Text("Pausar")
-                        } else {
-                            Text("iniciar")
-                        }
-                    }
-
-                    TextButton(onClick = onResetTimer )
-                    {
-                        Text("Reset")
-                    }
-                }
-            }
-
             // Answer options
             definition.scoringOptions.forEach { option ->
                 val isSelected = selectedScore == option.score
                 Box(
-                     modifier = Modifier
-                         .fillMaxWidth()
-                         .border(
-                             1.dp,
-                             if (isSelected) Color.Blue else Color.Blue.copy(alpha = 0.7f)
-                         )
-                         .background(if (isSelected) MaterialTheme.colorScheme.secondary else Color.Transparent)
-                         .clickable { onSelectScore(option.score) }
-                         .padding(horizontal = 12.dp, vertical = 16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(
+                            1.dp,
+                            if (isSelected) Color.Blue else Color.Blue.copy(alpha = 0.7f)
+                        )
+                        .background(if (isSelected) MaterialTheme.colorScheme.secondary else Color.Transparent)
+                        .clickable { onSelectScore(option.score) }
+                        .padding(horizontal = 12.dp, vertical = 16.dp)
 
                 ) {
                     Text(
@@ -165,54 +136,52 @@ fun BergTestScreen(
                 }
             }
         }
+
     }
+}
+
+
+
+
+@Composable
+fun SideSelectionDialog(
+    onSideSelected: (BodySide) -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = {},
+        title = {Text("Selecciona el lado a evaluar")},
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                BodySide.entries.forEach { side ->
+                    OutlinedButton(
+                        onClick = { onSideSelected(side)},
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("${BodySide.entries}")
+                    }
+                }
+            }
+        },
+        confirmButton = {}
+    )
 }
 
 @Preview
 @Composable
-private fun BergTestScreen_Preview() {
+private fun MotricityIndexScreen_Preview() {
     EscalasRhbTheme {
-        BergTestScreen(
-            currentItemIndex = 0,
-            definition = BergItemCatalog.definitions[BergItemType.SITTING_TO_STANDING]!!,
+        MotricityIndexScreen(
+            currentItemIndex = 4,
+            definition = MotricityIndexCatalog.definitions[MotricityIndexItemType.KNEE_EXTENSION]!!,
             selectedScore = 0,
-            totalScore = 0,
-            isTimerRunning = false,
-            formattedTime = "00:00.0",
-            itemCount = 14,
+            upperLimbScore = 20,
+            loweLimbScore = 0,
+            itemCount = 6,
             onNextItem = {},
             onBackItem = {},
             onSelectScore = {},
-            onStartTimer = {},
-            onStopTimer = {},
-            onResetTimer = {},
-            isLastItem = false,
             onFinish = {},
+            isLastItem = false
         )
     }
 }
-
-@Preview
-@Composable
-private fun BergTestScreenTimer_Preview() {
-    EscalasRhbTheme {
-        BergTestScreen(
-            currentItemIndex = 0,
-            definition = BergItemCatalog.definitions[BergItemType.STANDING_UNSUPPORTED_FEET_TOGETHER]!!,
-            selectedScore = 3,
-            totalScore = 0,
-            isTimerRunning = false,
-            formattedTime = "00:00.0",
-            itemCount = 14,
-            onNextItem = {},
-            onBackItem = {},
-            onSelectScore = {},
-            onStartTimer = {},
-            onStopTimer = {},
-            onResetTimer = {},
-            isLastItem = false,
-            onFinish = {},
-        )
-    }
-}
-

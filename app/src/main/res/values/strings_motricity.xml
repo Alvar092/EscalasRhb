@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Titles -->
+    <string name="motricity_pinchGrip_title">1- Pinza fina</string>
+    <string name="motricity_elbowFlexion_title">2- Flexión de codo</string>
+    <string name="motricity_shoulderAbduction_title">3- Abducción de hombro</string>
+    <string name="motricity_hipFlexion_title">4- Flexión de cadera</string>
+    <string name="motricity_kneeExtension_title">5- Extensión de rodilla</string>
+    <string name="motricity_ankleDorsiflexion_title">6- Dorsiflexión de tobillo</string>
+
+
+
+    <!-- Descriptions -->
+    <string name="motricity_pinchGrip_description">Capacidad para realizar pinza entre pulgar e índice.</string>
+    <string name="motricity_elbowFlexion_description">Flexión activa del codo contra gravedad o resistencia.</string>
+    <string name="motricity_shoulderAbduction_description">Abducción activa del hombro contra gravedad o resistencia.</string>
+    <string name="motricity_hipFlexion_description">Flexión activa de cadera contra gravedad o resistencia.</string>
+    <string name="motricity_kneeExtension_description">Extensión activa de la rodilla contra gravedad o resistencia.</string>
+    <string name="motricity_ankleDorsiflexion_description">Elevación activa del pie contra gravedad.</string>
+
+
+    <!-- Standard scoring -->
+    <string name="motricity_standard_score_0">0. No contracción visible.</string>
+    <string name="motricity_standard_score_9">9. Contracción palpable sin movimiento.</string>
+    <string name="motricity_standard_score_14">14. Movimiento sin vencer gravedad.</string>
+    <string name="motricity_standard_score_19">19. Movimiento venciendo gravedad.</string>
+    <string name="motricity_standard_score_25">25. Movimiento contra resistencia leve.</string>
+    <string name="motricity_standard_score_33">33. Fuerza normal.</string>
+
+    <!-- Pinch grip scoring -->
+    <string name="motricity_pinchGrip_score_0">0. No contracción visible.</string>
+    <string name="motricity_pinchGrip_score_11">11. Contracción palpable sin movimiento.</string>
+    <string name="motricity_pinchGrip_score_19">19. Movimiento sin vencer gravedad.</string>
+    <string name="motricity_pinchGrip_score_22">22. Movimiento venciendo gravedad.</string>
+    <string name="motricity_pinchGrip_score_26">26. Movimiento contra resistencia leve.</string>
+    <string name="motricity_pinchGrip_score_33">33. Fuerza normal.</string>
+
+</resources>

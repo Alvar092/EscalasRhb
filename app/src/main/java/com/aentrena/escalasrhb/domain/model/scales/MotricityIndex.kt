@@ -32,7 +32,7 @@ class MotricityIndexTest(
 data class MotricityIndexItem(
     override val id: UUID = UUID.randomUUID(),
     val itemType: MotricityIndexItemType,
-    override val score: Int? = null
+    override var score: Int? = null
 ) : ClinicalTestItem
 
 enum class MotricityIndexItemType {

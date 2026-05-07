@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Titles -->
+    <string name="motricity_pinchGrip_title">1- Pinch Grip</string>
+    <string name="motricity_elbowFlexion_title">2- Elbow Flexion</string>
+    <string name="motricity_shoulderAbduction_title">3- Shoulder Abduction</string>
+    <string name="motricity_ankleDorsiflexion_title">4- Ankle Dorsiflexion</string>
+    <string name="motricity_kneeExtension_title">5- Knee Extension</string>
+    <string name="motricity_hipFlexion_title">6- Hip Flexion</string>
+
+    <!-- Descriptions -->
+    <string name="motricity_pinchGrip_description">Ability to perform a pinch grip between the thumb and index finger.</string>
+    <string name="motricity_elbowFlexion_description">Active elbow flexion against gravity or resistance.</string>
+    <string name="motricity_shoulderAbduction_description">Active shoulder abduction against gravity or resistance.</string>
+    <string name="motricity_ankleDorsiflexion_description">Active lifting of the foot against gravity.</string>
+    <string name="motricity_kneeExtension_description">Active knee extension against gravity or resistance.</string>
+    <string name="motricity_hipFlexion_description">Active hip flexion against gravity or resistance.</string>
+
+    <!-- Standard scoring -->
+    <string name="motricity_standard_score_0">0. No visible contraction.</string>
+    <string name="motricity_standard_score_9">9. Palpable contraction without movement.</string>
+    <string name="motricity_standard_score_14">14. Movement without overcoming gravity.</string>
+    <string name="motricity_standard_score_19">19. Movement overcoming gravity.</string>
+    <string name="motricity_standard_score_25">25. Movement against mild resistance.</string>
+    <string name="motricity_standard_score_33">33. Normal strength.</string>
+
+    <!-- Pinch grip scoring -->
+    <string name="motricity_pinchGrip_score_0">0. No visible contraction.</string>
+    <string name="motricity_pinchGrip_score_11">11. Palpable contraction without movement.</string>
+    <string name="motricity_pinchGrip_score_19">19. Movement without overcoming gravity.</string>
+    <string name="motricity_pinchGrip_score_22">22. Movement overcoming gravity.</string>
+    <string name="motricity_pinchGrip_score_26">26. Movement against mild resistance.</string>
+    <string name="motricity_pinchGrip_score_33">33. Normal strength.</string>
+
+</resources>

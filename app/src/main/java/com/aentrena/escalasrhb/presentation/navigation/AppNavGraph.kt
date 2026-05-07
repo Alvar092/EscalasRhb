@@ -16,10 +16,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.aentrena.escalasrhb.domain.model.TestType
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItemType
 import com.aentrena.escalasrhb.presentation.HomeScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestUiState
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestViewModel
+import com.aentrena.escalasrhb.presentation.motricityIndex.MotricityIndexScreen
+import com.aentrena.escalasrhb.presentation.motricityIndex.MotricityIndexUiState
+import com.aentrena.escalasrhb.presentation.motricityIndex.MotricityIndexViewModel
+import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityIndexCatalog
 import com.aentrena.escalasrhb.presentation.patients.PatientDetailScreen
 import com.aentrena.escalasrhb.presentation.patients.PatientsDetailViewModel
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreen
@@ -145,7 +150,7 @@ fun AppNavGraph() {
             val testType = backStackEntry.arguments?.getString("testType")
                 ?.let { TestType.valueOf(it) } ?: TestType.BERG
 
-            when(testType) {
+            when (testType) {
                 TestType.BERG -> {
                     val viewModel: BergTestViewModel = hiltViewModel()
                     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -188,7 +193,36 @@ fun AppNavGraph() {
                 }
 
                 TestType.MOTRICITY_INDEX -> {
+                    val viewModel: MotricityIndexViewModel = hiltViewModel()
+                    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+                    val currentItemIndex by viewModel.currentItemIndex.collectAsStateWithLifecycle()
+                    val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
+                    val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
 
+                    when (uiState) {
+                        is MotricityIndexUiState.Loading -> CircularProgressIndicator()
+                        is MotricityIndexUiState.Error -> Text("Error cargando el test")
+                        is MotricityIndexUiState.Ready -> {
+                            val state = uiState as MotricityIndexUiState.Ready
+
+                            MotricityIndexScreen(
+                                currentItemIndex = currentItemIndex,
+                                definition = viewModel.currentItemDefinition,
+                                selectedScore = selectedScore,
+                                upperLimbScore = viewModel.upperLimbScore,
+                                loweLimbScore = viewModel.loweLimbScore,
+                                itemCount = viewModel.items.size,
+                                isLastItem = isLastItem,
+                                onNextItem = {viewModel.nextItem()},
+                                onBackItem = {viewModel.backItem()},
+                                onSelectScore = {viewModel.selectScore(it)},
+                                onFinish = {
+                                    viewModel.finishTest()
+                                    navController.navigate(Routes.testResult(testId = viewModel.testId))
+                                }
+                            )
+                        }
+                    }
                 }
 
                 TestType.TRUNK_CONTROL_TEST -> {
