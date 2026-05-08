@@ -12,7 +12,8 @@ data class BergTest(
     override val patientId: UUID,
     override val items: List<BergItem>,
     override val maxScore: Int = 56,
-    override val testType: TestType = TestType.BERG
+    override val testType: TestType = TestType.BERG,
+    override val side: BodySide?
 ): ClinicalTest {
     override val totalScore: Int
             get() = items.mapNotNull {it.score}.sum()

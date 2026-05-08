@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aentrena.escalasrhb.domain.model.scales.BergItem
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
+import com.aentrena.escalasrhb.domain.model.scales.BodySide
 import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItem
 import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexTest
 import com.aentrena.escalasrhb.domain.useCases.scales.GetMotricityByIdUseCase
@@ -47,6 +48,9 @@ class MotricityIndexViewModel @Inject constructor(
 
     val items = mutableStateListOf<MotricityIndexItem>()
 
+    private val _showSideDialog = MutableStateFlow(false)
+    val showSideDialog: StateFlow<Boolean> = _showSideDialog.asStateFlow()
+
     private val _isLastItem = MutableStateFlow(false)
     val isLastItem: StateFlow<Boolean> = _isLastItem.asStateFlow()
 
@@ -60,6 +64,9 @@ class MotricityIndexViewModel @Inject constructor(
                         items.addAll(test.items)
                         _test.value = test
                         _uiState.value = MotricityIndexUiState.Ready(test, test.items)
+                        if (test.side == null) {
+                            _showSideDialog.value = true
+                        }
                     } else {
                         _uiState.value = MotricityIndexUiState.Error
                     }
@@ -87,6 +94,10 @@ class MotricityIndexViewModel @Inject constructor(
     val loweLimbScore: Int
         get() = items.filter { it.itemType.isLowerLimb }
             .sumOf { it.score ?: 0 } + 1
+
+    fun onSideSelected(side: BodySide) {
+        _showSideDialog.value = false
+    }
 
     fun selectScore(score: Int) {
         _selectedScoreItem.value = score

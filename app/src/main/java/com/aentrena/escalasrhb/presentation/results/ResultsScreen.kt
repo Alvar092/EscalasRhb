@@ -36,6 +36,10 @@ import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.domain.model.scales.BergItem
 import com.aentrena.escalasrhb.domain.model.scales.BergItemType
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
+import com.aentrena.escalasrhb.domain.model.scales.BodySide
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItem
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItemType
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexTest
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
 import com.aentrena.escalasrhb.presentation.results.resources.TestResultItem
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
@@ -101,15 +105,34 @@ fun ResultsScreen(
                     )
                 }
 
+                if (test.testType != TestType.BERG) {
+                    item {
+                        Text(
+                            text = "${test.side}",
+                            style = MaterialTheme.typography.displayMedium,
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
                 item {
-
-
-                    Text(
-                        text = "${test.totalScore}/${test.maxScore}",
-                        style = MaterialTheme.typography.displayMedium,
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center
-                    )
+                        if (test.testType != TestType.BERG){
+                            Text(
+                                text = "${test.totalScore}/${test.maxScore}",
+                                style = MaterialTheme.typography.displayMedium,
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                        else {
+                            Text(
+                                text = "${test.totalScore}/${test.maxScore}",
+                                style = MaterialTheme.typography.displayMedium,
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center
+                            )
+                        }
                 }
             }
             item {
@@ -170,6 +193,7 @@ private fun ResultsScreen_Preview() {
         id = UUID.randomUUID(),
         date = System.currentTimeMillis(),
         evaluator = "Dr. García",
+        side = null,
         patientId = UUID.randomUUID(),
         items = BergItemType.entries.map { itemType ->
             BergItem(
@@ -223,6 +247,73 @@ private fun ResultsScreen_Preview() {
                         0 to R.string.berg_sittingtostanding_score_0,
                     ),
                     selectedScore = 3
+                )
+            ) ,
+            onNavigateToHome = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ResultsScreenMotricity_Preview() {
+    val fakeMotricityTest = MotricityIndexTest(
+        id = UUID.randomUUID(),
+        date = System.currentTimeMillis(),
+        evaluator = "Dr. García",
+        patientId = UUID.randomUUID(),
+        side = BodySide.RIGHT,
+        items = MotricityIndexItemType.entries.map { itemType ->
+            MotricityIndexItem(
+                itemType = itemType,
+                score = 1
+            )
+        }
+    )
+
+    EscalasRhbTheme {
+        ResultsScreen(
+            test = fakeMotricityTest,
+            patient = Patient(
+                UUID.randomUUID(),
+                "Ana Maria Martinez",
+                System.currentTimeMillis()
+            ),
+            formattedDate = "25/12/2025",
+            onExportPdf = {},
+            resultItems =listOf(
+                TestResultItem(
+                    titleRes = R.string.motricity_pinchGrip_title,
+                    options = listOf(
+                        4 to R.string.motricity_pinchGrip_score_0,
+                        3 to R.string.motricity_standard_score_14,
+                        2 to R.string.motricity_standard_score_19,
+                        1 to R.string.motricity_standard_score_25,
+                        0 to R.string.motricity_standard_score_33,
+                    ),
+                    selectedScore = 3
+                ),
+                TestResultItem(
+                    titleRes = R.string.motricity_pinchGrip_title,
+                    options = listOf(
+                        4 to R.string.motricity_pinchGrip_score_0,
+                        3 to R.string.motricity_standard_score_14,
+                        2 to R.string.motricity_standard_score_19,
+                        1 to R.string.motricity_standard_score_25,
+                        0 to R.string.motricity_standard_score_33,
+                    ),
+                    selectedScore = 2
+                ),
+                TestResultItem(
+                    titleRes = R.string.motricity_pinchGrip_title,
+                    options = listOf(
+                        4 to R.string.motricity_pinchGrip_score_0,
+                        3 to R.string.motricity_standard_score_14,
+                        2 to R.string.motricity_standard_score_19,
+                        1 to R.string.motricity_standard_score_25,
+                        0 to R.string.motricity_standard_score_33,
+                    ),
+                    selectedScore = 1
                 )
             ) ,
             onNavigateToHome = {}

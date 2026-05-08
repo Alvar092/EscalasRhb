@@ -151,6 +151,7 @@ private fun ScaleMenuScreen_Preview() {
             override val date = System.currentTimeMillis()
             override val evaluator = null
             override val patientId = UUID.randomUUID()
+            override val side = null
             override val maxScore = 56
             override val totalScore = 0
             override val items = emptyList<ClinicalTestItem>()

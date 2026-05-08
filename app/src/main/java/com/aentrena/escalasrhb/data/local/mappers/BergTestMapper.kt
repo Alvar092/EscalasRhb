@@ -17,6 +17,7 @@ object BergTestMapper {
         date = this.date,
         evaluator = this.evaluator,
         patientId = this.patientId.toString(),
+        side = this.side,
         itemsJson = gson.toJson(this.items),
         maxScore = this.maxScore ?: 56
     )
@@ -26,6 +27,7 @@ object BergTestMapper {
         date = this.date,
         evaluator = this.evaluator,
         patientId = UUID.fromString(this.patientId),
+        side = side,
         items = gson.fromJson(
             this.itemsJson,
             object: TypeToken<List<BergItem>>() {}.type

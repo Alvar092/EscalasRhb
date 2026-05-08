@@ -13,7 +13,7 @@ class MotricityIndexTest(
     override val evaluator: String? = null,
     override val patientId: UUID,
     override val side: BodySide? = null,
-    override val maxScore: Int? = null,
+    override val maxScore: Int? = 100,
     override val testType: TestType = TestType.MOTRICITY_INDEX,
     override val items: List<MotricityIndexItem>
 ): ClinicalTest, SideTest {

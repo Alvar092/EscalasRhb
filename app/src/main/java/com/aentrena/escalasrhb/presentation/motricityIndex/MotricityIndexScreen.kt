@@ -41,12 +41,17 @@ fun MotricityIndexScreen(
     upperLimbScore: Int,
     loweLimbScore: Int,
     itemCount: Int,
+    showSideDialog: Boolean,
+    onSideSelected: (BodySide) -> Unit,
     onNextItem: () -> Unit,
     onBackItem: () -> Unit,
     onSelectScore: (Int) -> Unit,
     onFinish: () -> Unit,
     isLastItem: Boolean
 ) {
+    if (showSideDialog) {
+        SideSelectionDialog(onSideSelected = onSideSelected)
+    }
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         bottomBar = {
@@ -157,7 +162,7 @@ fun SideSelectionDialog(
                         onClick = { onSideSelected(side)},
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("${BodySide.entries}")
+                        Text(side.name)
                     }
                 }
             }
@@ -177,6 +182,8 @@ private fun MotricityIndexScreen_Preview() {
             upperLimbScore = 20,
             loweLimbScore = 0,
             itemCount = 6,
+            showSideDialog = false,
+            onSideSelected = {},
             onNextItem = {},
             onBackItem = {},
             onSelectScore = {},

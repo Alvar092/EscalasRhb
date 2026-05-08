@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.aentrena.escalasrhb.domain.model.scales.BodySide
 
 @Entity(
     tableName = "berg_tests",
@@ -22,6 +23,7 @@ data class BergTestEntity(
     val date: Long,
     val evaluator: String?,
     val patientId: String,
+    val side: BodySide?,
     val itemsJson: String,
     val maxScore: Int = 56
 )

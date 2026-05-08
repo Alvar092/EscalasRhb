@@ -33,6 +33,7 @@ class CreateTestUseCase @Inject constructor(
                 id = UUID.randomUUID(),
                 date = System.currentTimeMillis(),
                 patientId = patientId,
+                side = side,
                 items = BergItemType.entries.map { itemType ->
                     BergItem(id = UUID.randomUUID(), itemType = itemType)
                 }

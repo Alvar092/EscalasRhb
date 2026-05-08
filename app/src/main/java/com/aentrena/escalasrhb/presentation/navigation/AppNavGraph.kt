@@ -198,6 +198,7 @@ fun AppNavGraph() {
                     val currentItemIndex by viewModel.currentItemIndex.collectAsStateWithLifecycle()
                     val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
                     val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
+                    val showSideDialog by viewModel.showSideDialog.collectAsStateWithLifecycle()
 
                     when (uiState) {
                         is MotricityIndexUiState.Loading -> CircularProgressIndicator()
@@ -213,6 +214,8 @@ fun AppNavGraph() {
                                 loweLimbScore = viewModel.loweLimbScore,
                                 itemCount = viewModel.items.size,
                                 isLastItem = isLastItem,
+                                onSideSelected = {side -> viewModel.onSideSelected(side)},
+                                showSideDialog = showSideDialog,
                                 onNextItem = {viewModel.nextItem()},
                                 onBackItem = {viewModel.backItem()},
                                 onSelectScore = {viewModel.selectScore(it)},
