@@ -5,22 +5,18 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aentrena.escalasrhb.domain.model.scales.BergItem
-import com.aentrena.escalasrhb.domain.model.scales.BergTest
 import com.aentrena.escalasrhb.domain.model.scales.BodySide
 import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItem
 import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexTest
 import com.aentrena.escalasrhb.domain.useCases.scales.GetMotricityByIdUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.SaveMotricityIndexUseCase
-import com.aentrena.escalasrhb.presentation.bergTest.BergTestUiState
-import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
-import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemDefinition
 import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityIndexCatalog
 import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityItemDefinition
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject
@@ -62,9 +58,14 @@ class MotricityIndexViewModel @Inject constructor(
                     if (test != null) {
                         items.clear()
                         items.addAll(test.items)
-                        _test.value = test
+
+                        // Preserva el lado si ya fue seleccionado
+                        val currentSide = _test.value?.side
+                        _test.value = test.copy(side = currentSide ?: test.side)
+                        Log.d("NAV", "Lado seleccionado ${test.side}" )
+
                         _uiState.value = MotricityIndexUiState.Ready(test, test.items)
-                        if (test.side == null) {
+                        if (_test.value?.side == null) {
                             _showSideDialog.value = true
                         }
                     } else {
@@ -97,6 +98,9 @@ class MotricityIndexViewModel @Inject constructor(
 
     fun onSideSelected(side: BodySide) {
         _showSideDialog.value = false
+        _test.update { currentTest ->
+            currentTest?.copy(side = side)
+        }
     }
 
     fun selectScore(score: Int) {

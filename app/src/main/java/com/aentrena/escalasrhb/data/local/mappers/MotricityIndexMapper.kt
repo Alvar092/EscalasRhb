@@ -16,7 +16,7 @@ object MotricityIndexMapper {
         date = this.date,
         evaluator = this.evaluator ?: "N/A",
         patientId = this.patientId.toString(),
-        side = this.side ?: BodySide.RIGHT,
+        side = this.side,
         itemsJson = gson.toJson(this.items),
         maxScore = this.maxScore
     )
@@ -26,6 +26,7 @@ object MotricityIndexMapper {
         date = this.date,
         evaluator = this.evaluator,
         patientId = UUID.fromString(this.patientId),
+        side = this.side,
         items = gson.fromJson(
             this.itemsJson,
             object : TypeToken<List<MotricityIndexItem>>() {}.type

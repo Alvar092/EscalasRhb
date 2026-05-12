@@ -7,12 +7,12 @@ import com.aentrena.escalasrhb.domain.interfaces.SideTest
 import com.aentrena.escalasrhb.domain.model.TestType
 import java.util.UUID
 
-class MotricityIndexTest(
+data class MotricityIndexTest(
     override val id: UUID = UUID.randomUUID(),
     override val date: Long,
     override val evaluator: String? = null,
     override val patientId: UUID,
-    override val side: BodySide? = null,
+    override var side: BodySide? = null,
     override val maxScore: Int? = 100,
     override val testType: TestType = TestType.MOTRICITY_INDEX,
     override val items: List<MotricityIndexItem>

@@ -23,7 +23,7 @@ data class MotricityIndexEntity(
     val date: Long,
     val evaluator: String,
     val patientId: String,
-    val side: BodySide,
+    val side: BodySide?,
     val itemsJson: String,
     val maxScore: Int?
 )

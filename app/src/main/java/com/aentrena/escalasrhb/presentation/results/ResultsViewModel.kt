@@ -1,6 +1,7 @@
 package com.aentrena.escalasrhb.presentation.results
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -75,8 +76,10 @@ class ResultsViewModel @Inject constructor(
                 .collect { test ->
                     _test.value = test
                     loadPatient(test.patientId)
+                    Log.d("REPO", "Test cargado ${test}")
                 }
         }
+
     }
 
     private fun loadPatient(patientId: UUID) {

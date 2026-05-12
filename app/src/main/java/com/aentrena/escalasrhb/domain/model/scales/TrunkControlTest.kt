@@ -6,7 +6,7 @@ import com.aentrena.escalasrhb.domain.interfaces.SideTest
 import com.aentrena.escalasrhb.domain.model.TestType
 import java.util.UUID
 
-class TrunkControlTest(
+data class TrunkControlTest(
     override val id: UUID = UUID.randomUUID(),
     override val date: Long,
     override val evaluator: String? = null,
