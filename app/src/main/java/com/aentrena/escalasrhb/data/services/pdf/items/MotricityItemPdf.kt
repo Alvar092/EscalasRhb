@@ -1,25 +1,25 @@
 package com.aentrena.escalasrhb.data.services.pdf.items
 
 import android.content.Context
-import com.aentrena.escalasrhb.domain.model.scales.BergItem
-import com.aentrena.escalasrhb.domain.model.scales.BergTest
-import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemDefinition
-import com.aentrena.escalasrhb.presentation.bergTest.resources.BergScoreOption
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItem
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexTest
+import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityItemDefinition
+import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityScoreOption
 
-data class BergItemPdf(
+data class MotricityItemPdf(
     val number: Int,
     val title: String,
     val description: String,
-    val scoringOptions: List<BergScoreOption>,
+    val scoringOptions: List<MotricityScoreOption>,
     val score: Int,
     val scoreDescription: String,
     val maxScore: Int
-) {
+){
     constructor(
         number: Int,
-        definition: BergItemDefinition,
-        item: BergItem,
-        test: BergTest,
+        definition: MotricityItemDefinition,
+        item: MotricityIndexItem,
+        test: MotricityIndexTest,
         scoreDescription: String,
         context: Context
     ) : this(
@@ -29,6 +29,6 @@ data class BergItemPdf(
         scoringOptions = definition.scoringOptions,
         score = item.score ?: 0,
         scoreDescription = scoreDescription,
-        maxScore = test.maxScore ?: 56
+        maxScore = test.maxScore ?: 100
     )
 }

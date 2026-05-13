@@ -5,13 +5,12 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
-import com.aentrena.escalasrhb.data.services.pdf.items.BergItemPdf
 import com.aentrena.escalasrhb.data.services.pdf.PdfLayout
-import com.aentrena.escalasrhb.data.services.pdf.strategies.TestPdfStrategy
+import com.aentrena.escalasrhb.data.services.pdf.items.MotricityItemPdf
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.patients.Patient
-import com.aentrena.escalasrhb.domain.model.scales.BergTest
-import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexTest
+import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityIndexCatalog
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
@@ -20,7 +19,7 @@ import java.time.ZoneId
 import java.util.Date
 import java.util.Locale
 
-class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
+class MotricityIndexPdfStrategy( private val context: Context): TestPdfStrategy {
 
     override fun drawContent(
         test: ClinicalTest,
@@ -29,12 +28,10 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
         layout: PdfLayout,
         requestNewPage: () -> Canvas
     ): Float {
-
-        val bergTest = test as? BergTest ?: return layout.margin
+        val motricityIndex = test as? MotricityIndexTest ?: return layout.margin
         var currentY = layout.margin
         var currentCanvas = canvas
         var currentPage = 1
-
 
         currentY = drawHeader(currentCanvas, test.testType.name, currentY, layout)
         currentY += 15f
@@ -45,16 +42,21 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
 
         currentY = drawSection(currentCanvas, "Información de la Evaluación", currentY, layout)
         currentY = drawText(currentCanvas, "Fecha: ${formatDate(test.date)}", currentY, layout)
+
+        motricityIndex.side?.let { side ->
+            currentY = drawText(currentCanvas, "Lado evaluado: ${side.name}", currentY, layout)
+        }
+
+        currentY = drawText(currentCanvas, "Puntuación Miembro Superior: ${motricityIndex.upperLimbScore} / 100", currentY, layout)
+        currentY = drawText(currentCanvas, "Puntuación Miembro Inferior: ${motricityIndex.lowerLimbScore} / 100", currentY, layout)
         currentY += 20f
 
-        currentY = drawTotalScore(currentCanvas, test.totalScore, test.maxScore ?: 56, currentY, layout)
-        currentY += 30f
+        currentY = drawTotalScore(currentCanvas, test.totalScore, test.maxScore ?: 100, currentY, layout)
+        currentY += 15f
 
-
-        val itemsPdf = prepareItemsForPdf(bergTest)
+        val itemsPdf = prepareItemsForPdf(motricityIndex)
         currentY = drawSection(currentCanvas, "Detalle de Ítems", currentY, layout)
         currentY += 10f
-
 
         for (item in itemsPdf) {
 
@@ -69,7 +71,8 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
             currentY += 8f
         }
 
-        drawPageNumber(currentCanvas,
+        drawPageNumber(
+            currentCanvas,
             currentPage,
             layout
         )
@@ -78,21 +81,20 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
 
     // MARK: - Prepare items
 
-    private fun prepareItemsForPdf(bergTest: BergTest): List<BergItemPdf> {
-        val definitions = BergItemCatalog.definitions
-        return bergTest.items.mapIndexedNotNull { index, item ->
+    private fun prepareItemsForPdf(motricityIndex: MotricityIndexTest): List<MotricityItemPdf> {
+        val definitions = MotricityIndexCatalog.definitions
+        return motricityIndex.items.mapIndexedNotNull { index, item ->
             val definition = definitions[item.itemType] ?: return@mapIndexedNotNull null
             val scoreDescription = item.score?.let { score: Int ->
                 definition.scoringOptions.firstOrNull { it.score == score }?.let { option ->
                     context.getString(option.textRes)
                 }
             } ?: ""
-            BergItemPdf(index + 1, definition, item, bergTest, scoreDescription, context)
+            MotricityItemPdf(index + 1, definition, item, motricityIndex, scoreDescription, context)
         }
     }
 
     // MARK: - Drawing
-
     private fun drawHeader(canvas: Canvas, testName: String, y: Float, layout: PdfLayout): Float {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             textSize = 26f
@@ -203,7 +205,7 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
         return y + boxHeight
     }
 
-    private fun drawItem(canvas: Canvas, item: BergItemPdf, y: Float, layout: PdfLayout): Float {
+    private fun drawItem(canvas: Canvas, item: MotricityItemPdf, y: Float, layout: PdfLayout): Float {
 
         // Altura dinámica: titulo 30, cada opcion 16 y padding 20
         val optionLineHeight = 16f
@@ -224,6 +226,8 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
             )
         }
 
+
+
         // Titulo del item (ocupa el ancho disponible menos el numero)
         val titlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             textSize = 11f
@@ -233,7 +237,8 @@ class BergPdfStrategy(private val context: Context) : TestPdfStrategy {
         canvas.drawText(
             item.title,
             layout.margin + 10f,
-            y + 22f, titlePaint
+            y + 22f,
+            titlePaint
         )
 
         // Respuestas -- debajo del titulo
