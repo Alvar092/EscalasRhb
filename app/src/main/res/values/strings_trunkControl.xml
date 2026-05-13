@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="trunkControl.balancedSitting.description">Capacidad para mantenerse sentado sin apoyo durante al menos 30 segundos.</string>
+    <string name="trunkControl.balancedSitting.title">Equilibrio en sedestación</string>
+    <string name="trunkControl.rollingToStrongSide.description">Capacidad para girar desde decúbito supino hacia el lado sano.</string>
+    <string name="trunkControl.rollingToStrongSide.title">Giro hacia el lado sano</string>
+    <string name="trunkControl.rollingToWeakSide.description">Capacidad para girar desde decúbito supino hacia el lado afecto.</string>
+    <string name="trunkControl.rollingToWeakSide.title">Giro hacia el lado afecto</string>
+    <string name="trunkControl.sittingUpFromLyingDown.description">Capacidad para incorporarse desde decúbito supino hasta sedestación.</string>
+    <string name="trunkControl.sittingUpFromLyingDown.title">Incorporación desde supino</string>
+    <string name="trunkControl.standard.score.0">0. Incapaz de realizar la tarea sin ayuda.</string>
+    <string name="trunkControl.standard.score.12">12. Realiza la tarea con ayuda.</string>
+    <string name="trunkControl.standard.score.25">25. Realiza la tarea de forma independiente.</string>
+</resources>

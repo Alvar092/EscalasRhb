@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="trunkControl.balancedSitting.description">Ability to remain seated without support for at least 30 seconds.</string>
+    <string name="trunkControl.balancedSitting.title">Balanced sitting</string>
+
+    <string name="trunkControl.rollingToStrongSide.description">Ability to roll from supine lying toward the unaffected side.</string>
+    <string name="trunkControl.rollingToStrongSide.title">Rolling to the unaffected side</string>
+
+    <string name="trunkControl.rollingToWeakSide.description">Ability to roll from supine lying toward the affected side.</string>
+    <string name="trunkControl.rollingToWeakSide.title">Rolling to the affected side</string>
+
+    <string name="trunkControl.sittingUpFromLyingDown.description">Ability to sit up from a supine position to sitting.</string>
+    <string name="trunkControl.sittingUpFromLyingDown.title">Sitting up from supine</string>
+
+    <string name="trunkControl.standard.score.0">0. Unable to perform the task without assistance.</string>
+    <string name="trunkControl.standard.score.12">12. Performs the task with assistance.</string>
+    <string name="trunkControl.standard.score.25">25. Performs the task independently.</string>
+</resources>

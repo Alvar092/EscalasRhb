@@ -35,6 +35,9 @@ import com.aentrena.escalasrhb.presentation.results.ResultsViewModel
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleInfoScreen
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleMenuScreen
 import com.aentrena.escalasrhb.presentation.scalesMenu.ScaleMenuViewModel
+import com.aentrena.escalasrhb.presentation.trunkControlTest.TrunkControlTestScreen
+import com.aentrena.escalasrhb.presentation.trunkControlTest.TrunkControlTestViewModel
+import com.aentrena.escalasrhb.presentation.trunkControlTest.TrunkControlUiState
 import java.util.UUID
 
 
@@ -229,7 +232,38 @@ fun AppNavGraph() {
                 }
 
                 TestType.TRUNK_CONTROL_TEST -> {
+                    val viewModel: TrunkControlTestViewModel = hiltViewModel()
+                    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+                    val currentItemIndex by viewModel.currentItemIndex.collectAsStateWithLifecycle()
+                    val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
+                    val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
+                    val showSideDialog by viewModel.showSideDialog.collectAsStateWithLifecycle()
 
+                    when (uiState) {
+                        is TrunkControlUiState.Loading -> CircularProgressIndicator()
+                        is TrunkControlUiState.Error -> Text("Error cargando el test")
+                        is TrunkControlUiState.Ready -> {
+                            val state = uiState as TrunkControlUiState.Ready
+
+                            TrunkControlTestScreen(
+                                currentItemIndex = currentItemIndex,
+                                definition = viewModel.currentItemDefinition,
+                                selectedScore = selectedScore,
+                                totalScore = viewModel.totalScore,
+                                itemCount = viewModel.items.size,
+                                isLastItem = isLastItem,
+                                onSideSelected = {side -> viewModel.onSideSelected(side)},
+                                showSideDialog = showSideDialog,
+                                onNextItem = {viewModel.nextItem()},
+                                onBackItem = {viewModel.backItem()},
+                                onSelectScore = {viewModel.selectScore(it)},
+                                onFinish = {
+                                    viewModel.finishTest()
+                                    navController.navigate(Routes.testResult(testId = viewModel.testId))
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }
