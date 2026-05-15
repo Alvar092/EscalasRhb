@@ -117,6 +117,7 @@ fun AppNavGraph() {
                 onSelectPatient = {patient ->
                     viewModel.setSelectedPatient(patient)
                 },
+                onAddPatient = {name, birthDate -> viewModel.createPatient(name,birthDate)},
                 onNavigateToInfo = {
                     navController.navigate(Routes.scaleInfo(testType))
                                    },

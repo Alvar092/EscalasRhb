@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -29,6 +30,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -126,7 +128,7 @@ fun PatientsScreen(
                 )
             }
         }
-    }
+}
 
 @Composable
 fun PatientList(
@@ -134,6 +136,7 @@ fun PatientList(
     mode: PatientsScreenMode,
     onLookDetail: (Patient) -> Unit,
     onSelectPatient: (Patient) -> Unit,
+    onCreatePatient: (() -> Unit)? = null,
     onEditPatient: (Patient) -> Unit,
     modifier: Modifier = Modifier
 ){
@@ -141,6 +144,21 @@ fun PatientList(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        if (onCreatePatient != null) {
+            item {
+                OutlinedButton(
+                    onCreatePatient,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp)
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = null)
+                    Spacer(Modifier.width(8.dp))
+                    Text("Añadir paciente")
+                }
+            }
+        }
+
         // Iterate, similar to for
         items(patients, key = {it.id}) { patient ->
             val dismissState = rememberSwipeToDismissBoxState()

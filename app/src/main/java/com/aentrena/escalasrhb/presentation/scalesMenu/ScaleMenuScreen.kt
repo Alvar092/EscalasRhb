@@ -35,6 +35,7 @@ import com.aentrena.escalasrhb.domain.interfaces.ClinicalTestItem
 import com.aentrena.escalasrhb.domain.model.TestType
 import com.aentrena.escalasrhb.domain.model.displayName
 import com.aentrena.escalasrhb.domain.model.patients.Patient
+import com.aentrena.escalasrhb.presentation.patients.AddPatientForm
 import com.aentrena.escalasrhb.presentation.patients.PatientList
 import com.aentrena.escalasrhb.presentation.patients.PatientsScreenMode
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
@@ -48,11 +49,13 @@ fun ScaleMenuScreen(
     createdTest: ClinicalTest?,
     testType: TestType,
     onSelectPatient: (Patient) -> Unit,
+    onAddPatient: (String, Long) -> Unit,
     onNavigateToInfo: () -> Unit,
     onStartTest: () -> Unit
 ) {
     val viewModel: ScaleMenuViewModel = hiltViewModel()
     var showPatientSheet by remember { mutableStateOf(false) }
+    var showAddPatientSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
    val isStartEnabled by viewModel.isStartButtonEnabled.collectAsStateWithLifecycle()
 
@@ -135,8 +138,26 @@ fun ScaleMenuScreen(
                     onSelectPatient(patient)
                     showPatientSheet = false
                 },
+                onCreatePatient = {
+                    showPatientSheet = false
+                    showAddPatientSheet = true
+                },
                 onLookDetail = {},
                 onEditPatient = {}
+            )
+        }
+    }
+
+    if (showAddPatientSheet) {
+        ModalBottomSheet(
+            onDismissRequest = {showAddPatientSheet = false},
+            sheetState = rememberModalBottomSheetState()
+        ) {
+            AddPatientForm(
+                onSave = { name, birthDate ->
+                    onAddPatient(name, birthDate)
+                    showAddPatientSheet = false
+                }
             )
         }
     }
@@ -169,6 +190,7 @@ private fun ScaleMenuScreen_Preview() {
             createdTest = fakeTest,
             testType = TestType.BERG,
             onSelectPatient = {},
+            onAddPatient = { _,_ -> },
             onNavigateToInfo = {},
             onStartTest = {}
         )

@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.TestType
 import com.aentrena.escalasrhb.domain.model.patients.Patient
+import com.aentrena.escalasrhb.domain.useCases.patient.CreatePatientUseCase
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientsUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.CreateTestUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,12 +21,14 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class ScaleMenuViewModel @Inject constructor(
     private var getPatients: GetPatientsUseCase,
     private var createTest: CreateTestUseCase,
+    private val createPatient: CreatePatientUseCase,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -60,6 +63,13 @@ class ScaleMenuViewModel @Inject constructor(
     val patientDisplayName: String
         get() = selectedPatient.value?.let {"Paciente: ${it.name}"} ?: "Seleccionar paciente"
 
+
+    fun createPatient(name: String, birthDate: Long) {
+        viewModelScope.launch {
+            val newPatient = Patient(id = UUID.randomUUID(), name = name, dateOfBirth = birthDate)
+            createPatient(newPatient)
+        }
+    }
 
     private fun createTestForPatient() {
         val patient = selectedPatient.value ?: return
