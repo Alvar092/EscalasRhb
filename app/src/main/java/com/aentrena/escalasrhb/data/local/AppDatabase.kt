@@ -21,7 +21,7 @@ import com.aentrena.escalasrhb.data.local.entities.TrunkControlTestEntity
         MotricityIndexEntity::class,
         TrunkControlTestEntity::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {

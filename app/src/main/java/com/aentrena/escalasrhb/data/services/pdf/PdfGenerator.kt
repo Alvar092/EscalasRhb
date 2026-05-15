@@ -8,6 +8,7 @@ import androidx.core.content.FileProvider
 import com.aentrena.escalasrhb.data.services.pdf.strategies.BergPdfStrategy
 import com.aentrena.escalasrhb.data.services.pdf.strategies.MotricityIndexPdfStrategy
 import com.aentrena.escalasrhb.data.services.pdf.strategies.TestPdfStrategy
+import com.aentrena.escalasrhb.data.services.pdf.strategies.TrunkControlPdfStrategy
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.TestType
 import com.aentrena.escalasrhb.domain.model.patients.Patient
@@ -81,6 +82,6 @@ class PdfGenerator(
     private fun getStrategy(test: ClinicalTest): TestPdfStrategy = when (test.testType) {
         TestType.BERG -> BergPdfStrategy(context = context)
         TestType.MOTRICITY_INDEX -> MotricityIndexPdfStrategy(context)
-        TestType.TRUNK_CONTROL_TEST -> BergPdfStrategy(context)
+        TestType.TRUNK_CONTROL_TEST -> TrunkControlPdfStrategy(context)
     }
 }

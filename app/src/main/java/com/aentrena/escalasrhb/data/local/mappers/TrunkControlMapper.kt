@@ -26,6 +26,7 @@ object TrunkControlMapper {
         date = this.date,
         evaluator = this.evaluator,
         patientId = UUID.fromString(this.patientId),
+        side = this.side,
         items = gson.fromJson(
             this.itemsJson,
             object : TypeToken<List<TrunkControlTestItem>>() {}.type
