@@ -54,6 +54,13 @@ fun ResultsScreen(
     onExportPdf: () -> Unit,
     onNavigateToHome: () -> Unit
 ) {
+    val patientLabel = patient?.name
+        ?.let { stringResource(R.string.patient_selected_format, it)}
+        ?: stringResource(R.string.patients_select)
+
+    val bodySideLabel = test?.side?.let {stringResource(it.displayNameRes)} ?: ""
+
+
     Scaffold(
         bottomBar = {
             Button(
@@ -65,7 +72,7 @@ fun ResultsScreen(
             ) {
                 Icon(imageVector = Icons.Default.Home, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Volver a inicio")
+                Text(stringResource(R.string.scaleResult_backToHome))
             }
         }
     ) { paddingValues ->
@@ -79,7 +86,7 @@ fun ResultsScreen(
             test?.let { safeTest ->
                 item {
                     Text(
-                        text = "${test.testType.displayName}",
+                        text = stringResource(test.testType.displayName),
                         style = MaterialTheme.typography.headlineMedium,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
@@ -88,7 +95,7 @@ fun ResultsScreen(
 
                 item {
                     Text(
-                        text = "Paciente: ${patient?.name}",
+                        text = patientLabel,
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Left
@@ -98,7 +105,7 @@ fun ResultsScreen(
                 item {
 
                     Text(
-                        text = "Fecha: ${formattedDate}",
+                        text = stringResource(R.string.date_format, formattedDate),
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Left
@@ -108,7 +115,7 @@ fun ResultsScreen(
                 if (test.testType != TestType.BERG) {
                     item {
                         Text(
-                            text = "${test.side}",
+                            text = bodySideLabel,
                             style = MaterialTheme.typography.displayMedium,
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center
@@ -142,7 +149,7 @@ fun ResultsScreen(
                 ) {
                     Icon(imageVector = Icons.Default.Share, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Exportar a PDF")
+                    Text(stringResource(R.string.export_to_pdf))
                 }
             }
 
@@ -186,7 +193,7 @@ private fun ClinicalTestItemCard(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, locale = "es")
 @Composable
 private fun ResultsScreen_Preview() {
     val fakeBergTest = BergTest(
@@ -254,7 +261,7 @@ private fun ResultsScreen_Preview() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, locale = "es")
 @Composable
 private fun ResultsScreenMotricity_Preview() {
     val fakeMotricityTest = MotricityIndexTest(

@@ -1,6 +1,7 @@
 package com.aentrena.escalasrhb.presentation
 
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.R
@@ -67,7 +69,7 @@ fun HomeScreen(
                             onDismissRequest = { menuExpanded = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Pacientes") },
+                                text = { Text(stringResource(R.string.home_menu_patients)) },
                                 leadingIcon = {
                                     Icon(Icons.Default.Person, contentDescription = null)
                                 },
@@ -77,7 +79,7 @@ fun HomeScreen(
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Contacto") },
+                                text = { Text(stringResource(R.string.home_menu_contact)) },
                                 leadingIcon = {
                                     Icon(Icons.Default.Email, contentDescription = null)
                                 },
@@ -102,7 +104,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Bienvenido",
+                text = stringResource(R.string.Welcome),
                 style = MaterialTheme.typography.headlineMedium
             )
 
@@ -114,13 +116,13 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(48.dp))
 
             Text(
-                text = "Nos alegra verte de nuevo.",
+                text = stringResource(R.string.GladToSeeYou),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Text(
-                text = "Elige una escala para comenzar.",
+                text = stringResource(R.string.Choose_a_scale),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -134,7 +136,7 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Berg Balance Scale")
+                Text(stringResource(R.string.Berg))
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -145,7 +147,7 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Índice motor")
+                Text(stringResource(R.string.Motricity))
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -156,13 +158,13 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Test de control de tronco")
+                Text(stringResource(R.string.Trunk))
             }
         }
     }
 }
 
-@Preview
+@Preview(locale = "en")
 @Composable
 private fun HomeScreen_Preview() {
     EscalasRhbTheme {

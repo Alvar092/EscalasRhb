@@ -106,6 +106,8 @@ fun AppNavGraph() {
             val patients by viewModel.patients.collectAsStateWithLifecycle()
             val selectedPatient by viewModel.selectedPatient.collectAsStateWithLifecycle()
             val createdTest by viewModel._createdTest.collectAsStateWithLifecycle()
+            val patientDisplayName by viewModel.patientDisplayName.collectAsStateWithLifecycle()
+            val isStartButtonEnabled by viewModel.isStartButtonEnabled.collectAsStateWithLifecycle()
             val testType = viewModel.testType
 
 
@@ -114,6 +116,8 @@ fun AppNavGraph() {
                 selectedPatient = selectedPatient,
                 createdTest = createdTest,
                 testType = testType,
+                patientDisplayName = patientDisplayName,
+                isStartButtonEnabled = isStartButtonEnabled,
                 onSelectPatient = {patient ->
                     viewModel.setSelectedPatient(patient)
                 },

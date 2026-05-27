@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,6 +46,16 @@ class ScaleMenuViewModel @Inject constructor(
     val _createdTest = MutableStateFlow<ClinicalTest?>(null)
     val createdTest: StateFlow<ClinicalTest?> = _createdTest
 
+    val patientDisplayName: StateFlow<String?> =
+        selectedPatient.map { patient ->
+            patient?.name
+        }
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                null
+            )
+
 
     val isStartButtonEnabled: StateFlow<Boolean> =
         combine(selectedPatient, _createdTest) { patient, test ->
@@ -60,8 +71,6 @@ class ScaleMenuViewModel @Inject constructor(
             ?.let { TestType.valueOf(it)}
             ?: error("testType argument is required")
 
-    val patientDisplayName: String
-        get() = selectedPatient.value?.let {"Paciente: ${it.name}"} ?: "Seleccionar paciente"
 
 
     fun createPatient(name: String, birthDate: Long) {

@@ -52,7 +52,7 @@ class ResultsViewModel @Inject constructor(
         .map { test ->
             val instant = Instant.ofEpochMilli(test.date)
             val formatter = DateTimeFormatter
-                .ofPattern("dd 'de' MMMM 'de' yyyy", Locale("es"))
+                .ofPattern("dd 'de' MMMM 'de' yyyy", Locale.getDefault())
                 .withZone(ZoneId.systemDefault())
             formatter.format(instant)
         }

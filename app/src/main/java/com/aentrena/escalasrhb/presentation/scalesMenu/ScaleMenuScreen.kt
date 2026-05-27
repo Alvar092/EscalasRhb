@@ -26,10 +26,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTestItem
 import com.aentrena.escalasrhb.domain.model.TestType
@@ -48,16 +51,22 @@ fun ScaleMenuScreen(
     selectedPatient: Patient?,
     createdTest: ClinicalTest?,
     testType: TestType,
+    patientDisplayName: String?,
+    isStartButtonEnabled: Boolean,
     onSelectPatient: (Patient) -> Unit,
     onAddPatient: (String, Long) -> Unit,
     onNavigateToInfo: () -> Unit,
     onStartTest: () -> Unit
 ) {
-    val viewModel: ScaleMenuViewModel = hiltViewModel()
+
     var showPatientSheet by remember { mutableStateOf(false) }
     var showAddPatientSheet by remember { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-   val isStartEnabled by viewModel.isStartButtonEnabled.collectAsStateWithLifecycle()
+
+    val patientLabel = patientDisplayName
+        ?.let { stringResource(R.string.patient_selected_format, it)}
+        ?: stringResource(R.string.patients_select)
+
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -71,7 +80,7 @@ fun ScaleMenuScreen(
                         contentAlignment = Alignment.TopCenter
                     ) {
                         Text(
-                            text = "${testType.displayName}",
+                            text = stringResource(testType.displayName),
                             style = MaterialTheme.typography.displaySmall
                         )
                     }
@@ -97,7 +106,7 @@ fun ScaleMenuScreen(
                     .defaultMinSize(minHeight = 68.dp),
                 shape = RoundedCornerShape(12.dp)
             ){
-                Text(viewModel.patientDisplayName)
+                Text(patientLabel)
             }
 
 
@@ -110,7 +119,7 @@ fun ScaleMenuScreen(
                     .defaultMinSize(minHeight = 68.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Información de la escala")
+                Text(stringResource(R.string.scale_info))
             }
 
 
@@ -122,9 +131,9 @@ fun ScaleMenuScreen(
                     .fillMaxWidth()
                     .defaultMinSize(minHeight = 68.dp),
                 shape = RoundedCornerShape(12.dp),
-                enabled = isStartEnabled
+                enabled = isStartButtonEnabled
             ) {
-                Text("Comenzar el test")
+                Text(stringResource(R.string.scale_start))
             }
 
         }
@@ -163,7 +172,7 @@ fun ScaleMenuScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, locale = "es")
 @Composable
 private fun ScaleMenuScreen_Preview() {
     EscalasRhbTheme {
@@ -184,11 +193,15 @@ private fun ScaleMenuScreen_Preview() {
             Patient(UUID.randomUUID(), "Laura", System.currentTimeMillis())
         )
 
+        val defaultLabel = stringResource(R.string.patient_selected_format)
+
         ScaleMenuScreen(
             patients = muestra,
-            selectedPatient = null,
+            selectedPatient = Patient(UUID.randomUUID(), "Ana Maria Martinez", System.currentTimeMillis()),
             createdTest = fakeTest,
             testType = TestType.BERG,
+            patientDisplayName = defaultLabel,
+            isStartButtonEnabled = false,
             onSelectPatient = {},
             onAddPatient = { _,_ -> },
             onNavigateToInfo = {},

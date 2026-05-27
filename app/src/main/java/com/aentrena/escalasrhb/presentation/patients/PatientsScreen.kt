@@ -48,8 +48,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.presentation.theme.P1L
 import java.text.SimpleDateFormat
@@ -78,7 +80,7 @@ fun PatientsScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text("Pacientes")
+                    Text(stringResource(R.string.home_menu_patients))
                 }
             )
         },
@@ -87,7 +89,7 @@ fun PatientsScreen(
                 ExtendedFloatingActionButton(
                     onClick = { showSheet = true },
                     icon = { Icon(Icons.Default.Add, contentDescription = null) },
-                    text = { Text("Añadir paciente") }
+                    text = { Text(stringResource(R.string.patients_add)) }
                 )
             }
         }
@@ -100,7 +102,7 @@ fun PatientsScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "No hay pacientes creados.",
+                    text = stringResource(R.string.patients_empty),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
@@ -111,7 +113,9 @@ fun PatientsScreen(
                     onLookDetail = onLookDetail,
                     onSelectPatient = onSelectPatient,
                     onEditPatient = onEditPatient,
-                    modifier = Modifier.fillMaxSize().padding(padding)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding)
                 )
             }
         }
@@ -154,7 +158,7 @@ fun PatientList(
                 ) {
                     Icon(Icons.Default.Add, contentDescription = null)
                     Spacer(Modifier.width(8.dp))
-                    Text("Añadir paciente")
+                    Text(stringResource(R.string.patients_add))
                 }
             }
         }
@@ -250,7 +254,7 @@ fun AddPatientForm(
 
     val selectedDateText = datePickerState.selectedDateMillis?.let {
         SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault()).format(Date(it))
-    } ?: "Seleccionar fecha"
+    } ?: stringResource(R.string.patients_add_date)
 
     Column(
         modifier = Modifier
@@ -261,7 +265,7 @@ fun AddPatientForm(
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Nombre") },
+            label = { Text(stringResource(R.string.patients_add_name)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -269,11 +273,11 @@ fun AddPatientForm(
         OutlinedTextField(
             value = selectedDateText,
             onValueChange = {},
-            label = { Text("Fecha de nacimiento") },
+            label = { Text(stringResource(R.string.patients_birthdate_label)) },
             readOnly = false,
             trailingIcon = {
                 IconButton(onClick = { showDatePicker = true }) {
-                    Icon(Icons.Default.DateRange, contentDescription = "Seleccionar fecha")
+                    Icon(Icons.Default.DateRange, contentDescription = stringResource(R.string.patients_add_date))
                 }
             },
             modifier = Modifier
@@ -290,14 +294,14 @@ fun AddPatientForm(
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Guardar")
+            Text(stringResource(R.string.patients_save))
         }
     }
     if (showDatePicker) {
         DatePickerDialog(
             onDismissRequest = { showDatePicker = false },
             confirmButton = {
-                TextButton(onClick = { showDatePicker = false }) { Text("Aceptar") }
+                TextButton(onClick = { showDatePicker = false }) { Text(stringResource(R.string.patients_save)) }
             }
         ) {
             DatePicker(state = datePickerState)
@@ -341,5 +345,25 @@ private fun PatientsScreenEmpty_Preview() {
     )
 }
 
+@Preview(showBackground = true, locale = "en")
+@Composable
+fun AddPatientFormPreview() {
+    AddPatientForm(
+        onSave = { _, _ -> }
+    )
+}
 
-
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true, locale = "es")
+@Composable
+fun AddPatientFormDatePickerPreview() {
+    val datePickerState = rememberDatePickerState()
+    DatePickerDialog(
+        onDismissRequest = {},
+        confirmButton = {
+            TextButton(onClick = {}) { Text(stringResource(R.string.patients_save)) }
+        }
+    ) {
+        DatePicker(state = datePickerState)
+    }
+}

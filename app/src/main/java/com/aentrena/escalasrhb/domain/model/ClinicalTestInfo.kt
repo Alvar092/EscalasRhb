@@ -5,11 +5,11 @@ import com.aentrena.escalasrhb.R
 
 enum class TestType { BERG, MOTRICITY_INDEX, TRUNK_CONTROL_TEST }
 
-val TestType.displayName: String
+val TestType.displayName: Int
     get() = when (this) {
-        TestType.BERG -> "Berg Balance Scale"
-        TestType.MOTRICITY_INDEX -> "Motricity Index"
-        TestType.TRUNK_CONTROL_TEST -> "Trunk Control Test"
+        TestType.BERG -> R.string.berg_name
+        TestType.MOTRICITY_INDEX -> R.string.motricity_index_name
+        TestType.TRUNK_CONTROL_TEST -> R.string.trunk_control_test_name
     }
 
 val TestType.info: ClinicalTestInfo

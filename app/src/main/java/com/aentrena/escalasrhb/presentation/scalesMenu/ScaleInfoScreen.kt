@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.domain.model.TestType
 import com.aentrena.escalasrhb.domain.model.info
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
@@ -42,7 +43,7 @@ fun ScaleInfoScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             CenterAlignedTopAppBar(title = { Text(
-                text = "Información de la escala",
+                text = stringResource(R.string.scale_info),
                 style = MaterialTheme.typography.headlineMedium
             )},
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -60,28 +61,28 @@ fun ScaleInfoScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.Start
         ) {
-            Text("Descripción:", style = MaterialTheme.typography.headlineMedium)
+            Text(stringResource(R.string.description), style = MaterialTheme.typography.headlineMedium)
             Text(text = stringResource(id = info.descriptionResId), style = MaterialTheme.typography.bodyMedium)
 
-            Text("Materiales:", style = MaterialTheme.typography.headlineMedium)
+            Text(stringResource(R.string.materials), style = MaterialTheme.typography.headlineMedium)
             val materials = stringArrayResource(id = info.materialsResId)
             materials.forEach {
                 Text(it)
             }
 
 
-            Text("Calificación:", style = MaterialTheme.typography.headlineMedium)
+            Text(stringResource(R.string.qualification), style = MaterialTheme.typography.headlineMedium)
             Text(text = stringResource(id = info.scoringResId), style = MaterialTheme.typography.bodyMedium)
 
-            Text("Interpretación:", style = MaterialTheme.typography.headlineMedium)
+            Text(stringResource(R.string.interpretation), style = MaterialTheme.typography.headlineMedium)
             Text(text = stringResource(id = info.interpretationResId), style = MaterialTheme.typography.bodyMedium)
 
 
-            Text("Recomendaciones:", style = MaterialTheme.typography.headlineMedium)
+            Text(stringResource(R.string.recommendations), style = MaterialTheme.typography.headlineMedium)
             Text(text = stringResource(id = info.recommendationsResId), style = MaterialTheme.typography.bodyMedium)
 
 
-            Text("Referencias:", style = MaterialTheme.typography.headlineMedium)
+            Text(stringResource(R.string.references), style = MaterialTheme.typography.headlineMedium)
             Text(text = info.referenceUrl, style = MaterialTheme.typography.bodyMedium)
 
 
@@ -90,7 +91,7 @@ fun ScaleInfoScreen(
     }
 }
 
-@Preview
+@Preview(locale = "en")
 @Composable
 private fun ScaleInfoScreen_Preview() {
     EscalasRhbTheme {
