@@ -21,6 +21,7 @@ import com.aentrena.escalasrhb.presentation.HomeScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestScreen
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestUiState
 import com.aentrena.escalasrhb.presentation.bergTest.BergTestViewModel
+import com.aentrena.escalasrhb.presentation.contact.ContactScreen
 import com.aentrena.escalasrhb.presentation.motricityIndex.MotricityIndexScreen
 import com.aentrena.escalasrhb.presentation.motricityIndex.MotricityIndexUiState
 import com.aentrena.escalasrhb.presentation.motricityIndex.MotricityIndexViewModel
@@ -90,11 +91,11 @@ fun AppNavGraph() {
             }
         }
 
-        /*composable(Routes.CONTACT) {
+        composable(Routes.CONTACT) {
             ContactScreen(
                 onNavigateBack = { navController.popBackStack() }
             )
-        } */
+        }
 
         composable(route = Routes.SCALE_MENU,
             arguments = listOf(navArgument("testType"){

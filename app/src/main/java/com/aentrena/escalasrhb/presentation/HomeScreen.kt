@@ -61,9 +61,6 @@ fun HomeScreen(
                                 tint = TextPrim
                             )
                         }
-                        /*
-                        Se muestra cuando menuExpanded = true
-                         */
                         DropdownMenu(
                             expanded = menuExpanded,
                             onDismissRequest = { menuExpanded = false }
@@ -85,7 +82,7 @@ fun HomeScreen(
                                 },
                                 onClick = {
                                     menuExpanded = false
-                                    // TODO onNavigateToContact()
+                                    onNavigateToContact()
                                 }
                             )
                         }
