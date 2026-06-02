@@ -26,21 +26,12 @@ import com.aentrena.escalasrhb.presentation.theme.TextPrim
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    // Lambdas que descoplan la navegación de la UI
     onNavigateToPatients: () -> Unit = {},
     onNavigateToContact: () -> Unit = {},
     onNavigateToBerg: () -> Unit = {},
     onNavigateToMotricity: () -> Unit = {},
     onNavigateToTrunk: () -> Unit = {},
 ) {
-    /*
-    Estado local de la UI.
-    remember guarda el estado durante las recomposiciones,
-
-    mutableStateOf hace que Compose re-renderice cuando cambie el valor:
-        En este caso es el menu desplegable.
-     */
-
     var menuExpanded by remember { mutableStateOf(false)}
 
     Scaffold(
@@ -91,7 +82,7 @@ fun HomeScreen(
             )
         }
     ) {padding ->
-        // Aplicamos padding al contenido para dejar espacio para la TopBar
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
