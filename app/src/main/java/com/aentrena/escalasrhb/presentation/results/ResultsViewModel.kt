@@ -10,9 +10,13 @@ import com.aentrena.escalasrhb.data.services.pdf.PdfGenerator
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.domain.model.scales.BergTest
+import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexTest
+import com.aentrena.escalasrhb.domain.model.scales.TrunkControlTest
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientByIdUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.GetTestResultUseCase
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
+import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityIndexCatalog
+import com.aentrena.escalasrhb.presentation.trunkControlTest.resources.TrunkControlItemCatalog
 import com.aentrena.escalasrhb.presentation.results.resources.TestResultItem
 import com.aentrena.escalasrhb.analytics.CrashlyticsHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -100,6 +104,22 @@ class ResultsViewModel @Inject constructor(
         when (test) {
             is BergTest -> test.items.mapNotNull { item ->
                 val definition = BergItemCatalog.definitions[item.itemType] ?: return@mapNotNull null
+                TestResultItem(
+                    titleRes = definition.titleRes,
+                    options = definition.scoringOptions.map { it.score to it.textRes },
+                    selectedScore = item.score
+                )
+            }
+            is MotricityIndexTest -> test.items.mapNotNull { item ->
+                val definition = MotricityIndexCatalog.definitions[item.itemType] ?: return@mapNotNull null
+                TestResultItem(
+                    titleRes = definition.titleRes,
+                    options = definition.scoringOptions.map { it.score to it.textRes },
+                    selectedScore = item.score
+                )
+            }
+            is TrunkControlTest -> test.items.mapNotNull { item ->
+                val definition = TrunkControlItemCatalog.definitions[item.itemType] ?: return@mapNotNull null
                 TestResultItem(
                     titleRes = definition.titleRes,
                     options = definition.scoringOptions.map { it.score to it.textRes },
