@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.domain.model.scales.BodySide
 import com.aentrena.escalasrhb.domain.model.scales.TrunkControlItemType
-import com.aentrena.escalasrhb.presentation.motricityIndex.SideSelectionDialog
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
 import com.aentrena.escalasrhb.presentation.trunkControlTest.resources.TrunkControlItemDefinition
 import com.aentrena.escalasrhb.presentation.trunkControlTest.resources.TrunkControlScoreOption

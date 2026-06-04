@@ -11,7 +11,7 @@ data class TrunkControlTest(
     override val date: Long,
     override val evaluator: String? = null,
     override val patientId: UUID,
-    override val side: BodySide? = null,
+    override var side: BodySide? = null,
     override val maxScore: Int? = 100,
     override val testType: TestType = TestType.TRUNK_CONTROL_TEST,
     override val items: List<TrunkControlTestItem>

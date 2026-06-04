@@ -16,7 +16,7 @@ object TrunkControlMapper {
         date = this.date,
         evaluator = this.evaluator ?: "N/A",
         patientId = this.patientId.toString(),
-        side = this.side ?: BodySide.RIGHT,
+        side = this.side,
         itemsJson = gson.toJson(this.items),
         maxScore = this.maxScore
     )

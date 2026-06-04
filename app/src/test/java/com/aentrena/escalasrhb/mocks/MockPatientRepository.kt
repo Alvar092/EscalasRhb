@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import java.util.UUID
 
-class MockPatientRepository: PatientRepository {
+class MockPatientRepository : PatientRepository {
     private val patients = MutableStateFlow<List<Patient>>(emptyList())
 
     override fun getAll(): Flow<List<Patient>> = patients
 
     override fun getById(id: UUID): Flow<Patient?> =
-        patients.map {it.firstOrNull {p -> p.id == id }}
+        patients.map { it.firstOrNull { p -> p.id == id } }
 
     override suspend fun save(patient: Patient) {
         val current = patients.value.toMutableList()
@@ -22,6 +22,7 @@ class MockPatientRepository: PatientRepository {
         if (index >= 0) current[index] = patient else current.add(patient)
         patients.value = current
     }
+
     override suspend fun update(patient: Patient) = save(patient)
 
     override suspend fun delete(id: UUID) {
