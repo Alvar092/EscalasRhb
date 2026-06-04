@@ -12,6 +12,7 @@ import com.aentrena.escalasrhb.domain.useCases.scales.GetBergByIdUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.SaveBergTestUseCase
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemDefinition
+import com.aentrena.escalasrhb.analytics.CrashlyticsHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -38,7 +39,11 @@ class BergTestViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    val testId: UUID = UUID.fromString(checkNotNull(savedStateHandle["testId"]))
+    val testId: UUID = UUID.fromString(checkNotNull(savedStateHandle["testId"])).also {
+        CrashlyticsHelper.setScreen("berg_test")
+        CrashlyticsHelper.setTestType("BERG")
+        CrashlyticsHelper.setTestId(it.toString())
+    }
 
     private val _uiState = MutableStateFlow<BergTestUiState>(BergTestUiState.Loading)
     val uiState: StateFlow<BergTestUiState> = _uiState.asStateFlow()
@@ -102,6 +107,7 @@ class BergTestViewModel @Inject constructor(
     fun selectScore(score: Int) {
         _selectedScoreItem.value = score
         items[currentItemIndex.value].score = score
+        CrashlyticsHelper.setCurrentScore(score)
     }
 
 
@@ -150,7 +156,8 @@ class BergTestViewModel @Inject constructor(
         if (currentItemIndex.value >= items.size - 1) return
         _currentItemIndex.value++
         _selectedScoreItem.value = items[currentItemIndex.value].score
-        _isLastItem.value = currentItemIndex.value == items.size -1
+        _isLastItem.value = currentItemIndex.value == items.size - 1
+        CrashlyticsHelper.setItemIndex(_currentItemIndex.value)
 
         //Save time
         _elapsedTime.value = items[currentItemIndex.value].timeRecorded ?: 0.0
@@ -164,6 +171,7 @@ class BergTestViewModel @Inject constructor(
         if (currentItemIndex.value > 0) {
             _currentItemIndex.value--
             _selectedScoreItem.value = items[currentItemIndex.value].score
+            CrashlyticsHelper.setItemIndex(_currentItemIndex.value)
 
             //Save time
             _elapsedTime.value = items[currentItemIndex.value].timeRecorded ?: 0.0

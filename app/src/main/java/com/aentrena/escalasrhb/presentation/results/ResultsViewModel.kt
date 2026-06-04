@@ -14,6 +14,7 @@ import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientByIdUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.GetTestResultUseCase
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
 import com.aentrena.escalasrhb.presentation.results.resources.TestResultItem
+import com.aentrena.escalasrhb.analytics.CrashlyticsHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -76,6 +77,9 @@ class ResultsViewModel @Inject constructor(
                 .collect { test ->
                     _test.value = test
                     loadPatient(test.patientId)
+                    CrashlyticsHelper.setScreen("results")
+                    CrashlyticsHelper.setTestType(test.testType.name)
+                    CrashlyticsHelper.setTestId(testId)
                     Log.d("REPO", "Test cargado ${test}")
                 }
         }

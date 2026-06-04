@@ -12,6 +12,7 @@ import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.domain.useCases.patient.CreatePatientUseCase
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientsUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.CreateTestUseCase
+import com.aentrena.escalasrhb.analytics.CrashlyticsHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,6 +42,8 @@ class ScaleMenuViewModel @Inject constructor(
 
     fun setSelectedPatient(patient: Patient) {
         _selectedPatient.value = patient
+        CrashlyticsHelper.setPatientSelected(true)
+        CrashlyticsHelper.setPatientId(patient.id.toString())
         createTestForPatient()
     }
     val _createdTest = MutableStateFlow<ClinicalTest?>(null)
@@ -67,9 +70,12 @@ class ScaleMenuViewModel @Inject constructor(
         )
 
     val testType: TestType =
-        savedStateHandle.get<String>("testType")
-            ?.let { TestType.valueOf(it)}
-            ?: error("testType argument is required")
+        (savedStateHandle.get<String>("testType")
+            ?.let { TestType.valueOf(it) }
+            ?: error("testType argument is required")).also {
+            CrashlyticsHelper.setScreen("scale_menu")
+            CrashlyticsHelper.setTestType(it.name)
+        }
 
 
 

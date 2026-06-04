@@ -12,6 +12,7 @@ import com.aentrena.escalasrhb.domain.useCases.scales.GetTrunkControlByIdUseCase
 import com.aentrena.escalasrhb.domain.useCases.scales.SaveTrunkControlTestUseCase
 import com.aentrena.escalasrhb.presentation.trunkControlTest.resources.TrunkControlItemCatalog
 import com.aentrena.escalasrhb.presentation.trunkControlTest.resources.TrunkControlItemDefinition
+import com.aentrena.escalasrhb.analytics.CrashlyticsHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,7 +35,11 @@ class TrunkControlTestViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    val testId: UUID = UUID.fromString(checkNotNull(savedStateHandle["testId"]))
+    val testId: UUID = UUID.fromString(checkNotNull(savedStateHandle["testId"])).also {
+        CrashlyticsHelper.setScreen("trunk_control_test")
+        CrashlyticsHelper.setTestType("TRUNK_CONTROL_TEST")
+        CrashlyticsHelper.setTestId(it.toString())
+    }
 
     private val _uiState = MutableStateFlow<TrunkControlUiState>(TrunkControlUiState.Loading)
     val uiState: StateFlow<TrunkControlUiState> = _uiState.asStateFlow()
@@ -91,27 +96,29 @@ class TrunkControlTestViewModel @Inject constructor(
 
     fun onSideSelected(side: BodySide) {
         _showSideDialog.value = false
-        _test.update { currentTest ->
-            currentTest?.copy(side = side)
-        }
+        _test.update { currentTest -> currentTest?.copy(side = side) }
+        CrashlyticsHelper.setSide(side.name)
     }
 
     fun selectScore(score: Int) {
         _selectedScoreItem.value = score
         items[currentItemIndex.value].score = score
+        CrashlyticsHelper.setCurrentScore(score)
     }
 
     fun nextItem() {
         if (currentItemIndex.value >= items.size - 1) return
         _currentItemIndex.value++
         _selectedScoreItem.value = items[currentItemIndex.value].score
-        _isLastItem.value = currentItemIndex.value == items.size -1
+        _isLastItem.value = currentItemIndex.value == items.size - 1
+        CrashlyticsHelper.setItemIndex(_currentItemIndex.value)
     }
 
     fun backItem() {
         if (currentItemIndex.value > 0) {
             _currentItemIndex.value--
             _selectedScoreItem.value = items[currentItemIndex.value].score
+            CrashlyticsHelper.setItemIndex(_currentItemIndex.value)
         }
     }
 

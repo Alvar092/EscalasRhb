@@ -148,6 +148,17 @@ fun HomeScreen(
             ) {
                 Text(stringResource(R.string.Trunk))
             }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+           /*  Button(
+                onClick = { throw RuntimeException("Test Crash") },
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text("Test Crash")
+            } */
         }
     }
 }

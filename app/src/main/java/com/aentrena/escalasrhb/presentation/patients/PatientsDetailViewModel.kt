@@ -7,6 +7,7 @@ import com.aentrena.escalasrhb.domain.model.patients.ClinicalHistory
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientByIdUseCase
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientTestsUseCase
+import com.aentrena.escalasrhb.analytics.CrashlyticsHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +22,10 @@ class PatientsDetailViewModel @Inject constructor(
     private val getPatientTestsUseCase: GetPatientTestsUseCase
 ): ViewModel() {
 
-    private val patientId: UUID = UUID.fromString(checkNotNull(savedStateHandle["patientId"]))
+    private val patientId: UUID = UUID.fromString(checkNotNull(savedStateHandle["patientId"])).also {
+        CrashlyticsHelper.setScreen("patient_detail")
+        CrashlyticsHelper.setPatientId(it.toString())
+    }
 
     val patient: StateFlow<Patient?> = getPatientByIdUseCase(patientId)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
