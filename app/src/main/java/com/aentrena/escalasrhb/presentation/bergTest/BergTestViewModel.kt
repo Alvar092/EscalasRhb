@@ -152,7 +152,7 @@ class BergTestViewModel @Inject constructor(
         if(isTimerRunning.value == true) {
             stopTimer()
         }
-
+        items[currentItemIndex.value].timeRecorded = _elapsedTime.value
         if (currentItemIndex.value >= items.size - 1) return
         _currentItemIndex.value++
         _selectedScoreItem.value = items[currentItemIndex.value].score
@@ -168,6 +168,7 @@ class BergTestViewModel @Inject constructor(
             stopTimer()
         }
 
+        items[currentItemIndex.value].timeRecorded = _elapsedTime.value
         if (currentItemIndex.value > 0) {
             _currentItemIndex.value--
             _selectedScoreItem.value = items[currentItemIndex.value].score

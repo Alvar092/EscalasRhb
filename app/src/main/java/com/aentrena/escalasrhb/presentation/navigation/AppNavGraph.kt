@@ -5,10 +5,15 @@ import android.util.Log
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -168,6 +173,19 @@ fun AppNavGraph() {
                     val isTimerRunning by viewModel.isTimerRunning.collectAsStateWithLifecycle()
                     val formattedTime by viewModel.formattedTime.collectAsStateWithLifecycle()
                     val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
+
+                    val lifecycleOwner = LocalLifecycleOwner.current
+                    DisposableEffect(lifecycleOwner) {
+                        val observer = LifecycleEventObserver{_ , event ->
+                            if (event == Lifecycle.Event.ON_PAUSE) {
+                                viewModel.stopTimer()
+                            }
+                        }
+                        lifecycleOwner.lifecycle.addObserver(observer)
+                        onDispose {
+                            lifecycleOwner.lifecycle.removeObserver(observer)
+                        }
+                    }
 
                     when (uiState) {
                         is BergTestUiState.Loading -> CircularProgressIndicator()
