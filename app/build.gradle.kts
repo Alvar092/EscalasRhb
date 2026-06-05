@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -9,6 +11,11 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
+val localProperties = Properties().also { props ->
+    val f = rootProject.file("local.properties")
+    if (f.exists()) f.inputStream().use { props.load(it) }
+}
+
 android {
     namespace = "com.aentrena.escalasrhb"
     compileSdk = 36
@@ -17,19 +24,35 @@ android {
         applicationId = "com.aentrena.escalasrhb"
         minSdk = 30
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = rootProject.file(
+                System.getenv("KEYSTORE_PATH") ?: localProperties["KEYSTORE_PATH"] as String
+            )
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: localProperties["KEYSTORE_PASSWORD"] as String
+            keyAlias = System.getenv("KEY_ALIAS") ?: localProperties["KEY_ALIAS"] as String
+            keyPassword = System.getenv("KEY_PASSWORD") ?: localProperties["KEY_PASSWORD"] as String
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            ndk {
+                debugSymbolLevel = "SYMBOL_TABLE"
+            }
         }
     }
     compileOptions {
@@ -91,5 +114,4 @@ dependencies {
 
     // --- Crashlytics
     implementation("com.google.firebase:firebase-crashlytics")
-    implementation("com.google.firebase:firebase-analytics")
 }

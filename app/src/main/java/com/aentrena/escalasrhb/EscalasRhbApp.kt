@@ -9,6 +9,6 @@ import dagger.hilt.android.HiltAndroidApp
 class EscalasRhbApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
     }
 }
