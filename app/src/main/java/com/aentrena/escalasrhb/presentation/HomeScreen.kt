@@ -4,7 +4,9 @@ package com.aentrena.escalasrhb.presentation
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -87,7 +89,8 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(horizontal = 32.dp),
+                .padding(horizontal = 32.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -161,5 +164,17 @@ private fun HomeScreen_Preview() {
         HomeScreen()
     }
 
+}
+
+@Preview(
+    name = "Landscape",
+    locale = "en",
+    device = "spec:width=891dp,height=411dp,orientation=landscape"
+)
+@Composable
+private fun HomeScreen_LandscapePreview() {
+    EscalasRhbTheme {
+        HomeScreen()
+    }
 }
 
