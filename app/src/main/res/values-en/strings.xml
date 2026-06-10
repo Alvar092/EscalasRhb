@@ -29,6 +29,8 @@
     <string name="patients_add_name">Name</string>
     <string name="patients_age">Age:</string>
     <string name="patients_birthdate_label">Birth date:</string>
+    <string name="patients_birthdate_format">DD/MM/YYYY</string>
+    <string name="patients_birthdate_invalid">Invalid date</string>
     <string name="patients_add_date">Select date</string>
     <string name="patients_browse_title">Patients</string>
     <string name="patients_cancel">Cancel</string>

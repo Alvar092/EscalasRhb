@@ -13,8 +13,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
@@ -24,6 +27,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -33,6 +37,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.Text
@@ -49,11 +54,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.presentation.theme.P1L
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -72,7 +81,7 @@ fun PatientsScreen(
     onAddPatient: (String, Long) -> Unit,
     onNavigateBack: () -> Unit = {}
 ) {
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var showSheet by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -249,16 +258,15 @@ fun AddPatientForm(
     onSave: (name: String, birthDate: Long) -> Unit
 ) {
     var name by remember { mutableStateOf("") }
+    var birthDateField by remember { mutableStateOf(TextFieldValue("")) }
     var showDatePicker by remember { mutableStateOf(false) }
-    val datePickerState = rememberDatePickerState()
+    var showDateError by remember { mutableStateOf(false) }
 
-    val selectedDateText = datePickerState.selectedDateMillis?.let {
-        SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault()).format(Date(it))
-    } ?: stringResource(R.string.patients_add_date)
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -271,25 +279,37 @@ fun AddPatientForm(
         )
 
         OutlinedTextField(
-            value = selectedDateText,
-            onValueChange = {},
+            value = birthDateField,
+            onValueChange = { newValue ->
+                val formatted = formatBirthDateInput(newValue.text)
+                birthDateField = TextFieldValue(formatted, selection = TextRange(formatted.length))
+                showDateError = false
+            },
             label = { Text(stringResource(R.string.patients_birthdate_label)) },
-            readOnly = false,
-            trailingIcon = {
-                IconButton(onClick = { showDatePicker = true }) {
-                    Icon(Icons.Default.DateRange, contentDescription = stringResource(R.string.patients_add_date))
+            placeholder = { Text(stringResource(R.string.patients_birthdate_format)) },
+            singleLine = true,
+            isError = showDateError,
+            supportingText = {
+                if (showDateError) {
+                    Text(stringResource(R.string.patients_birthdate_invalid))
                 }
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { showDatePicker = true }
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            trailingIcon = {
+                IconButton(onClick = { showDatePicker = true }) {
+                    Icon(Icons.Default.DateRange, contentDescription = null)
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
         )
 
         Button(
             onClick = {
-                val date = datePickerState.selectedDateMillis
-                if (name.isNotBlank() && date != null) {
-                    onSave(name, date)
+                val birthDate = parseBirthDate(birthDateField.text)
+                if (name.isNotBlank() && birthDate != null) {
+                    onSave(name, birthDate)
+                } else {
+                    showDateError = birthDate == null
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -298,14 +318,50 @@ fun AddPatientForm(
         }
     }
     if (showDatePicker) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = parseBirthDate(birthDateField.text) ?: System.currentTimeMillis(),
+            initialDisplayMode = DisplayMode.Picker,
+            selectableDates = object : SelectableDates {
+                override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                    return utcTimeMillis <= System.currentTimeMillis()
+                }
+            }
+        )
         DatePickerDialog(
             onDismissRequest = { showDatePicker = false },
             confirmButton = {
-                TextButton(onClick = { showDatePicker = false }) { Text(stringResource(R.string.patients_save)) }
+                TextButton(onClick = {
+                    datePickerState.selectedDateMillis?.let { millis ->
+                        val formatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(millis))
+                        birthDateField = TextFieldValue(formatted, selection = TextRange(formatted.length))
+                        showDateError = false
+                    }
+                    showDatePicker = false
+                }) { Text(stringResource(R.string.patients_save)) }
             }
         ) {
             DatePicker(state = datePickerState)
         }
+    }
+}
+
+private fun formatBirthDateInput(input: String): String {
+    val digits = input.filter { it.isDigit() }.take(8)
+    return buildString {
+        digits.forEachIndexed { index, c ->
+            if (index == 2 || index == 4) append('/')
+            append(c)
+        }
+    }
+}
+
+private fun parseBirthDate(text: String): Long? {
+    if (text.length != 10) return null
+    return try {
+        val time = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).apply { isLenient = false }.parse(text)?.time
+        time?.takeIf { it <= System.currentTimeMillis() }
+    } catch (e: ParseException) {
+        null
     }
 }
 
@@ -357,7 +413,7 @@ fun AddPatientFormPreview() {
 @Preview(showBackground = true, locale = "es")
 @Composable
 fun AddPatientFormDatePickerPreview() {
-    val datePickerState = rememberDatePickerState()
+    val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
     DatePickerDialog(
         onDismissRequest = {},
         confirmButton = {
