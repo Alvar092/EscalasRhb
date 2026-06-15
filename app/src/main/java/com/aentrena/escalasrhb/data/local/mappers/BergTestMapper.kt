@@ -30,7 +30,7 @@ object BergTestMapper {
         side = side,
         items = gson.fromJson(
             this.itemsJson,
-            object: TypeToken<List<BergItem>>() {}.type
+            TypeToken.getParameterized(List::class.java, BergItem::class.java).type
         ),
         maxScore = this.maxScore
     )

@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aentrena.escalasrhb.domain.model.patients.Patient
 import com.aentrena.escalasrhb.domain.useCases.patient.CreatePatientUseCase
+import com.aentrena.escalasrhb.domain.useCases.patient.DeletePatientUseCase
+import com.aentrena.escalasrhb.domain.useCases.patient.EditPatientUseCase
 import com.aentrena.escalasrhb.domain.useCases.patient.GetPatientsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class PatientsViewModel @Inject constructor(
     private val getPatients: GetPatientsUseCase,
-    private val createPatient: CreatePatientUseCase
+    private val createPatient: CreatePatientUseCase,
+    private val editPatient: EditPatientUseCase,
+    private val deletePatient: DeletePatientUseCase
 ): ViewModel() {
 
     val patients: StateFlow<List<Patient>> = getPatients()
@@ -30,12 +34,14 @@ class PatientsViewModel @Inject constructor(
     }
 
     fun onEditPatient(patient: Patient) {
-        // TODO: editar paciente
+        viewModelScope.launch {
+            editPatient(patient)
+        }
     }
 
     fun onDeletePatient(patient: Patient) {
         viewModelScope.launch {
-            // TODO: borrar paciente
+            deletePatient(patient.id)
         }
     }
 }

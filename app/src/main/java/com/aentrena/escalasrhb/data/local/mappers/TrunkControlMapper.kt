@@ -29,7 +29,7 @@ object TrunkControlMapper {
         side = this.side,
         items = gson.fromJson(
             this.itemsJson,
-            object : TypeToken<List<TrunkControlTestItem>>() {}.type
+            TypeToken.getParameterized(List::class.java, TrunkControlTestItem::class.java).type
         ),
         maxScore = this.maxScore
     )

@@ -24,8 +24,8 @@ android {
         applicationId = "com.aentrena.escalasrhb"
         minSdk = 30
         targetSdk = 36
-        versionCode = 6
-        versionName = "1.0.3"
+        versionCode = 9
+        versionName = "1.0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +55,7 @@ android {
             }
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

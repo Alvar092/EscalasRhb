@@ -29,7 +29,7 @@ object MotricityIndexMapper {
         side = this.side,
         items = gson.fromJson(
             this.itemsJson,
-            object : TypeToken<List<MotricityIndexItem>>() {}.type
+            TypeToken.getParameterized(List::class.java, MotricityIndexItem::class.java).type
         ),
         maxScore = this.maxScore
     )

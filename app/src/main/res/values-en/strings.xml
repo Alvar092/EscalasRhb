@@ -36,6 +36,8 @@
     <string name="patients_cancel">Cancel</string>
     <string name="patients_create_button">Create</string>
     <string name="patients_delete">Delete</string>
+    <string name="patients_delete_title">Delete patient</string>
+    <string name="patients_delete_message">Are you sure you want to delete %1$s? All their tests will also be deleted. This action cannot be undone.</string>
     <string name="patients_edit">Edit</string>
     <string name="patients_empty">No patients registered</string>
     <string name="patients_name">Name</string>

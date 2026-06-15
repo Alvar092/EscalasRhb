@@ -1,5 +1,6 @@
 package com.aentrena.escalasrhb.presentation.patients
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +22,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,6 +44,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -53,6 +58,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardType
@@ -78,6 +85,7 @@ fun PatientsScreen(
     onLookDetail: (Patient) -> Unit,
     onSelectPatient: (Patient) -> Unit,
     onEditPatient: (Patient) -> Unit,
+    onDeletePatient: (Patient) -> Unit,
     onAddPatient: (String, Long) -> Unit,
     onNavigateBack: () -> Unit = {}
 ) {
@@ -122,6 +130,7 @@ fun PatientsScreen(
                     onLookDetail = onLookDetail,
                     onSelectPatient = onSelectPatient,
                     onEditPatient = onEditPatient,
+                    onDeletePatient = onDeletePatient,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(padding)
@@ -143,6 +152,7 @@ fun PatientsScreen(
         }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PatientList(
     patients: List<Patient>,
@@ -151,6 +161,7 @@ fun PatientList(
     onSelectPatient: (Patient) -> Unit,
     onCreatePatient: (() -> Unit)? = null,
     onEditPatient: (Patient) -> Unit,
+    onDeletePatient: (Patient) -> Unit,
     modifier: Modifier = Modifier
 ){
     LazyColumn(
@@ -174,8 +185,42 @@ fun PatientList(
 
         // Iterate, similar to for
         items(patients, key = {it.id}) { patient ->
-            val dismissState = rememberSwipeToDismissBoxState()
-            SwipeToDismissBox(state = dismissState, backgroundContent = {/*TODO: deletePatient()*/}) {
+            var showDeleteDialog by remember { mutableStateOf(false) }
+            var showEditSheet by remember { mutableStateOf(false) }
+            val dismissState = rememberSwipeToDismissBoxState(
+                confirmValueChange = { value ->
+                    when (value) {
+                        SwipeToDismissBoxValue.StartToEnd -> showEditSheet = true
+                        SwipeToDismissBoxValue.EndToStart -> showDeleteDialog = true
+                        SwipeToDismissBoxValue.Settled -> {}
+                    }
+                    false
+                }
+            )
+            SwipeToDismissBox(
+                state = dismissState,
+                enableDismissFromStartToEnd = mode == PatientsScreenMode.Browse,
+                enableDismissFromEndToStart = mode == PatientsScreenMode.Browse,
+                backgroundContent = {
+                    when (dismissState.targetValue) {
+                        SwipeToDismissBoxValue.StartToEnd -> SwipeActionBackground(
+                            color = MaterialTheme.colorScheme.primaryContainer,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            icon = Icons.Default.Edit,
+                            contentDescription = stringResource(R.string.patients_edit),
+                            alignment = Alignment.CenterStart
+                        )
+                        SwipeToDismissBoxValue.EndToStart -> SwipeActionBackground(
+                            color = MaterialTheme.colorScheme.errorContainer,
+                            tint = MaterialTheme.colorScheme.onErrorContainer,
+                            icon = Icons.Default.Delete,
+                            contentDescription = stringResource(R.string.patients_delete),
+                            alignment = Alignment.CenterEnd
+                        )
+                        SwipeToDismissBoxValue.Settled -> {}
+                    }
+                }
+            ) {
                 PatientCard(
                     patient = patient,
                     onClick = {
@@ -185,20 +230,75 @@ fun PatientList(
                                 onSelectPatient(patient)
                             }
                         }
-                    },
-                    onEdit = { onEditPatient(patient)}
+                    }
                 )
+            }
+
+            if (showDeleteDialog) {
+                AlertDialog(
+                    onDismissRequest = { showDeleteDialog = false },
+                    title = { Text(stringResource(R.string.patients_delete_title)) },
+                    text = { Text(stringResource(R.string.patients_delete_message, patient.name)) },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            showDeleteDialog = false
+                            onDeletePatient(patient)
+                        }) {
+                            Text(stringResource(R.string.patients_delete))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { showDeleteDialog = false }) {
+                            Text(stringResource(R.string.patients_cancel))
+                        }
+                    }
+                )
+            }
+
+            if (showEditSheet) {
+                ModalBottomSheet(
+                    onDismissRequest = { showEditSheet = false },
+                    sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+                ) {
+                    AddPatientForm(
+                        initialName = patient.name,
+                        initialBirthDate = patient.dateOfBirth,
+                        onSave = { name, birthDate ->
+                            onEditPatient(patient.copy(name = name, dateOfBirth = birthDate))
+                            showEditSheet = false
+                        }
+                    )
+                }
             }
         }
     }
-    
+
+}
+
+@Composable
+private fun SwipeActionBackground(
+    color: Color,
+    tint: Color,
+    icon: ImageVector,
+    contentDescription: String?,
+    alignment: Alignment
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 12.dp)
+            .background(color = color, shape = RoundedCornerShape(14.dp))
+            .padding(horizontal = 20.dp),
+        contentAlignment = alignment
+    ) {
+        Icon(imageVector = icon, contentDescription = contentDescription, tint = tint)
+    }
 }
 
 @Composable
 fun PatientCard(
     patient: Patient,
-    onClick: () -> Unit,
-    onEdit: () -> Unit
+    onClick: () -> Unit
 ) {
    Card(
        modifier = Modifier
@@ -255,10 +355,14 @@ fun PatientCard(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPatientForm(
+    initialName: String = "",
+    initialBirthDate: Long? = null,
     onSave: (name: String, birthDate: Long) -> Unit
 ) {
-    var name by remember { mutableStateOf("") }
-    var birthDateField by remember { mutableStateOf(TextFieldValue("")) }
+    var name by remember { mutableStateOf(initialName) }
+    var birthDateField by remember {
+        mutableStateOf(TextFieldValue(initialBirthDate?.let { formatBirthDateMillis(it) } ?: ""))
+    }
     var showDatePicker by remember { mutableStateOf(false) }
     var showDateError by remember { mutableStateOf(false) }
 
@@ -332,7 +436,7 @@ fun AddPatientForm(
             confirmButton = {
                 TextButton(onClick = {
                     datePickerState.selectedDateMillis?.let { millis ->
-                        val formatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(millis))
+                        val formatted = formatBirthDateMillis(millis)
                         birthDateField = TextFieldValue(formatted, selection = TextRange(formatted.length))
                         showDateError = false
                     }
@@ -365,6 +469,9 @@ private fun parseBirthDate(text: String): Long? {
     }
 }
 
+private fun formatBirthDateMillis(millis: Long): String =
+    SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(millis))
+
 @Preview
 @Composable
 private fun PatientsScreen_Preview() {
@@ -381,6 +488,7 @@ private fun PatientsScreen_Preview() {
             onLookDetail = {},
             onSelectPatient = {},
             onEditPatient = {},
+            onDeletePatient = {},
             onAddPatient = {_, _ -> },
             onNavigateBack = {}
         )
@@ -396,6 +504,7 @@ private fun PatientsScreenEmpty_Preview() {
         onLookDetail = {},
         onSelectPatient = {},
         onEditPatient = {},
+        onDeletePatient = {},
         onAddPatient = {_, _ -> },
         onNavigateBack = {}
     )

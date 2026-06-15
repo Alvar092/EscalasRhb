@@ -75,6 +75,7 @@ fun AppNavGraph() {
                 onLookDetail = { patient -> navController.navigate(Routes.patientDetail(patient.id))},
                 onSelectPatient = { },
                 onEditPatient = { viewModel.onEditPatient(it)},
+                onDeletePatient = {viewModel.onDeletePatient(it)},
                 onAddPatient = {name, birthdate -> viewModel.addPatient(name,birthdate)},
                 onNavigateBack = { navController.popBackStack() }
             )

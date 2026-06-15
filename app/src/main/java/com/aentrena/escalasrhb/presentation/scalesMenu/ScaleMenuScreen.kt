@@ -152,7 +152,8 @@ fun ScaleMenuScreen(
                     showAddPatientSheet = true
                 },
                 onLookDetail = {},
-                onEditPatient = {}
+                onEditPatient = {},
+                onDeletePatient = {}
             )
         }
     }

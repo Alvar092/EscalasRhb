@@ -35,6 +35,8 @@
     <string name="patients_cancel">Cancelar</string>
     <string name="patients_create_button">Crear paciente</string>
     <string name="patients_delete">Eliminar</string>
+    <string name="patients_delete_title">Eliminar paciente</string>
+    <string name="patients_delete_message">¿Seguro que quieres eliminar a %1$s? También se eliminarán todas sus pruebas. Esta acción no se puede deshacer.</string>
     <string name="patients_edit">Editar</string>
     <string name="patients_empty">No hay pacientes registrados</string>
     <string name="patients_name">Nombre</string>

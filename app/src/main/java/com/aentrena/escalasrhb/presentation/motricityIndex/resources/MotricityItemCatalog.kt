@@ -50,10 +50,10 @@ object MotricityIndexCatalog {
             needsTimer = false
         ),
 
-        MotricityIndexItemType.ANKLE_DORSIFLEXION to MotricityItemDefinition(
-            type = MotricityIndexItemType.ANKLE_DORSIFLEXION,
-            titleRes = R.string.motricity_ankleDorsiflexion_title,
-            descriptionRes = R.string.motricity_ankleDorsiflexion_description,
+        MotricityIndexItemType.HIP_FLEXION to MotricityItemDefinition(
+            type = MotricityIndexItemType.HIP_FLEXION,
+            titleRes = R.string.motricity_hipFlexion_title,
+            descriptionRes = R.string.motricity_hipFlexion_description,
             scoringOptions = standardScoringOptions,
             needsTimer = false
         ),
@@ -66,12 +66,13 @@ object MotricityIndexCatalog {
             needsTimer = false
         ),
 
-        MotricityIndexItemType.HIP_FLEXION to MotricityItemDefinition(
-            type = MotricityIndexItemType.HIP_FLEXION,
-            titleRes = R.string.motricity_hipFlexion_title,
-            descriptionRes = R.string.motricity_hipFlexion_description,
+        MotricityIndexItemType.ANKLE_DORSIFLEXION to MotricityItemDefinition(
+            type = MotricityIndexItemType.ANKLE_DORSIFLEXION,
+            titleRes = R.string.motricity_ankleDorsiflexion_title,
+            descriptionRes = R.string.motricity_ankleDorsiflexion_description,
             scoringOptions = standardScoringOptions,
             needsTimer = false
         ),
+
     )
 }
