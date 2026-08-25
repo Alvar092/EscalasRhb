@@ -23,7 +23,8 @@ data class TrunkControlTest(
 data class TrunkControlTestItem(
     override val id: UUID = UUID.randomUUID(),
     val itemType: TrunkControlItemType,
-    override  var score: Int? = null
+    override  var score: Int? = null,
+    override var note: String? = null
 ): ClinicalTestItem
 
 enum class TrunkControlItemType {

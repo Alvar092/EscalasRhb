@@ -89,6 +89,9 @@ class MotricityIndexViewModel @Inject constructor(
     private var _selectedScoreItem = MutableStateFlow<Int?>(null)
     var selectedScoreItem: StateFlow<Int?> = _selectedScoreItem.asStateFlow()
 
+    private var _currentItemNote = MutableStateFlow<String?>(null)
+    var currentItemNote: StateFlow<String?> = _currentItemNote.asStateFlow()
+
     val currentItemDefinition: MotricityItemDefinition
         get() = MotricityIndexCatalog.definitions[currentItem.itemType]
             ?: error("No definition found for item type ${currentItem.itemType}")
@@ -117,6 +120,7 @@ class MotricityIndexViewModel @Inject constructor(
         if (currentItemIndex.value >= items.size - 1) return
         _currentItemIndex.value++
         _selectedScoreItem.value = items[currentItemIndex.value].score
+        _currentItemNote.value = items[currentItemIndex.value].note
         _isLastItem.value = currentItemIndex.value == items.size - 1
         CrashlyticsHelper.setItemIndex(_currentItemIndex.value)
     }
@@ -125,8 +129,14 @@ class MotricityIndexViewModel @Inject constructor(
         if (currentItemIndex.value > 0) {
             _currentItemIndex.value--
             _selectedScoreItem.value = items[currentItemIndex.value].score
+            _currentItemNote.value = items[currentItemIndex.value].note
             CrashlyticsHelper.setItemIndex(_currentItemIndex.value)
         }
+    }
+
+    fun updateCurrentItemNote(note: String?) {
+        _currentItemNote.value = note
+        items[currentItemIndex.value].note = note
     }
 
     fun finishTest() {

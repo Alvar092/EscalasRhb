@@ -24,10 +24,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun HomeScreen() {
 
-}
 
 @Preview
 @Composable

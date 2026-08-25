@@ -17,3 +17,6 @@ local.properties
 google-services.json
 *.jks
 *.keystore
+
+# Notas personales, no versionadas
+/notes/

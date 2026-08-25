@@ -59,4 +59,8 @@
     <string name="interpretation">Interpretation</string>
     <string name="recommendations">Recommendations</string>
     <string name="references">References</string>
+    <string name="item_note_add">Add note</string>
+    <string name="item_note_edit">Edit note</string>
+    <string name="item_note_placeholder">Write a note for this item…</string>
+    <string name="item_note_pdf_prefix">Note: %s</string>
 </resources>

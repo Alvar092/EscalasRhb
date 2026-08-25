@@ -13,7 +13,8 @@ data class BergItemPdf(
     val scoringOptions: List<BergScoreOption>,
     val score: Int,
     val scoreDescription: String,
-    val maxScore: Int
+    val maxScore: Int,
+    val note: String?
 ) {
     constructor(
         number: Int,
@@ -29,6 +30,7 @@ data class BergItemPdf(
         scoringOptions = definition.scoringOptions,
         score = item.score ?: 0,
         scoreDescription = scoreDescription,
-        maxScore = test.maxScore ?: 56
+        maxScore = test.maxScore ?: 56,
+        note = item.note
     )
 }

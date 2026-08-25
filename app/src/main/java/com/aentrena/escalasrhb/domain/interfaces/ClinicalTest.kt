@@ -20,4 +20,5 @@ interface ClinicalTest {
 interface ClinicalTestItem {
     val id: UUID
     val score: Int?
+    val note: String?
 }

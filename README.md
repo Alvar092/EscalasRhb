@@ -2,6 +2,37 @@
 
 App Android para profesionales de la rehabilitación que permite administrar escalas clínicas estandarizadas a pacientes y exportar los resultados en PDF. Funciona completamente offline.
 
+
+## Descripción
+
+En el día a día clínico, cada minuto cuenta. Escalas digitaliza la valoración en rehabilitación y permite exportar resultados en segundos.
+
+Escalas es una aplicación diseñada para profesionales de la rehabilitación que permite exportar resultados en segundos.
+
+En el entorno asistencial, el tiempo es un recurso limitado. Escalas digitaliza las principales pruebas en rehabilitación, permitiendo registrar resultados de manera ágil, calcular puntuaciones automáticamente y reducir errores manuales.
+
+¿Qué ofrece Escalas?
+
+·Gestión de pacientes (crear, editar, eliminar)
+
+·Administración de escalas clínicas con registro de puntuaciones
+
+·Historial clínico por paciente
+
+·Exportación de resultados a PDF
+
+·Interfaz disponible en español e inglés
+
+Escalas no sustituye el criterio clínico, lo complementa.
+
+Su objetivo es optimizar el flujo de trabajo, reducir el tiempo dedicado al formato y facilitar que los resultados puedan incorporarse fácilmente a la documentación del paciente.
+
+Creada pensando en la práctica real de fisioterapeutas y profesionales de la rehabilitación, e-rehabilitación, fisioterapia, valoración clínica, terapia, neurología, geriatría. 
+
+Escalas busca aportar eficiencia, precisión y comodidad en cada valoración.
+
+Menos tiempo en papeleo. Más tiempo con el paciente.
+
 ---
 
 ## Escalas clínicas
@@ -20,7 +51,7 @@ App Android para profesionales de la rehabilitación que permite administrar esc
 - Administración de escalas clínicas con registro de puntuaciones
 - Historial clínico por paciente
 - Exportación de resultados a PDF
-- Interfaz disponible en español e inglés
+- Interfaz disponible en español e inglés 
 
 ---
 

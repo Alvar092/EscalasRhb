@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.domain.model.scales.BergItemType
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemCatalog
 import com.aentrena.escalasrhb.presentation.bergTest.resources.BergItemDefinition
+import com.aentrena.escalasrhb.presentation.components.ItemNoteField
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
 
 
@@ -40,12 +41,14 @@ fun BergTestScreen(
     isTimerRunning: Boolean,
     formattedTime: String,
     itemCount: Int,
+    note: String?,
     onNextItem: () -> Unit,
     onBackItem: () -> Unit,
     onSelectScore: (Int) -> Unit,
     onStartTimer: () -> Unit,
     onStopTimer: () -> Unit,
     onResetTimer: () -> Unit,
+    onNoteChange: (String?) -> Unit,
     onFinish: () -> Unit,
     isLastItem: Boolean
 ) {
@@ -164,6 +167,12 @@ fun BergTestScreen(
                     )
                 }
             }
+
+            ItemNoteField(
+                note = note,
+                onNoteChange = onNoteChange,
+                itemKey = currentItemIndex
+            )
         }
     }
 }
@@ -180,12 +189,14 @@ private fun BergTestScreen_Preview() {
             isTimerRunning = false,
             formattedTime = "00:00.0",
             itemCount = 14,
+            note = null,
             onNextItem = {},
             onBackItem = {},
             onSelectScore = {},
             onStartTimer = {},
             onStopTimer = {},
             onResetTimer = {},
+            onNoteChange = {},
             isLastItem = false,
             onFinish = {},
         )
@@ -204,12 +215,14 @@ private fun BergTestScreenTimer_Preview() {
             isTimerRunning = false,
             formattedTime = "00:00.0",
             itemCount = 14,
+            note = null,
             onNextItem = {},
             onBackItem = {},
             onSelectScore = {},
             onStartTimer = {},
             onStopTimer = {},
             onResetTimer = {},
+            onNoteChange = {},
             isLastItem = false,
             onFinish = {},
         )

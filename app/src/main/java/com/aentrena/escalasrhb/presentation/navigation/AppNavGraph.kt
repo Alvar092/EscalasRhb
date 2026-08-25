@@ -171,6 +171,7 @@ fun AppNavGraph() {
                     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
                     val currentItemIndex by viewModel.currentItemIndex.collectAsStateWithLifecycle()
                     val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
+                    val currentItemNote by viewModel.currentItemNote.collectAsStateWithLifecycle()
                     val isTimerRunning by viewModel.isTimerRunning.collectAsStateWithLifecycle()
                     val formattedTime by viewModel.formattedTime.collectAsStateWithLifecycle()
                     val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
@@ -203,6 +204,7 @@ fun AppNavGraph() {
                                 isTimerRunning = isTimerRunning,
                                 formattedTime = formattedTime,
                                 itemCount = viewModel.items.size,
+                                note = currentItemNote,
                                 isLastItem = isLastItem,
                                 onNextItem = { viewModel.nextItem() },
                                 onBackItem = { viewModel.backItem() },
@@ -210,6 +212,7 @@ fun AppNavGraph() {
                                 onStartTimer = { viewModel.startTimer() },
                                 onStopTimer = { viewModel.saveAndStop() },
                                 onResetTimer = { viewModel.resetTimer() },
+                                onNoteChange = { viewModel.updateCurrentItemNote(it) },
                                 onFinish = {
                                     viewModel.finishTest()
                                     navController.navigate(Routes.testResult(testId = viewModel.testId))
@@ -225,6 +228,7 @@ fun AppNavGraph() {
                     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
                     val currentItemIndex by viewModel.currentItemIndex.collectAsStateWithLifecycle()
                     val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
+                    val currentItemNote by viewModel.currentItemNote.collectAsStateWithLifecycle()
                     val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
                     val showSideDialog by viewModel.showSideDialog.collectAsStateWithLifecycle()
 
@@ -241,12 +245,14 @@ fun AppNavGraph() {
                                 upperLimbScore = viewModel.upperLimbScore,
                                 loweLimbScore = viewModel.loweLimbScore,
                                 itemCount = viewModel.items.size,
+                                note = currentItemNote,
                                 isLastItem = isLastItem,
                                 onSideSelected = {side -> viewModel.onSideSelected(side)},
                                 showSideDialog = showSideDialog,
                                 onNextItem = {viewModel.nextItem()},
                                 onBackItem = {viewModel.backItem()},
                                 onSelectScore = {viewModel.selectScore(it)},
+                                onNoteChange = { viewModel.updateCurrentItemNote(it) },
                                 onFinish = {
                                     viewModel.finishTest()
                                     navController.navigate(Routes.testResult(testId = viewModel.testId))
@@ -261,6 +267,7 @@ fun AppNavGraph() {
                     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
                     val currentItemIndex by viewModel.currentItemIndex.collectAsStateWithLifecycle()
                     val selectedScore by viewModel.selectedScoreItem.collectAsStateWithLifecycle()
+                    val currentItemNote by viewModel.currentItemNote.collectAsStateWithLifecycle()
                     val isLastItem by viewModel.isLastItem.collectAsStateWithLifecycle()
                     val showSideDialog by viewModel.showSideDialog.collectAsStateWithLifecycle()
 
@@ -276,12 +283,14 @@ fun AppNavGraph() {
                                 selectedScore = selectedScore,
                                 totalScore = viewModel.totalScore,
                                 itemCount = viewModel.items.size,
+                                note = currentItemNote,
                                 isLastItem = isLastItem,
                                 onSideSelected = {side -> viewModel.onSideSelected(side)},
                                 showSideDialog = showSideDialog,
                                 onNextItem = {viewModel.nextItem()},
                                 onBackItem = {viewModel.backItem()},
                                 onSelectScore = {viewModel.selectScore(it)},
+                                onNoteChange = { viewModel.updateCurrentItemNote(it) },
                                 onFinish = {
                                     viewModel.finishTest()
                                     navController.navigate(Routes.testResult(testId = viewModel.testId))

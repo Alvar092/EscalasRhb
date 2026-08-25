@@ -5,6 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
+import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.data.services.pdf.PdfLayout
 import com.aentrena.escalasrhb.data.services.pdf.items.MotricityItemPdf
 import com.aentrena.escalasrhb.domain.interfaces.ClinicalTest
@@ -209,7 +213,9 @@ class MotricityIndexPdfStrategy( private val context: Context): TestPdfStrategy 
 
         // Altura dinámica: titulo 30, cada opcion 16 y padding 20
         val optionLineHeight = 16f
-        val itemHeight = 30f + (item.scoringOptions.size * optionLineHeight) + 20f
+        val baseHeight = 30f + (item.scoringOptions.size * optionLineHeight) + 20f
+        val noteLayout = buildNoteLayout(item.note, layout)
+        val itemHeight = baseHeight + (noteLayout?.let { it.height + 16f } ?: 0f)
 
         // Fondo alternado en items pares para mejorar legibilidad
         if (item.number % 2 == 0) {
@@ -265,7 +271,44 @@ class MotricityIndexPdfStrategy( private val context: Context): TestPdfStrategy 
             optionY += optionLineHeight
         }
 
+        // Nota (pie del ítem)
+        if (noteLayout != null) {
+            drawNote(canvas, noteLayout, y + baseHeight - 4f, layout)
+        }
+
         return y + itemHeight
+    }
+
+    private fun buildNoteLayout(note: String?, layout: PdfLayout): StaticLayout? {
+        if (note.isNullOrEmpty()) return null
+        val text = context.getString(R.string.item_note_pdf_prefix, note)
+        val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
+            textSize = 10f
+            color = Color.DKGRAY
+        }
+        val width = (layout.contentWidth - 20f).toInt().coerceAtLeast(1)
+        return StaticLayout.Builder.obtain(text, 0, text.length, textPaint, width)
+            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+            .build()
+    }
+
+    private fun drawNote(canvas: Canvas, noteLayout: StaticLayout, dividerY: Float, layout: PdfLayout) {
+        val linePaint = Paint().apply {
+            color = Color.LTGRAY
+            strokeWidth = 0.5f
+        }
+        canvas.drawLine(
+            layout.margin + 10f,
+            dividerY,
+            layout.margin + layout.contentWidth - 10f,
+            dividerY,
+            linePaint
+        )
+
+        canvas.save()
+        canvas.translate(layout.margin + 10f, dividerY + 8f)
+        noteLayout.draw(canvas)
+        canvas.restore()
     }
 
     private fun drawPageNumber(canvas: Canvas, number: Int, layout: PdfLayout) {

@@ -23,7 +23,8 @@ data class BergItem(
     override val id: UUID = UUID.randomUUID(),
     val itemType: BergItemType,
     override var score: Int? = null,
-    var timeRecorded: Double? = null
+    var timeRecorded: Double? = null,
+    override var note: String? = null
 ) : ClinicalTestItem {
 
     fun withTimeScoring(): BergItem {
@@ -66,7 +67,11 @@ data class BergItem(
             }
             else -> return this // items sin tiempo no aplica
         }
-        return BergItem(score = newScore.coerceIn(0, 4), itemType = itemType)
+        return BergItem(
+            score = newScore.coerceIn(0, 4),
+            itemType = itemType,
+            note = note
+        )
     }
 }
 

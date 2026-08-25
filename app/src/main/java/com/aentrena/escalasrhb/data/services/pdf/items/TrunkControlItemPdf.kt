@@ -13,7 +13,8 @@ class TrunkControlItemPdf(
     val scoringOptions: List<TrunkControlScoreOption>,
     val score: Int,
     val scoreDescription: String,
-    val maxScore: Int
+    val maxScore: Int,
+    val note: String?
 ) {
     constructor(
         number: Int,
@@ -29,6 +30,7 @@ class TrunkControlItemPdf(
         scoringOptions = definition.scoringOptions,
         score = item.score ?: 0,
         scoreDescription = scoreDescription,
-        maxScore = test.maxScore ?: 100
+        maxScore = test.maxScore ?: 100,
+        note = item.note
     )
 }

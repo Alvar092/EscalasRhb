@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.R
 import com.aentrena.escalasrhb.domain.model.scales.BodySide
 import com.aentrena.escalasrhb.domain.model.scales.TrunkControlItemType
+import com.aentrena.escalasrhb.presentation.components.ItemNoteField
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
 import com.aentrena.escalasrhb.presentation.trunkControlTest.resources.TrunkControlItemDefinition
 import com.aentrena.escalasrhb.presentation.trunkControlTest.resources.TrunkControlScoreOption
@@ -39,11 +40,13 @@ fun TrunkControlTestScreen(
     selectedScore: Int?,
     totalScore: Int,
     itemCount: Int,
+    note: String?,
     showSideDialog: Boolean,
     onSideSelected: (BodySide) -> Unit,
     onNextItem: () -> Unit,
     onBackItem: () -> Unit,
     onSelectScore: (Int) -> Unit,
+    onNoteChange: (String?) -> Unit,
     onFinish: () -> Unit,
     isLastItem: Boolean
 ){
@@ -132,6 +135,12 @@ fun TrunkControlTestScreen(
                     )
                 }
             }
+
+            ItemNoteField(
+                note = note,
+                onNoteChange = onNoteChange,
+                itemKey = currentItemIndex
+            )
         }
 
     }
@@ -184,11 +193,13 @@ private fun TrunkControlTestScreen_Preview() {
             selectedScore = 12,
             totalScore = 12,
             itemCount = 1,
+            note = null,
             showSideDialog = false,
             onSideSelected= {},
             onNextItem= {},
             onBackItem= {},
             onSelectScore = {},
+            onNoteChange = {},
             onFinish = {},
             isLastItem = true
         )

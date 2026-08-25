@@ -24,7 +24,7 @@ android {
         applicationId = "com.aentrena.escalasrhb"
         minSdk = 30
         targetSdk = 36
-        versionCode = 9
+        versionCode = 11
         versionName = "1.0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

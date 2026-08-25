@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aentrena.escalasrhb.domain.model.scales.BodySide
 import com.aentrena.escalasrhb.domain.model.scales.MotricityIndexItemType
+import com.aentrena.escalasrhb.presentation.components.ItemNoteField
 import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityIndexCatalog
 import com.aentrena.escalasrhb.presentation.motricityIndex.resources.MotricityItemDefinition
 import com.aentrena.escalasrhb.presentation.theme.EscalasRhbTheme
@@ -41,11 +42,13 @@ fun MotricityIndexScreen(
     upperLimbScore: Int,
     loweLimbScore: Int,
     itemCount: Int,
+    note: String?,
     showSideDialog: Boolean,
     onSideSelected: (BodySide) -> Unit,
     onNextItem: () -> Unit,
     onBackItem: () -> Unit,
     onSelectScore: (Int) -> Unit,
+    onNoteChange: (String?) -> Unit,
     onFinish: () -> Unit,
     isLastItem: Boolean
 ) {
@@ -140,6 +143,12 @@ fun MotricityIndexScreen(
                     )
                 }
             }
+
+            ItemNoteField(
+                note = note,
+                onNoteChange = onNoteChange,
+                itemKey = currentItemIndex
+            )
         }
 
     }
@@ -182,11 +191,13 @@ private fun MotricityIndexScreen_Preview() {
             upperLimbScore = 20,
             loweLimbScore = 0,
             itemCount = 6,
+            note = null,
             showSideDialog = false,
             onSideSelected = {},
             onNextItem = {},
             onBackItem = {},
             onSelectScore = {},
+            onNoteChange = {},
             onFinish = {},
             isLastItem = false
         )
